@@ -21,6 +21,27 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public Flights getById(int id) {
+        String query = "SELECT * FROM quotes WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                Flights flight = new Flights();
+                flight.setFlightID(rs.getInt("flightID"));
+                flight.setSource(rs.getString("source"));
+                flight.setDestination(rs.getString("destination"));
+                flight.setDeparture(rs.getString("departure"));
+                flight.setArrival(rs.getString("arrival"));
+                flight.setAvalivableSeats(rs.getInt("avalivableSeats"));
+                rs.close();
+                return flight;
+            }else{
+                return null;
+            }
+        }catch(SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
         return null;
     }
 
@@ -61,7 +82,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
             while(rs.next()){
                 Flights f = new Flights();
                 f.setFlightID(rs.getInt(1));
-                f.setDeparture(rs.getString(2));
+                f.setSource(rs.getString(2));
                 f.setDestination(rs.getString(3));
                 f.setDeparture(rs.getString(4));
                 f.setArrival(rs.getString(5));

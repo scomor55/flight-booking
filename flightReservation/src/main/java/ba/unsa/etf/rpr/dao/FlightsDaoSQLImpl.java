@@ -3,9 +3,21 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Flights;
 
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FlightsDaoSQLImpl implements FlightsDao {
+
+    private Connection connection;
+    public FlightsDaoSQLImpl(){
+        try{
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/root", "root", "root");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public Flights getById(int id) {

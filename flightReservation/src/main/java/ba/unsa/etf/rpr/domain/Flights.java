@@ -40,7 +40,7 @@ public class Flights {
         return departure;
     }
 
-    public void setDeparture(Date departure) {
+    public void setDeparture(String departure) {
         this.departure = departure;
     }
 
@@ -48,7 +48,7 @@ public class Flights {
         return arrival;
     }
 
-    public void setArrival(Date arrival) {
+    public void setArrival(String arrival) {
         this.arrival = arrival;
     }
 

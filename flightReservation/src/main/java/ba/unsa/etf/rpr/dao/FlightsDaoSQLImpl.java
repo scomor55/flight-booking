@@ -47,7 +47,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public Flights add(Flights item) {
-        /* TRY USING CLASSES IF THIS DOESNT WORK */
+        /* TRY USING int IF THIS DOESNT WORK */
        /* String insert = "INSERT INTO Flights(flightID) VALUES(?)";*/
         String insert = "INSERT INTO Flights(source) VALUES(?)";
         try{

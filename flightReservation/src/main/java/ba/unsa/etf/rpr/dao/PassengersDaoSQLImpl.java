@@ -78,7 +78,14 @@ public class PassengersDaoSQLImpl implements PassengersDao {
 
     @Override
     public void delete(int id) {
-
+        String insert = "DELETE FROM Passengers WHERE passengerID = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, id);
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override

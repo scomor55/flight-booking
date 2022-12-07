@@ -138,6 +138,25 @@ public class PassengersDaoSQLImpl implements PassengersDao {
 
     @Override
     public List<Passengers> searchBySurname(String surname) {
+        String query = "SELECT * FROM Passengers WHERE surname LIKE concat('%', ?, '%')";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, surname);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Passengers> passengersLista = new ArrayList<>();
+            while (rs.next()) {
+                Passengers p = new Passengers();
+                p.setPassengerID(rs.getInt(1));
+                p.setName(rs.getString(2));
+                p.setSurname(rs.getString(3));
+                p.setDateOfBirth(rs.getDate(4));
+                p.setAdress(rs.getString(5));
+                passengersLista.add(p);
+            }
+            return passengersLista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

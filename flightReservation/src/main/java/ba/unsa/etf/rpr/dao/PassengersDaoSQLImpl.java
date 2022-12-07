@@ -63,7 +63,17 @@ public class PassengersDaoSQLImpl implements PassengersDao {
 
     @Override
     public Passengers update(Passengers item) {
-        return null;
+        String insert = "UPDATE Passengers SET name = ? WHERE passengerID = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, item.getName());
+            stmt.setObject(2, item.getPassengerID());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

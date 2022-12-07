@@ -1,5 +1,4 @@
 package ba.unsa.etf.rpr.dao;
 
-public interface FlightsDaoImpl {
-
+public class FlightsDaoImpl {
 }

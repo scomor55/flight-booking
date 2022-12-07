@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface FlightsDao extends Dao<Flights> {
 
-    List<Flights> searchByDestination(String flightDestination);
+    List<Flights> searchByDestination(String flightDestination) ;
 
 }

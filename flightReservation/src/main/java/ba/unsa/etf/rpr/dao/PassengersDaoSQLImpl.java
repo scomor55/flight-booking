@@ -90,7 +90,24 @@ public class PassengersDaoSQLImpl implements PassengersDao {
 
     @Override
     public List<Passengers> getAll() {
-        return null;
+        String query = "SELECT * FROM Passengers";
+        List<Passengers> passengers = new ArrayList<Passengers>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){ // result set is iterator.
+                Passengers passenger = new Passengers();
+                passenger.setPassengerID(rs.getInt("passengerID"));
+                passenger.setName(rs.getString("name"));
+                passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
+                passenger.setAdress(rs.getString("adress"));
+                passengers.add(passenger);
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return passengers;
     }
 
     @Override

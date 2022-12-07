@@ -66,6 +66,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
                 f.setDeparture(rs.getString(4));
                 f.setArrival(rs.getString(5));
                 f.setAvalivableSeats(rs.getInt(6));
+                flightsList.add(f);
             }
             return flightsList;
         }catch(SQLException e){

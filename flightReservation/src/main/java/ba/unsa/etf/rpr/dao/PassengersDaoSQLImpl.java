@@ -30,6 +30,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
                 Passengers passenger = new Passengers();
                 passenger.setPassengerID(rs.getInt("passengerID"));
                 passenger.setName(rs.getString("name"));
+                passenger.setSurname(rs.getString("surname"));
                 passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
                 passenger.setAdress(rs.getString("adress"));
                 rs.close();
@@ -99,6 +100,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
                 Passengers passenger = new Passengers();
                 passenger.setPassengerID(rs.getInt("passengerID"));
                 passenger.setName(rs.getString("name"));
+                passenger.setSurname(rs.getString("surname"));
                 passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
                 passenger.setAdress(rs.getString("adress"));
                 passengers.add(passenger);
@@ -112,6 +114,25 @@ public class PassengersDaoSQLImpl implements PassengersDao {
 
     @Override
     public List<Passengers> searchByName(String name) {
+        String query = "SELECT * FROM Passengers WHERE name LIKE concat('%', ?, '%')";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Passengers> passengersLista = new ArrayList<>();
+            while (rs.next()) {
+                Passengers p = new Passengers();
+                p.setPassengerID(rs.getInt(1));
+                p.setName(rs.getString(2));
+                p.setSurname(rs.getString(3));
+                p.setDateOfBirth(rs.getDate(4));
+                p.setAdress(rs.getString(5));
+                passengersLista.add(p);
+            }
+            return passengersLista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

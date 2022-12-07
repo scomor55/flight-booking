@@ -21,7 +21,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public Flights getById(int id) {
-        String query = "SELECT * FROM quotes WHERE id = ?";
+        String query = "SELECT * FROM Flights WHERE flightID = ?";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(query);
             stmt.setInt(1, id);
@@ -67,7 +67,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public Flights update(Flights item) {
-        String insert = "UPDATE flights SET source = ? WHERE flightID = ?";
+        String insert = "UPDATE Flights SET source = ? WHERE flightID = ?";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getSource());
@@ -82,7 +82,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public void delete(int id) {
-        String insert = "DELETE FROM categories WHERE flightID = ?";
+        String insert = "DELETE FROM Flights WHERE flightID = ?";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, id);
@@ -94,7 +94,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public List<Flights> getAll() {
-        String query = "SELECT * FROM flights";
+        String query = "SELECT * FROM Flights";
         List<Flights> flights = new ArrayList<Flights>();
         try{
             PreparedStatement stmt = this.connection.prepareStatement(query);

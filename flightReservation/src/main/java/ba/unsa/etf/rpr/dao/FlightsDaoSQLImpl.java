@@ -47,10 +47,12 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public Flights add(Flights item) {
-        String insert = "INSERT INTO Flights(flightID) VALUES(?)";
+        /* TRY USING CLASSES IF THIS DOESNT WORK */
+       /* String insert = "INSERT INTO Flights(flightID) VALUES(?)";*/
+        String insert = "INSERT INTO Flights(source) VALUES(?)";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, item.getFlightID());
+            stmt.setString(1, item.getSource());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -65,12 +67,29 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public Flights update(Flights item) {
-        return null;
+        String insert = "UPDATE flights SET source = ? WHERE flightID = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, item.getSource());
+            stmt.setObject(2, item.getFlightID());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public void delete(int id) {
-
+        String insert = "DELETE FROM categories WHERE flightID = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, id);
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override

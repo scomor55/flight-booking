@@ -40,7 +40,7 @@ public class Flights {
         return departure;
     }
 
-    public void setDeparture(String departure) {
+    public void setDeparture(Date departure) {
         this.departure = departure;
     }
 
@@ -48,7 +48,7 @@ public class Flights {
         return arrival;
     }
 
-    public void setArrival(String arrival) {
+    public void setArrival(Date arrival) {
         this.arrival = arrival;
     }
 
@@ -83,6 +83,7 @@ public class Flights {
     public int hashCode() {
         return Objects.hash(flightID, source, destination, departure,arrival,avalivableSeats);
     }
+
 
 
 }

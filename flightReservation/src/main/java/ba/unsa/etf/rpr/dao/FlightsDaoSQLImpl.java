@@ -31,8 +31,8 @@ public class FlightsDaoSQLImpl implements FlightsDao {
                 flight.setFlightID(rs.getInt("flightID"));
                 flight.setSource(rs.getString("source"));
                 flight.setDestination(rs.getString("destination"));
-                flight.setDeparture(rs.getString("departure"));
-                flight.setArrival(rs.getString("arrival"));
+                flight.setDeparture(rs.getDate("departure"));
+                flight.setArrival(rs.getDate("arrival"));
                 flight.setAvalivableSeats(rs.getInt("avalivableSeats"));
                 rs.close();
                 return flight;
@@ -47,6 +47,19 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public Flights add(Flights item) {
+        String insert = "INSERT INTO Flights(flightID) VALUES(?)";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, item.getFlightID());
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next(); // we know that there is one key
+            item.setFlightID(rs.getInt(1)); //set id to return it back
+            return item;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -84,8 +97,8 @@ public class FlightsDaoSQLImpl implements FlightsDao {
                 f.setFlightID(rs.getInt(1));
                 f.setSource(rs.getString(2));
                 f.setDestination(rs.getString(3));
-                f.setDeparture(rs.getString(4));
-                f.setArrival(rs.getString(5));
+                f.setDeparture(rs.getDate(4));
+                f.setArrival(rs.getDate(5));
                 f.setAvalivableSeats(rs.getInt(6));
                 flightsList.add(f);
             }

@@ -94,7 +94,26 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
     @Override
     public List<Flights> getAll() {
-        return null;
+        String query = "SELECT * FROM flights";
+        List<Flights> flights = new ArrayList<Flights>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){ // result set is iterator.
+                Flights flight = new Flights();
+                flight.setFlightID(rs.getInt("flightID"));
+                flight.setSource(rs.getString("source"));
+                flight.setDestination(rs.getString("destination"));
+                flight.setDeparture(rs.getDate("departure"));
+                flight.setArrival(rs.getDate("arrival"));
+                flight.setAvalivableSeats(rs.getInt("avalivableSeats"));
+                flights.add(flight);
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return flights;
     }
 
     /**

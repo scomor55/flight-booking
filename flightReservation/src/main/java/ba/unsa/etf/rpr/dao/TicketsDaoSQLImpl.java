@@ -92,7 +92,25 @@ public class TicketsDaoSQLImpl implements TicketsDao{
 
     @Override
     public List<Tickets> getAll() {
-        return null;
+        String query = "SELECT * FROM Tickets";
+        List<Tickets> tickets = new ArrayList<Tickets>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){ // result set is iterator.
+                Tickets ticket = new Tickets();
+                ticket.setTicketID(rs.getInt("ticketID"));
+                ticket.setFlightID(rs.getInt("flightID"));
+                ticket.setPassengerID(rs.getInt("passengerID"));
+                ticket.setTravelClass(rs.getString("class"));
+                ticket.setPrice(rs.getInt("price"));
+                tickets.add(ticket);
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return tickets;
     }
 
     @Override

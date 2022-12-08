@@ -32,7 +32,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
                 passenger.setName(rs.getString("name"));
                 passenger.setSurname(rs.getString("surname"));
                 passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
-                passenger.setAdress(rs.getString("adress"));
+                passenger.setAdress(rs.getString("address"));
                 rs.close();
                 return passenger;
             }else{
@@ -102,7 +102,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
                 passenger.setName(rs.getString("name"));
                 passenger.setSurname(rs.getString("surname"));
                 passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
-                passenger.setAdress(rs.getString("adress"));
+                passenger.setAdress(rs.getString("address"));
                 passengers.add(passenger);
             }
             rs.close();

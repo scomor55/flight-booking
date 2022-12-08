@@ -65,7 +65,17 @@ public class TicketsDaoSQLImpl implements TicketsDao{
 
     @Override
     public Tickets update(Tickets item) {
-        return null;
+        String insert = "UPDATE Tickets SET class = ? WHERE ticketID = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, item.getTravelClass());
+            stmt.setObject(2, item.getTicketID());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

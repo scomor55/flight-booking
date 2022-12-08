@@ -115,6 +115,25 @@ public class TicketsDaoSQLImpl implements TicketsDao{
 
     @Override
     public List<Tickets> searchByClass(String ticketClass) {
+        String query = "SELECT * FROM Tickets WHERE class LIKE concat('%', ?, '%')";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, ticketClass);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Tickets> ticketsList = new ArrayList<>();
+            while (rs.next()) {
+                Tickets t = new Tickets();
+                t.setTicketID(rs.getInt(1));
+                t.setFlightID(rs.getInt(2));
+                t.setPassengerID(rs.getInt(3));
+                t.setTravelClass(rs.getString(4));
+                t.setPrice(rs.getInt(5));
+                ticketsList.add(t);
+            }
+            return ticketsList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

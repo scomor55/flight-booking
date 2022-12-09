@@ -12,7 +12,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
     private Connection connection;
     public PassengersDaoSQLImpl(){
         try{
-            this.connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7582258", "sql8582914", "wqZdXspcAm");
+            this.connection = DriverManager.getConnection("jdbc:mysql://sql8.freemysqlhosting.net:3306/sql7582258", "sql8582914", "wqZdXspcAm");
         }catch(Exception e){
             e.printStackTrace();
         }

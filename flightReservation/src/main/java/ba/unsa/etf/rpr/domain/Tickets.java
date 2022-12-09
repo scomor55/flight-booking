@@ -53,7 +53,7 @@ public class Tickets {
 
     @Override
     public String toString() {
-        return "Quote{" +
+        return "Tickets{" +
                 "ticketID=" + ticketID +
                 ", flightID=" + flightID +
                 ", passengerID=" + passengerID +

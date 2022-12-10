@@ -33,7 +33,16 @@ public class App
         tickets.setPrice(1000);
 
 
+        ArrayList<Tickets> t = new ArrayList<Tickets>(dao.searchByClass("Economy"));
+        for(Tickets temp : t){
+            System.out.println(temp);
+        }
 
+        PassengersDao dao1 = new PassengersDaoSQLImpl();
+        ArrayList<Passengers> passengers = new ArrayList<Passengers>(dao1.searchByName("Hamza"));
+        for(Passengers temp: passengers){
+            System.out.println(temp);
+        }
 
     }
 }

@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="flightReservation" target="1.8" />
+      <module name="flightReservation" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>

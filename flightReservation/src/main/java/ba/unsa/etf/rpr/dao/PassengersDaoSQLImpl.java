@@ -53,13 +53,7 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
             ResultSet rs = stmt.executeQuery();
             ArrayList<Passengers> passengersList = new ArrayList<>();
             while (rs.next()) {
-                Passengers p = new Passengers();
-                p.setId(rs.getInt(1));
-                p.setName(rs.getString(2));
-                p.setSurname(rs.getString(3));
-                p.setDateOfBirth(rs.getDate(4));
-                p.setAdress(rs.getString(5));
-                passengersList.add(p);
+                passengersList.add(row2object(rs));
             }
             return passengersList;
         } catch (SQLException e) {

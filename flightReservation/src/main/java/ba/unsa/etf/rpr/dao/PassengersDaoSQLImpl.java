@@ -66,7 +66,7 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
     }
 
     @Override
-    public List<Passengers> searchBySurname(String surname) {
+    public List<Passengers> searchBySurname(String surname) throws FlightBookingException{
         String query = "SELECT * FROM Passengers WHERE surname LIKE concat('%', ?, '%')";
         try {
             PreparedStatement stmt = getConnection().prepareStatement(query);
@@ -74,18 +74,11 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
             ResultSet rs = stmt.executeQuery();
             ArrayList<Passengers> passengersList = new ArrayList<>();
             while (rs.next()) {
-                Passengers p = new Passengers();
-                p.setId(rs.getInt(1));
-                p.setName(rs.getString(2));
-                p.setSurname(rs.getString(3));
-                p.setDateOfBirth(rs.getDate(4));
-                p.setAdress(rs.getString(5));
-                passengersList.add(p);
+                passengersList.add(row2object(rs));
             }
             return passengersList;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new FlightBookingException(e.getMessage(), e);
         }
-        return null;
     }
 }

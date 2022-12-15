@@ -10,12 +10,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -24,18 +22,44 @@ import java.io.IOException;
 public class Main extends Application {
 
 
-    public static void main( String[] args ) {
+   /* public static void main( String[] args ) {
         System.out.println( "Hello World!" );
         launch(args);
-    }
+    }*/
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // FXML style
+
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+
+        /*FXMLLoader fmxlLoader = new FXMLLoader(Main.class.getResource("sample.fxml"));
+        Scene scene = new Scene(fmxlLoader.load(),320,240);
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(scene);
+        primaryStage.show();*/
+
+      /*  String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version");
+        Label l = new Label("JavaFX" + javafxVersion + ", Java "+ javaVersion);
+        Scene scene = new Scene(new StackPane(l),320,240);
+        primaryStage.setScene(scene);
+        primaryStage.show();*/
+    }
+
+    public static void main( String[] args ){
+        launch(args);
+    }
+   /* @Override
+    public void start(Stage primaryStage) throws Exception {*/
+        // FXML style
+       /* Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Dummy Login App");
         primaryStage.setScene(new Scene(root, 300, 110));
         primaryStage.setResizable(false);
-        primaryStage.show();
+        primaryStage.show();*/
 
         /*
         // Class style
@@ -59,6 +83,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         */
-    }
+   /* }*/
 
 }

@@ -27,7 +27,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     public abstract T row2object(ResultSet rs) throws FlightBookingException;
-    public abstract Map<String, Object> object2row(T object);
+    public abstract Map<String, Object> object2row(T object) ;
 
     public T getById(int id) throws FlightBookingException {
         String query = "SELECT * FROM "+this.tableName+" WHERE id = ?";

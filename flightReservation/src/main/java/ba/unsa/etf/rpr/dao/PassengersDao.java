@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.domain.Passengers;
+import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 
 import java.util.List;
 
@@ -11,6 +12,6 @@ import java.util.List;
  * @author Safet Čomor
  */
 public interface PassengersDao extends Dao<Passengers> {
-    List<Passengers> searchByName(String name);
+    List<Passengers> searchByName(String name) throws FlightBookingException;
     List<Passengers> searchBySurname(String surname);
 }

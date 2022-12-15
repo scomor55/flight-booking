@@ -3,123 +3,53 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.domain.Passengers;
 
+import ba.unsa.etf.rpr.exceptions.FlightBookingException;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class PassengersDaoSQLImpl implements PassengersDao {
-
-    private Connection connection;
-    public PassengersDaoSQLImpl(){
-        try{
-            this.connection = DriverManager.getConnection("jdbc:mysql://sql8.freemysqlhosting.net:3306/sql8582914", "sql8582914", "wqZdXspcAm");
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
+public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements PassengersDao {
 
 
-    @Override
-    public Passengers getById(int id) {
-        String query = "SELECT * FROM Passengers WHERE passengerID = ?";
-        try{
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
-                Passengers passenger = new Passengers();
-                passenger.setId(rs.getInt("passengerID"));
-                passenger.setName(rs.getString("name"));
-                passenger.setSurname(rs.getString("surname"));
-                passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
-                passenger.setAdress(rs.getString("address"));
-                rs.close();
-                return passenger;
-            }else{
-                return null;
-            }
-        }catch(SQLException e){
-            e.printStackTrace(); // poor error handling
-        }
-        return null;
+    public PassengersDaoSQLImpl() {
+        super("Passengers");
     }
 
     @Override
-    public Passengers add(Passengers item) {
-        String insert = "INSERT INTO Passengers(name) VALUES(?)";
-        try{
-            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, item.getName());
-            stmt.executeUpdate();
-
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next(); // we know that there is one key
-            item.setId(rs.getInt(1)); //set id to return it back
-            return item;
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public Passengers update(Passengers item) {
-        String insert = "UPDATE Passengers SET name = ? WHERE passengerID = ?";
-        try{
-            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, item.getName());
-            stmt.setObject(2, item.getId());
-            stmt.executeUpdate();
-            return item;
-        }catch (SQLException e){
-            e.printStackTrace();
-            return null;
+    public Passengers row2object(ResultSet rs) throws FlightBookingException{
+        try {
+            Passengers p = new Passengers();
+            p.setId(rs.getInt("passengerID"));
+            p.setName(rs.getString("name"));
+            p.setSurname(rs.getString("surname"));
+            p.setDateOfBirth(rs.getDate("dateOfBirth"));
+            return p;
+        } catch (Exception e) {
+            throw new FlightBookingException(e.getMessage(), e);
         }
     }
 
     @Override
-    public void delete(int id) {
-        String insert = "DELETE FROM Passengers WHERE passengerID = ?";
-        try{
-            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, id);
-            stmt.executeUpdate();
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
+    public Map<String, Object> object2row(Passengers object) {
+        Map<String, Object> item = new TreeMap<String, Object>();
+        item.put("passengerID", object.getId());
+        item.put("name", object.getName());
+        item.put("surname", object.getSurname());
+        item.put("dateOfBirth", object.getDateOfBirth());
+        return item;
     }
 
     @Override
-    public List<Passengers> getAll() {
-        String query = "SELECT * FROM Passengers";
-        List<Passengers> passengers = new ArrayList<Passengers>();
-        try{
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()){ // result set is iterator.
-                Passengers passenger = new Passengers();
-                passenger.setId(rs.getInt("passengerID"));
-                passenger.setName(rs.getString("name"));
-                passenger.setSurname(rs.getString("surname"));
-                passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
-                passenger.setAdress(rs.getString("address"));
-                passengers.add(passenger);
-            }
-            rs.close();
-        }catch (SQLException e){
-            e.printStackTrace(); // poor error handling
-        }
-        return passengers;
-    }
-
-    @Override
-    public List<Passengers> searchByName(String name) {
+    public List<Passengers> searchByName(String name)throws FlightBookingException{
         String query = "SELECT * FROM Passengers WHERE name LIKE concat('%', ?, '%')";
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setString(1, name);
             ResultSet rs = stmt.executeQuery();
-            ArrayList<Passengers> passengersLista = new ArrayList<>();
+            ArrayList<Passengers> passengersList = new ArrayList<>();
             while (rs.next()) {
                 Passengers p = new Passengers();
                 p.setId(rs.getInt(1));
@@ -127,23 +57,22 @@ public class PassengersDaoSQLImpl implements PassengersDao {
                 p.setSurname(rs.getString(3));
                 p.setDateOfBirth(rs.getDate(4));
                 p.setAdress(rs.getString(5));
-                passengersLista.add(p);
+                passengersList.add(p);
             }
-            return passengersLista;
+            return passengersList;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new FlightBookingException(e.getMessage(), e);
         }
-        return null;
     }
 
     @Override
     public List<Passengers> searchBySurname(String surname) {
         String query = "SELECT * FROM Passengers WHERE surname LIKE concat('%', ?, '%')";
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setString(1, surname);
             ResultSet rs = stmt.executeQuery();
-            ArrayList<Passengers> passengersLista = new ArrayList<>();
+            ArrayList<Passengers> passengersList = new ArrayList<>();
             while (rs.next()) {
                 Passengers p = new Passengers();
                 p.setId(rs.getInt(1));
@@ -151,9 +80,9 @@ public class PassengersDaoSQLImpl implements PassengersDao {
                 p.setSurname(rs.getString(3));
                 p.setDateOfBirth(rs.getDate(4));
                 p.setAdress(rs.getString(5));
-                passengersLista.add(p);
+                passengersList.add(p);
             }
-            return passengersLista;
+            return passengersList;
         } catch (SQLException e) {
             e.printStackTrace();
         }

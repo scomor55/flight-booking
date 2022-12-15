@@ -9,6 +9,7 @@ import ba.unsa.etf.rpr.dao.FlightsDaoSQLImpl;
 import ba.unsa.etf.rpr.dao.TicketsDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Passengers;
 import ba.unsa.etf.rpr.domain.Tickets;
+import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class App
         TicketsDao dao = new TicketsDaoSQLImpl();
         Tickets tickets = new Tickets();
 
-        tickets.setTicketID(3);
+        tickets.setId(3);
         tickets.setFlightID(3);
         tickets.setPassengerID(1);
         tickets.setTravelClass("Business");
@@ -39,7 +40,12 @@ public class App
         }
 
         PassengersDao dao1 = new PassengersDaoSQLImpl();
-        ArrayList<Passengers> passengers = new ArrayList<Passengers>(dao1.searchByName("Hamza"));
+        ArrayList<Passengers> passengers = null;
+        try {
+            passengers = new ArrayList<Passengers>(dao1.searchByName("Hamza"));
+        } catch (FlightBookingException e) {
+            throw new RuntimeException(e);
+        }
         for(Passengers temp: passengers){
             System.out.println(temp);
         }

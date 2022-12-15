@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import java.util.List;
 
 /**
- * MySQLs implementation of the DAO
+ * MySQL implementation of the DAO
  * @author Safet Čomor
  */
 
@@ -59,7 +59,7 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
     public List<Flights> searchByDestination(String flightDestination) {
         String query = "SELECT * FROM Flights WHERE destinacija LIKE concat('%',?,'%')";
         try{
-            PreparedStatement stmt = this.connection.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setString(1,flightDestination);
             ResultSet rs = stmt.executeQuery();
             ArrayList<Flights> flightsList = new ArrayList<>();

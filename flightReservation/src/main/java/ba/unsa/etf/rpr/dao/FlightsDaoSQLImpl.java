@@ -53,30 +53,20 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
         return row;
     }
 
-
-
     @Override
-    public List<Flights> searchByDestination(String flightDestination) {
-        String query = "SELECT * FROM Flights WHERE destinacija LIKE concat('%',?,'%')";
+    public List<Flights> searchByDestination(String flightDestination) throws FlightBookingException{
+        String query = "SELECT * FROM Flights WHERE destination LIKE concat('%',?,'%')";
         try{
             PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setString(1,flightDestination);
             ResultSet rs = stmt.executeQuery();
             ArrayList<Flights> flightsList = new ArrayList<>();
             while(rs.next()){
-                Flights f = new Flights();
-                f.setId(rs.getInt(1));
-                f.setSource(rs.getString(2));
-                f.setDestination(rs.getString(3));
-                f.setDeparture(rs.getDate(4));
-                f.setArrival(rs.getDate(5));
-                f.setAvalivableSeats(rs.getInt(6));
-                flightsList.add(f);
+                flightsList.add(row2object(rs));
             }
             return flightsList;
         }catch(SQLException e){
-            e.printStackTrace();
+            throw new FlightBookingException(e.getMessage(), e);
         }
-        return null;
     }
 }

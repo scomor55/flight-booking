@@ -28,7 +28,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                 Passengers passenger = new Passengers();
-                passenger.setPassengerID(rs.getInt("passengerID"));
+                passenger.setId(rs.getInt("passengerID"));
                 passenger.setName(rs.getString("name"));
                 passenger.setSurname(rs.getString("surname"));
                 passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
@@ -54,7 +54,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
 
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
-            item.setPassengerID(rs.getInt(1)); //set id to return it back
+            item.setId(rs.getInt(1)); //set id to return it back
             return item;
         }catch (SQLException e){
             e.printStackTrace();
@@ -68,7 +68,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getName());
-            stmt.setObject(2, item.getPassengerID());
+            stmt.setObject(2, item.getId());
             stmt.executeUpdate();
             return item;
         }catch (SQLException e){
@@ -98,7 +98,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()){ // result set is iterator.
                 Passengers passenger = new Passengers();
-                passenger.setPassengerID(rs.getInt("passengerID"));
+                passenger.setId(rs.getInt("passengerID"));
                 passenger.setName(rs.getString("name"));
                 passenger.setSurname(rs.getString("surname"));
                 passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
@@ -122,7 +122,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
             ArrayList<Passengers> passengersLista = new ArrayList<>();
             while (rs.next()) {
                 Passengers p = new Passengers();
-                p.setPassengerID(rs.getInt(1));
+                p.setId(rs.getInt(1));
                 p.setName(rs.getString(2));
                 p.setSurname(rs.getString(3));
                 p.setDateOfBirth(rs.getDate(4));
@@ -146,7 +146,7 @@ public class PassengersDaoSQLImpl implements PassengersDao {
             ArrayList<Passengers> passengersLista = new ArrayList<>();
             while (rs.next()) {
                 Passengers p = new Passengers();
-                p.setPassengerID(rs.getInt(1));
+                p.setId(rs.getInt(1));
                 p.setName(rs.getString(2));
                 p.setSurname(rs.getString(3));
                 p.setDateOfBirth(rs.getDate(4));

@@ -4,18 +4,18 @@ import java.util.Date;
 import java.util.Objects;
 
 
-public class Tickets {
+public class Tickets implements Idable{
     private int ticketID;
     private int flightID;
     private int passengerID;
     private String travelClass;
     private int price;
 
-    public int getTicketID() {
+    public int getId() {
         return ticketID;
     }
 
-    public void setTicketID(int ticketID) {
+    public void setId(int ticketID) {
         this.ticketID = ticketID;
     }
 

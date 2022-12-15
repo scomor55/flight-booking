@@ -28,7 +28,7 @@ public class TicketsDaoSQLImpl implements TicketsDao{
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) { // result set is iterator.
                 Tickets ticket = new Tickets();
-                ticket.setTicketID(rs.getInt("ticketID"));
+                ticket.setId(rs.getInt("ticketID"));
                 ticket.setFlightID(rs.getInt("flightID"));
                 ticket.setPassengerID(rs.getInt("passengerID"));
                 ticket.setTravelClass(rs.getString("class"));
@@ -55,7 +55,7 @@ public class TicketsDaoSQLImpl implements TicketsDao{
 
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
-            item.setTicketID(rs.getInt(1)); //set id to return it back
+            item.setId(rs.getInt(1)); //set id to return it back
             return item;
         }catch (SQLException e){
             e.printStackTrace();
@@ -69,7 +69,7 @@ public class TicketsDaoSQLImpl implements TicketsDao{
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getTravelClass());
-            stmt.setObject(2, item.getTicketID());
+            stmt.setObject(2, item.getId());
             stmt.executeUpdate();
             return item;
         }catch (SQLException e){
@@ -99,7 +99,7 @@ public class TicketsDaoSQLImpl implements TicketsDao{
             ResultSet rs = stmt.executeQuery();
             while (rs.next()){ // result set is iterator.
                 Tickets ticket = new Tickets();
-                ticket.setTicketID(rs.getInt("ticketID"));
+                ticket.setId(rs.getInt("ticketID"));
                 ticket.setFlightID(rs.getInt("flightID"));
                 ticket.setPassengerID(rs.getInt("passengerID"));
                 ticket.setTravelClass(rs.getString("class"));
@@ -123,7 +123,7 @@ public class TicketsDaoSQLImpl implements TicketsDao{
             ArrayList<Tickets> ticketsList = new ArrayList<>();
             while (rs.next()) {
                 Tickets t = new Tickets();
-                t.setTicketID(rs.getInt(1));
+                t.setId(rs.getInt(1));
                 t.setFlightID(rs.getInt(2));
                 t.setPassengerID(rs.getInt(3));
                 t.setTravelClass(rs.getString(4));

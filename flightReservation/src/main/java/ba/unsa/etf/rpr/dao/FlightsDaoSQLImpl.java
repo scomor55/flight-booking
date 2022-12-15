@@ -28,7 +28,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                 Flights flight = new Flights();
-                flight.setFlightID(rs.getInt("flightID"));
+                flight.setId(rs.getInt("flightID"));
                 flight.setSource(rs.getString("source"));
                 flight.setDestination(rs.getString("destination"));
                 flight.setDeparture(rs.getDate("departure"));
@@ -57,7 +57,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
 
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
-            item.setFlightID(rs.getInt(1)); //set id to return it back
+            item.setId(rs.getInt(1)); //set id to return it back
             return item;
         }catch (SQLException e){
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getSource());
-            stmt.setObject(2, item.getFlightID());
+            stmt.setObject(2, item.getId());
             stmt.executeUpdate();
             return item;
         }catch (SQLException e){
@@ -101,7 +101,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()){ // result set is iterator.
                 Flights flight = new Flights();
-                flight.setFlightID(rs.getInt("flightID"));
+                flight.setId(rs.getInt("flightID"));
                 flight.setSource(rs.getString("source"));
                 flight.setDestination(rs.getString("destination"));
                 flight.setDeparture(rs.getDate("departure"));
@@ -132,7 +132,7 @@ public class FlightsDaoSQLImpl implements FlightsDao {
             ArrayList<Flights> flightsList = new ArrayList<>();
             while(rs.next()){
                 Flights f = new Flights();
-                f.setFlightID(rs.getInt(1));
+                f.setId(rs.getInt(1));
                 f.setSource(rs.getString(2));
                 f.setDestination(rs.getString(3));
                 f.setDeparture(rs.getDate(4));

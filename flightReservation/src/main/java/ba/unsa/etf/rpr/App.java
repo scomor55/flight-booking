@@ -34,7 +34,12 @@ public class App
         tickets.setPrice(1000);
 
 
-        ArrayList<Tickets> t = new ArrayList<Tickets>(dao.searchByClass("Economy"));
+        ArrayList<Tickets> t = null;
+        try {
+            t = new ArrayList<Tickets>(dao.searchByClass("Economy"));
+        } catch (FlightBookingException e) {
+            throw new RuntimeException(e);
+        }
         for(Tickets temp : t){
             System.out.println(temp);
         }

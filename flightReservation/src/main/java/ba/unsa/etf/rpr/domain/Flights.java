@@ -3,7 +3,7 @@ package ba.unsa.etf.rpr.domain;
 import java.util.Date;
 import java.util.Objects;
 
-public class Flights {
+public class Flights implements Idable{
 
     private int flightID;
     private String source;
@@ -12,11 +12,11 @@ public class Flights {
     private Date arrival;
     private int avalivableSeats;
 
-    public int getFlightID() {
+    public int getId() {
         return flightID;
     }
 
-    public void setFlightID(int flightID) {
+    public void setId(int flightID) {
         this.flightID = flightID;
     }
 

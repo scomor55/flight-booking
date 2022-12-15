@@ -15,7 +15,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <TextField fx:id="textField" promptText="Some main app content" GridPane.rowIndex="1" />
-        <Button mnemonicParsing="false" onAction="#logout" text="Logout" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="textField" prefHeight="35.0" prefWidth="200.0" promptText="Some main app content" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#logout" prefHeight="24.0" prefWidth="202.0" text="Logout" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     </children>
 </GridPane>

@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr.domain;
 
 import java.util.Date;
 import java.util.Objects;
-public class Passengers {
+public class Passengers implements Idable{
 
     private int passengerID;
     private String name;
@@ -10,11 +10,11 @@ public class Passengers {
     private Date dateOfBirth;
     private String adress;
 
-    public int getPassengerID() {
+    public int getId() {
         return passengerID;
     }
 
-    public void setPassengerID(int passengerID) {
+    public void setId(int passengerID) {
         this.passengerID = passengerID;
     }
 

@@ -1,21 +1,11 @@
 #loginBtn {
     -fx-background-color: lightskyblue;
     -fx-font-family:verdana;
-    -fx-font-size:20;
-    -fx-font-weight: bold;
+    -fx-font-size:15;
+  /*  -fx-font-weight: bold;*/
     -fx-stroke:navy;
-    -fx-font-style:italic;
-    -fx-border-radius: 20;
-    -fx-background-radius: 20;
+    /*-fx-font-style:italic;*/
+    -fx-border-radius: 15;
+   /* -fx-background-radius: 10;*/
     -fx-padding: 5;
-}
-.label {
-    -fx-text-fill: red;
-    -fx-font-weight: bold;
-    -fx-font-style: italic;
-    -fx-font-family: Arial;
-    -fx-font-smoothing-type: gray;
-}
-.invalidField {
-   -fx-background-color: lightpink;
 }

@@ -56,7 +56,7 @@ public class LoginController {
 
     public void loginClick(ActionEvent actionEvent) {
         String login = loginField.getText();
-        System.out.println("Login filed value: " + login);
+        System.out.println("Login filed value: " +  login);
         loginBtn.setText(loginField.getText());
         if (login.isEmpty()){
             loginField.getStyleClass().add("invalidField");

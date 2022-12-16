@@ -31,7 +31,7 @@ public class MainController {
     }
 
     public void setUsername(String username){
-        this.username = username;
+        this.username =  username;
     }
 
     public String getUsername(){

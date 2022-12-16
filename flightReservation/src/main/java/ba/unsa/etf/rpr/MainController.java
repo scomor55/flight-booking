@@ -39,7 +39,7 @@ public class MainController {
     }
 
     public void logout(ActionEvent actionEvent){
-        Node n = (Node) actionEvent.getSource();
+        Node n =(Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
     }

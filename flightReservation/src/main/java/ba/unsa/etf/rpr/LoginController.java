@@ -58,7 +58,7 @@ public class LoginController {
         String login = loginField.getText();
         System.out.println("Login filed value: " +  login);
         loginBtn.setText(loginField.getText());
-        if (login.isEmpty()){
+        if(login.isEmpty()){
             loginField.getStyleClass().add("invalidField");
         }else{
             try {

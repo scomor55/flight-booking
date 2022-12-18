@@ -20,7 +20,7 @@ import java.util.Stack;
  * Hello world!
  *
  */
-public class App 
+public class App
 {
     public static void main( String[] args )
     {
@@ -47,7 +47,7 @@ public class App
         PassengersDao dao1 = new PassengersDaoSQLImpl();
         ArrayList<Passengers> passengers = null;
         try {
-            passengers = new ArrayList<Passengers>(dao1.searchByName("Hamza"));
+            passengers = new ArrayList<Passengers>(dao1.searchByName("Nedim"));
         } catch (FlightBookingException e) {
             throw new RuntimeException(e);
         }
@@ -62,3 +62,30 @@ public class App
    }*/
 
 }
+
+
+/*package ba.unsa.etf.rpr;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class App extends Application {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // FXML style
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        primaryStage.setTitle("Login App");
+        primaryStage.setScene(new Scene(root, 300, 110));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+
+    }
+}*/

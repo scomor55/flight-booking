@@ -14,4 +14,5 @@ import java.util.List;
 public interface PassengersDao extends Dao<Passengers> {
     List<Passengers> searchByName(String name) throws FlightBookingException;
     List<Passengers> searchBySurname(String surname)throws FlightBookingException;
+
 }

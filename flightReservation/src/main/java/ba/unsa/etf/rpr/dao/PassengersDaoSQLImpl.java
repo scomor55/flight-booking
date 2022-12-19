@@ -22,7 +22,7 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
     public Passengers row2object(ResultSet rs) throws FlightBookingException{
         try {
             Passengers p = new Passengers();
-            p.setId(rs.getInt("passengerID"));
+            p.setId(rs.getInt("id"));
             p.setName(rs.getString("name"));
             p.setSurname(rs.getString("surname"));
             p.setDateOfBirth(rs.getDate("dateOfBirth"));
@@ -36,7 +36,7 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
     @Override
     public Map<String, Object> object2row(Passengers object) {
         Map<String, Object> item = new TreeMap<String, Object>();
-        item.put("passengerID", object.getId());
+        item.put("id", object.getId());
         item.put("name", object.getName());
         item.put("surname", object.getSurname());
         item.put("dateOfBirth", object.getDateOfBirth());

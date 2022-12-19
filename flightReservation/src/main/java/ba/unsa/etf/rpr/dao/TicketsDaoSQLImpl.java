@@ -21,7 +21,7 @@ public class TicketsDaoSQLImpl extends AbstractDao<Tickets> implements TicketsDa
     public Tickets row2object(ResultSet rs) throws FlightBookingException{
         try {
             Tickets p = new Tickets();
-            p.setId(rs.getInt("ticketID"));
+            p.setId(rs.getInt("id"));
             p.setFlightID(rs.getInt("flightID"));
             p.setPassengerID(rs.getInt("passengerID"));  /* <----- Ovo popraviti */
             p.setTravelClass(rs.getString("class"));    /* I OVO */
@@ -35,7 +35,7 @@ public class TicketsDaoSQLImpl extends AbstractDao<Tickets> implements TicketsDa
     @Override
     public Map<String, Object> object2row(Tickets object) {
         Map<String, Object> item = new TreeMap<String, Object>();
-        item.put("ticketID", object.getId());
+        item.put("id", object.getId());
         item.put("flightID", object.getFlightID());   /* <----- Ovo popraviti */
         item.put("passengerID", object.getPassengerID());  /* I OVO */
         item.put("class", object.getClass());

@@ -20,6 +20,7 @@ import java.util.Stack;
  * Hello world!
  *
  */
+/*
 public class App
 {
     public static void main( String[] args )
@@ -55,16 +56,16 @@ public class App
             System.out.println(temp);
         }
 
-    }
+    }*/
    /*public static void main( String[] args ){
        Runtime.Version version = Runtime.version();
        System.out.println("Java version: " + version);
-   }*/
+   }
 
-}
+}*/
 
 
-/*package ba.unsa.etf.rpr;
+/*package ba.unsa.etf.rpr;*/
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -88,4 +89,4 @@ public class App extends Application {
         primaryStage.show();
 
     }
-}*/
+}

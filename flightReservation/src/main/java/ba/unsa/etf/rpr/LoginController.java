@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.domain.Passengers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -54,9 +55,10 @@ public class LoginController {
     }
 
     public void loginClick(ActionEvent actionEvent) {
+        Passengers passenger;
         String login = loginField.getText();
         System.out.println("Login filed value: " + login);
-        loginBtn.setText(loginField.getText());
+    /*    loginBtn.setText(loginField.getText());*/
         if (login.isEmpty()){
             loginField.getStyleClass().add("invalidField");
         }else{

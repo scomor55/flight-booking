@@ -102,7 +102,7 @@ public class Controller {
             loader.load();
             Register register = loader.getController();
             myStage.setTitle("Main Screen");
-            myStage.setScene(new Scene(loader.getRoot(),300,275));
+            myStage.setScene(new Scene(loader.getRoot(),300,125));
             myStage.show();
         } catch (IOException e) {
             e.printStackTrace();

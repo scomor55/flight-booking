@@ -44,7 +44,35 @@ public class Register extends Application {
         stage.show();
     }
 
+    public boolean signin(){
 
+        try{
+
+            Properties p = new Properties();
+            p.load(ClassLoader.getSystemResource("application.properties.template").openStream());
+            String url = p.getProperty("db.connection_string");
+            String usr = p.getProperty("db.username");
+            String pswd = p.getProperty("db.password");
+
+            Connection conn = DriverManager.getConnection(url, usr, pswd);
+
+            Statement stmt = conn.createStatement();
+            String sql = "INSERT INTO Users (username , password)"+
+                    "VALUES (?,?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, fieldUsername.getText());
+            preparedStatement.setString(2, fieldPassword.getText());
+
+            preparedStatement.executeUpdate();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
     public void signinClick(ActionEvent actionEvent) {
         if (fieldUsername.getText().isEmpty()) {
             fieldUsername.getStyleClass().add("invalidField");
@@ -57,32 +85,25 @@ public class Register extends Application {
             return;
         }
 
-        tempUsername = fieldUsername.getText();
-        tempPassword = fieldPassword.getText();
-
-            try{
-
-                Properties p = new Properties();
-                p.load(ClassLoader.getSystemResource("application.properties.template").openStream());
-                String url = p.getProperty("db.connection_string");
-                String usr = p.getProperty("db.username");
-                String pswd = p.getProperty("db.password");
-
-                Connection conn = DriverManager.getConnection(url, usr, pswd);
-
-                Statement stmt = conn.createStatement();
-                String sql = "INSERT INTO Users (username , password)"+
-                        "VALUES (?,?)";
-                PreparedStatement preparedStatement = conn.prepareStatement(sql);
-                preparedStatement.setString(1, fieldUsername.getText());
-                preparedStatement.setString(2, fieldPassword.getText());
-
-            preparedStatement.executeUpdate();
+        boolean check = signin();
+        if (!check) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška");
+            alert.setHeaderText("Pogrijesio si");
+            alert.setContentText("Greska Safete");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ispravan unos");
+            alert.setHeaderText("Uspjesno ste kreirali racun ");
+            alert.setContentText("Svaka cast");
+            alert.showAndWait();
+        }
 
 
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+
+
+
 
     }
 }

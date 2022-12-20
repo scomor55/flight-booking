@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.sql.*;
@@ -14,6 +15,8 @@ public class Controller {
     public TextField fieldUsername;
     public String tempUsername;
     public String tempPassword;
+    public PasswordField fieldPassword;
+
     @FXML
     public void initialize(){
         fieldUsername.getStyleClass().add("invalidField");
@@ -50,8 +53,8 @@ public class Controller {
             ResultSet rs = preparedStatement.executeQuery();
 
             if(rs.next()){
-                tempUsername = rs.getString("username");
-                tempPassword = rs.getString("password");
+               /* tempUsername = rs.getString("username");
+                tempPassword = rs.getString("password");*/
                 return true;
             }
             stmt.close();
@@ -75,7 +78,26 @@ public class Controller {
             return;
         }
         tempUsername = fieldUsername.getText();
+        tempPassword = fieldPassword.getText();
 
+
+        boolean check = Check(tempUsername,tempPassword);
+        if(!check){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška");
+            alert.setHeaderText("Pogrijesio si");
+            alert.setContentText("Greska Safete");
+
+            alert.showAndWait();
+        }else{
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Ispravan unos");
+            alert.setHeaderText("Uspjesno ste logovani");
+            alert.setContentText("Svaka cast");
+
+            alert.showAndWait();
+        }
 
 
     }

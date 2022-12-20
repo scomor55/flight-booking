@@ -48,7 +48,7 @@ public class App
         PassengersDao dao1 = new PassengersDaoSQLImpl();
         ArrayList<Passengers> passengers = null;
         try {
-            passengers = new ArrayList<Passengers>(dao1.searchByName("Nedim"));
+            passengers = new ArrayList<Passengers>(dao1.searchByName("Hamza"));
         } catch (FlightBookingException e) {
             throw new RuntimeException(e);
         }

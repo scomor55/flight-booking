@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +18,8 @@ public class Register extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
-        stage.setTitle("Login App");
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/register.fxml"));
+        stage.setTitle("Register");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();

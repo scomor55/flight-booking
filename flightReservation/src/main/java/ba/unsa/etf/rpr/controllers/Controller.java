@@ -4,10 +4,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
@@ -18,15 +23,15 @@ public class Controller {
     public PasswordField fieldPassword;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         fieldUsername.getStyleClass().add("invalidField");
         fieldUsername.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if(fieldUsername.getText().trim().isEmpty()){
+                if (fieldUsername.getText().trim().isEmpty()) {
                     fieldUsername.getStyleClass().removeAll("validField");
                     fieldUsername.getStyleClass().add("invalidField");
-                }else{
+                } else {
                     fieldUsername.getStyleClass().removeAll("invalidField");
                     fieldUsername.getStyleClass().add("validField");
                 }
@@ -34,32 +39,32 @@ public class Controller {
         });
     }
 
-    public boolean Check(String username, String password){
+    public boolean Check(String username, String password) {
 
-        try{
+        try {
             Properties p = new Properties();
             p.load(ClassLoader.getSystemResource("application.properties.template").openStream());
             String url = p.getProperty("db.connection_string");
             String usr = p.getProperty("db.username");
-            String pswd= p.getProperty("db.password");
+            String pswd = p.getProperty("db.password");
 
-            Connection conn = DriverManager.getConnection(url,usr,pswd);
+            Connection conn = DriverManager.getConnection(url, usr, pswd);
 
             Statement stmt = conn.createStatement();
             String sql = "SELECT * FROM Users WHERE username=? AND password=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2,password);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
             ResultSet rs = preparedStatement.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                /* tempUsername = rs.getString("username");
                 tempPassword = rs.getString("password");*/
                 return true;
             }
             stmt.close();
             conn.close();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -67,7 +72,7 @@ public class Controller {
     }
 
     public void buttonClick(ActionEvent actionEvent) {
-        if(fieldUsername.getText().isEmpty()){
+        if (fieldUsername.getText().isEmpty()) {
             fieldUsername.getStyleClass().add("invalidField");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška");
@@ -81,15 +86,15 @@ public class Controller {
         tempPassword = fieldPassword.getText();
 
 
-        boolean check = Check(tempUsername,tempPassword);
-        if(!check){
+        boolean check = Check(tempUsername, tempPassword);
+        if (!check) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška");
             alert.setHeaderText("Pogrijesio si");
             alert.setContentText("Greska Safete");
 
             alert.showAndWait();
-        }else{
+        } else {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ispravan unos");
@@ -101,4 +106,23 @@ public class Controller {
 
 
     }
+
+    public void registerClick(ActionEvent actionEvent) {
+        try {
+
+            final Stage myStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/register.fxml"));
+            loader.load();
+            Register register = loader.getController();
+            myStage.setTitle("Main Screen");
+            myStage.setScene(new Scene(loader.getRoot(),300,275));
+            myStage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

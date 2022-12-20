@@ -56,10 +56,7 @@ public class Controller {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             ResultSet rs = preparedStatement.executeQuery();
-
             if (rs.next()) {
-               /* tempUsername = rs.getString("username");
-                tempPassword = rs.getString("password");*/
                 return true;
             }
             stmt.close();
@@ -67,7 +64,6 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -78,13 +74,11 @@ public class Controller {
             alert.setTitle("Greška");
             alert.setHeaderText("Niste unijeli korisničko ime");
             alert.setContentText("Korisničko ime ne smije biti prazno");
-
             alert.showAndWait();
             return;
         }
         tempUsername = fieldUsername.getText();
         tempPassword = fieldPassword.getText();
-
 
         boolean check = Check(tempUsername, tempPassword);
         if (!check) {
@@ -92,24 +86,17 @@ public class Controller {
             alert.setTitle("Greška");
             alert.setHeaderText("Pogrijesio si");
             alert.setContentText("Greska Safete");
-
             alert.showAndWait();
         } else {
-
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ispravan unos");
             alert.setHeaderText("Uspjesno ste logovani");
             alert.setContentText("Svaka cast");
-
             alert.showAndWait();
         }
-
-
     }
-
     public void registerClick(ActionEvent actionEvent) {
         try {
-
             final Stage myStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/register.fxml"));
             loader.load();
@@ -117,8 +104,6 @@ public class Controller {
             myStage.setTitle("Main Screen");
             myStage.setScene(new Scene(loader.getRoot(),300,275));
             myStage.show();
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import java.net.*?>
 <GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="300.0" vgap="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.Register">
     <stylesheets>
         <URL value="@/css/register.css" />
@@ -32,7 +32,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Button fx:id="signinBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Sign in" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <Button fx:id="signinBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signinClick" text="Sign in" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -43,11 +43,11 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <TextField GridPane.columnIndex="1">
+      <TextField fx:id="fieldUsername" GridPane.columnIndex="1">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="fieldPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
    <opaqueInsets>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

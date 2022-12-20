@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="loginScreen" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.LoginController">
+<GridPane fx:id="loginScreen" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.Controller">
     <stylesheets>
         <URL value="@/css/login.css" />
     </stylesheets>
@@ -19,9 +20,12 @@
     </rowConstraints>
     <children>
         <Label styleClass="label" text="Username:" />
-        <TextField fx:id="loginField" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+        <TextField fx:id="fieldUsername" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
         <Label styleClass="label" text="Password:" GridPane.rowIndex="1" />
         <PasswordField maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Button fx:id="loginBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loginClick" text="Login" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+        <Button fx:id="loginBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonClick" text="Login" GridPane.columnSpan="2" GridPane.rowIndex="2" />
     </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </GridPane>

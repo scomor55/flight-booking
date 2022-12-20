@@ -19,3 +19,7 @@
 .invalidField {
    -fx-background-color: lightpink;
 }
+
+.validField {
+   -fx-background-color: yellowgreen;
+}

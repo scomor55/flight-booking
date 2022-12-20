@@ -17,13 +17,15 @@
         <RowConstraints />
         <RowConstraints />
         <RowConstraints />
+      <RowConstraints />
     </rowConstraints>
     <children>
         <Label styleClass="label" text="Username:" />
         <TextField fx:id="fieldUsername" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
         <Label styleClass="label" text="Password:" GridPane.rowIndex="1" />
         <PasswordField fx:id="fieldPassword" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Button fx:id="loginBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonClick" text="Login" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+        <Button fx:id="loginBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonClick" prefHeight="29.0" prefWidth="222.0" text="Login" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <Button fx:id="registerBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="29.0" prefWidth="222.0" text="Register" GridPane.columnSpan="2" GridPane.rowIndex="3" />
     </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

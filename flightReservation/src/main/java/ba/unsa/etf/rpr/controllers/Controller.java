@@ -88,7 +88,7 @@ public class Controller {
             alert.setContentText("Greska Safete");
             alert.showAndWait();
         } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Ispravan unos");
             alert.setHeaderText("Uspjesno ste logovani");
             alert.setContentText("Svaka cast");

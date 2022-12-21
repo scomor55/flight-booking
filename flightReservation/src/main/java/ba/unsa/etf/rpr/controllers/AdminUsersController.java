@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class AdminUserController extends Application {
+public class AdminUsersController extends Application {
 
     public static void main(String[] args) {
         // System.out.println("Hello World!");

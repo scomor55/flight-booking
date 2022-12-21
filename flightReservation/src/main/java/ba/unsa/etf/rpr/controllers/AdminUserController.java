@@ -17,6 +17,10 @@ public class AdminUserController extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/adminUser.fxml"));
+        stage.setTitle("Login App");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
     }
 }

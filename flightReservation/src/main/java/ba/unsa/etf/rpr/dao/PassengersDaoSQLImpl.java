@@ -27,6 +27,7 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
             p.setSurname(rs.getString("surname"));
             p.setDateOfBirth(rs.getDate("dateOfBirth"));
             p.setAdress(rs.getString("address"));
+            p.setEmail(rs.getString("email"));
             return p;
         } catch (Exception e) {
             throw new FlightBookingException(e.getMessage(), e);
@@ -41,6 +42,7 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
         item.put("surname", object.getSurname());
         item.put("dateOfBirth", object.getDateOfBirth());
         item.put("address", object.getAdress());
+        item.put("email",object.getEmail());
         return item;
     }
 

@@ -9,6 +9,8 @@ public class Passengers implements Idable{
     private String surname;
     private Date dateOfBirth;
     private String adress;
+    private String email;
+
 
     public int getId() {
         return passengerID;
@@ -50,6 +52,14 @@ public class Passengers implements Idable{
         this.adress = adress;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Passengr{" +
@@ -58,6 +68,7 @@ public class Passengers implements Idable{
                 ", surname:'" + surname + "'"+
                 ", dateOfBirth:" + dateOfBirth +
                 ", adress:'" + adress + '\'' +
+                ", email: "+ email +
                 '}';
     }
 
@@ -71,7 +82,7 @@ public class Passengers implements Idable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(passengerID, name, surname, dateOfBirth,adress);
+        return Objects.hash(passengerID, name, surname, dateOfBirth,adress,email);
     }
 
 }

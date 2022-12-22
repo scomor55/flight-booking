@@ -93,6 +93,22 @@ public class Controller {
             alert.setHeaderText("Uspjesno ste logovani");
             alert.setContentText("Svaka cast");
             alert.showAndWait();
+            alert.close();
+
+            if(tempUsername.equals("safa")){
+
+                try {
+                final Stage adminStage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPanel.fxml"));
+                loader.load();
+                Register register = loader.getController();
+                adminStage.setTitle("Main Screen");
+                adminStage.setScene(new Scene(loader.getRoot(),300,125));
+                adminStage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            }
         }
     }
     public void registerClick(ActionEvent actionEvent) {

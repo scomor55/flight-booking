@@ -104,8 +104,8 @@ public class Controller {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPanel.fxml"));
                 loader.load();
                 Register register = loader.getController();
-                adminStage.setTitle("Main Screen");
-                adminStage.setScene(new Scene(loader.getRoot(),300,125));
+                adminStage.setTitle("Admin panel");
+                adminStage.setScene(new Scene(loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
                 adminStage.setResizable(false);
                 adminStage.show();
             } catch (IOException e) {

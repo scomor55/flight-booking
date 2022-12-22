@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="180.0" vgap="5.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="180.0" vgap="5.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.AdminPanelController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -16,10 +16,10 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="User" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" prefWidth="100.0" text="Passengers" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Button mnemonicParsing="false" prefWidth="100.0" text="Flights" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-      <Button mnemonicParsing="false" prefWidth="100.0" text="Tickets" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Button fx:id="userAdmin" contentDisplay="CENTER" mnemonicParsing="false" onAction="#userClick" prefHeight="25.0" prefWidth="100.0" text="User" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Button fx:id="passengerAdmin" mnemonicParsing="false" onAction="#passengerClick" prefWidth="100.0" text="Passengers" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Button fx:id="flightsAdmin" mnemonicParsing="false" onAction="#flightsClick" prefWidth="100.0" text="Flights" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Button fx:id="ticketsAdmin" mnemonicParsing="false" onAction="#ticketsClick" prefWidth="100.0" text="Tickets" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
       <Label text="Welcome admin" GridPane.halignment="CENTER" />
    </children>
    <padding>

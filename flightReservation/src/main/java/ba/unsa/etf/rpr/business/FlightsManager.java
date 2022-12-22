@@ -4,6 +4,8 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 
+import java.util.List;
+
 public class FlightsManager {
 
     public Flights add(Flights flight)throws FlightBookingException{
@@ -18,6 +20,22 @@ public class FlightsManager {
     }
 
     public void delete(int flightId)throws FlightBookingException{
-
+    try {
+        DaoFactory.flightsDao().delete(flightId);
+    }catch(FlightBookingException f){
+        if(f.getMessage().contains("FOREIGN KEY")){
+            throw new FlightBookingException("Cannot delete category which is related to quotes. First delete related quotes before deleting category.");
+        }
+        throw f;
     }
+    }
+
+    public Flights update(Flights flight)throws FlightBookingException{
+        return DaoFactory.flightsDao().update(flight);
+    }
+
+    public List<Flights> getAll() throws FlightBookingException {
+        return DaoFactory.flightsDao().getAll();
+    }
+
 }

@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+
 public class Controller {
     public TextField fieldUsername;
     public String tempUsername;
@@ -104,6 +106,7 @@ public class Controller {
                 Register register = loader.getController();
                 adminStage.setTitle("Main Screen");
                 adminStage.setScene(new Scene(loader.getRoot(),300,125));
+                adminStage.setResizable(false);
                 adminStage.show();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -118,7 +121,7 @@ public class Controller {
             loader.load();
             Register register = loader.getController();
             myStage.setTitle("Main Screen");
-            myStage.setScene(new Scene(loader.getRoot(),300,125));
+            myStage.setScene(new Scene(loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
             myStage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -16,6 +16,10 @@ public class AdminTicketsController extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/adminTickets.fxml"));
+        stage.setTitle("Tickets Management");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
     }
 }

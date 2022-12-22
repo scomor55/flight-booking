@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,5 +22,17 @@ public class AdminUsersController extends Application {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
+    }
+/* Implementation of functionalities starts here */
+    public void addUser(ActionEvent actionEvent) {
+
+    }
+
+    public void updateUser(ActionEvent actionEvent) {
+
+    }
+
+    public void deleteUser(ActionEvent actionEvent) {
+
     }
 }

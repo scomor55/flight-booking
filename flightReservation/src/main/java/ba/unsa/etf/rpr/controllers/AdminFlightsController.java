@@ -55,7 +55,8 @@ public class AdminFlightsController /*extends Application*/ {
         flight = manager.update(flight);
     }
 
-    public void deleteFlight(ActionEvent actionEvent) {
-
+    public void deleteFlight(ActionEvent actionEvent)throws FlightBookingException{
+        Flights flight = manager.getById(Integer.parseInt(idField.getText()));
+        manager.delete(flight.getId());
     }
 }

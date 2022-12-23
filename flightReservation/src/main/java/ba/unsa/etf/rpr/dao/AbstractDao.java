@@ -22,6 +22,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
             this.connection = DriverManager.getConnection(url,username,password);
         } catch (Exception e) {
             e.printStackTrace();
+            System.exit(0);     /* new */
         }
     }
 
@@ -29,42 +30,19 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         return this.connection;
     }
 
+    public void setConnection(){
+        this.connection = connection;
+    }
+
     public abstract T row2object(ResultSet rs) throws FlightBookingException;
     public abstract Map<String, Object> object2row(T object) ;
 
     public T getById(int id) throws FlightBookingException {
-        String query = "SELECT * FROM "+this.tableName+" WHERE id = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) { // result set is iterator.
-                T result = row2object(rs);
-                rs.close();
-                return result;
-            } else {
-                throw new FlightBookingException("Object not found");
-            }
-        } catch (SQLException e) {
-            throw new FlightBookingException(e.getMessage(), e);
-        }
+        return executeQueryUnique("SELECT * FROM "+ this.tableName+" WHERE id = ?",new Object[]{id});
     }
 
     public List<T> getAll() throws FlightBookingException {
-        String query = "SELECT * FROM "+ tableName;
-        List<T> results = new ArrayList<T>();
-        try{
-            PreparedStatement stmt = getConnection().prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()){ // result set is iterator.
-                T object = row2object(rs);
-                results.add(object);
-            }
-            rs.close();
-            return results;
-        }catch (SQLException e){
-            throw new FlightBookingException(e.getMessage(), e);
-        }
+        return executeQuery("SELECT * FROM " + tableName, null);
     }
 
     public void delete(int id) throws FlightBookingException {
@@ -129,8 +107,52 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
             stmt.setObject(counter, item.getId());
             stmt.executeUpdate();
             return item;
-        }catch (SQLException e){
+       }catch (SQLException e){
             throw new FlightBookingException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Utility method for executing any kind of query
+     * @param query - SQL query
+     * @param params - params for query
+     * @return List of objects from database
+     * @throws FlightBookingException in case of error with db
+     */
+
+    public List<T> executeQuery(String query, Object[] params) throws FlightBookingException{
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+            if (params != null){
+                for(int i = 1; i <= params.length; i++){
+                    stmt.setObject(i, params[i-1]);
+                }
+            }
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<T> resultList = new ArrayList<>();
+            while (rs.next()) {
+                resultList.add(row2object(rs));
+            }
+            return resultList;
+        } catch (SQLException e) {
+            throw new FlightBookingException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Utility for query execution that always return single record
+     * @param query - query that returns single record
+     * @param params - list of params for sql query
+     * @return Object
+     * @throws FlightBookingException in case when object is not found
+     */
+
+    public T executeQueryUnique(String query, Object[] params) throws FlightBookingException{
+        List<T> result = executeQuery(query, params);
+        if (result != null && result.size() == 1){
+            return result.get(0);
+        }else{
+            throw new FlightBookingException("Object not found");
         }
     }
 

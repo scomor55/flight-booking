@@ -19,7 +19,7 @@ import java.util.Properties;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class Register extends Application {
+public class Register  {
 
 
     public Button signinBtn;
@@ -29,20 +29,6 @@ public class Register extends Application {
     public String tempPassword;
     public TextField fieldPassword;
 
-
-    public static void main(String[] args) {
-        // System.out.println("Hello World!");
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/register.fxml"));
-        stage.setTitle("Register");
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        stage.show();
-    }
 
     public boolean signin(){
 

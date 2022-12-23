@@ -13,13 +13,13 @@ public class AdminTicketsController  {
 
     public TextField flightIdLabel;
 
-
     public TextField passengerIdLabel;
     public TextField classLabel;
     public TextField priceLabel;
     public TextField ticketIDLabel;
 
     public void addTicket(ActionEvent actionEvent) {
+
     }
 
     public void updateTicket(ActionEvent actionEvent) {

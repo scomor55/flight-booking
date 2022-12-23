@@ -34,7 +34,7 @@ public class TicketsDaoSQLImpl extends AbstractDao<Tickets> implements TicketsDa
 
     @Override
     public Map<String, Object> object2row(Tickets object) {
-        Map<String, Object> item = new TreeMap<String, Object>();
+        Map<String, Object> item = new TreeMap<>();
         item.put("id", object.getId());
         item.put("flightID", object.getFlightID());   /* <----- Ovo popraviti */
         item.put("passengerID", object.getPassengerID());  /* I OVO */

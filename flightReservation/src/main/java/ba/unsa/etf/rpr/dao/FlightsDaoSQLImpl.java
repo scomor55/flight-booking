@@ -43,7 +43,7 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
 
     @Override
     public Map<String, Object> object2row(Flights object) {
-        Map<String, Object> row = new TreeMap<String, Object>();
+        Map<String, Object> row = new TreeMap<>();
         row.put("id", object.getId());
         row.put("source", object.getSource());
         row.put("destination", object.getDestination());

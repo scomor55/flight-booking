@@ -36,7 +36,7 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
 
     @Override
     public Map<String, Object> object2row(Passengers object) {
-        Map<String, Object> item = new TreeMap<String, Object>();
+        Map<String, Object> item = new TreeMap<>();
         item.put("id", object.getId());
         item.put("name", object.getName());
         item.put("surname", object.getSurname());

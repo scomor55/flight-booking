@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 public class Passengers implements Idable{
@@ -7,7 +8,7 @@ public class Passengers implements Idable{
     private int passengerID;
     private String name;
     private String surname;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;   /* TRY TO USE DATE INSTEAD OF THIS */
     private String adress;
     private String email;
 
@@ -36,11 +37,11 @@ public class Passengers implements Idable{
         this.surname = surname;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

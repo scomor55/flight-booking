@@ -25,7 +25,7 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
             p.setId(rs.getInt("id"));
             p.setName(rs.getString("name"));
             p.setSurname(rs.getString("surname"));
-            p.setDateOfBirth(rs.getDate("dateOfBirth"));
+            p.setDateOfBirth(rs.getDate("dateOfBirth").toLocalDate());
             p.setAdress(rs.getString("address"));
             p.setEmail(rs.getString("email"));
             return p;

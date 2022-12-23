@@ -37,4 +37,8 @@ public class PassengersManager {
         return DaoFactory.passengersDao().getAll();
     }
 
+    public Passengers getById(int id) throws FlightBookingException {
+        return DaoFactory.passengersDao().getById(id);
+    }
+
 }

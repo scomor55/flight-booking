@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Flights implements Idable{
@@ -8,9 +8,12 @@ public class Flights implements Idable{
     private int flightID;
     private String source;
     private String destination;
-    private Date departure;
-    private Date arrival;
-    private int avalivableSeats;
+    //private Date departure;//
+
+    private LocalDate departure;
+   // private Date arrival;//
+   private LocalDate arrival;
+    private int seats;
 
     public int getId() {
         return flightID;
@@ -36,28 +39,28 @@ public class Flights implements Idable{
         this.destination = destination;
     }
 
-    public Date getDeparture() {
+    public LocalDate getDeparture() {
         return departure;
     }
 
-    public void setDeparture(Date departure) {
+    public void setDeparture(LocalDate departure) {
         this.departure = departure;
     }
 
-    public Date getArrival() {
+    public LocalDate getArrival() {
         return arrival;
     }
 
-    public void setArrival(Date arrival) {
+    public void setArrival(LocalDate arrival) {
         this.arrival = arrival;
     }
 
-    public int getAvalivableSeats() {
-        return avalivableSeats;
+    public int getSeats() {
+        return seats;
     }
 
-    public void setAvalivableSeats(int avalivableSeats) {
-        this.avalivableSeats = avalivableSeats;
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 
     @Override
@@ -67,7 +70,7 @@ public class Flights implements Idable{
                 ", source:'" + source + '\'' +
                 ", destination:'" + destination + '\'' +
                 ", arrival:" + arrival +
-                ", avalivableSeats=" + avalivableSeats +
+                ", seats=" + seats +
                 '}';
     }
 
@@ -81,7 +84,7 @@ public class Flights implements Idable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(flightID, source, destination, departure,arrival,avalivableSeats);
+        return Objects.hash(flightID, source, destination, departure,arrival, seats);
     }
 
 

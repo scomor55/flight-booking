@@ -32,9 +32,9 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
             flight.setId(rs.getInt("id"));
             flight.setSource(rs.getString("source"));
             flight.setDestination(rs.getString("destination"));
-            flight.setDeparture(rs.getDate("departure"));
-            flight.setArrival(rs.getDate("arrival"));
-            flight.setAvalivableSeats(rs.getInt("avalivableSeats"));
+            flight.setDeparture(rs.getDate("departure").toLocalDate());
+            flight.setArrival(rs.getDate("arrival").toLocalDate());
+            flight.setSeats(rs.getInt("seatSeats"));
             return flight;
         } catch (SQLException e) {
             throw new FlightBookingException(e.getMessage(), e);
@@ -49,7 +49,7 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
         row.put("destination", object.getDestination());
         row.put("departure", object.getDeparture());
         row.put("arrival", object.getArrival());
-        row.put("avalivableSeats", object.getAvalivableSeats());
+        row.put("seats", object.getSeats());
         return row;
     }
 

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -51,16 +52,19 @@ public class AdminPanelController extends Application {
     }
 
 
-    public void flightsClick(ActionEvent actionEvent)throws IOException {
-        Stage flightsStage = new Stage();
+    public void flightsClick(ActionEvent actionEvent) throws IOException {
+
+        Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminFlights.fxml"));
         Parent root = loader.load();
        /* AdminUsersController adminUsersController = new AdminUsersController();
         loader.setController(adminUsersController);*/
-        flightsStage.setTitle("Flights management");
-        flightsStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-        flightsStage.setResizable(false);
-        flightsStage.show();
+        passengerStage.setTitle("Flights management");
+        passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        passengerStage.setResizable(false);
+        passengerStage.show();
+
+
     }
 
 

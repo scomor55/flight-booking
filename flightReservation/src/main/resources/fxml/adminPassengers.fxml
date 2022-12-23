@@ -19,7 +19,6 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label text="First name :" GridPane.halignment="CENTER" />
@@ -32,10 +31,10 @@
       <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Button mnemonicParsing="false" onAction="#addButton" prefHeight="33.0" prefWidth="205.0" text="Add" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-      <Button mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="212.0" text="Delete" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+      <Button mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="100.0" text="Delete" GridPane.columnSpan="2" GridPane.rowIndex="7" />
       <Label text="ID :" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
       <TextField fx:id="IdField" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Button mnemonicParsing="false" onAction="#updateField" prefHeight="31.0" prefWidth="205.0" text="Update" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+      <Button mnemonicParsing="false" onAction="#updateField" prefHeight="30.0" prefWidth="100.0" text="Update" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
       <ListView fx:id="listField" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowSpan="9" />
       <DatePicker fx:id="dateOfBirthField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>

@@ -45,10 +45,14 @@ public class AdminPassengersController {
     }catch(FlightBookingException f){
         new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
     }
-
     }
 
     public void deleteButton(ActionEvent actionEvent) throws FlightBookingException {
+        Passengers passenger = manager.getById(Integer.parseInt(IdField.getText()));
+        manager.delete(passenger.getId());
+    }
+
+    public void updateField(ActionEvent actionEvent) throws FlightBookingException {
         Passengers passenger = manager.getById(Integer.parseInt(IdField.getText()));
         passenger.setName(nameField.getText());
         passenger.setSurname(surnameField.getText());
@@ -56,10 +60,5 @@ public class AdminPassengersController {
         passenger.setAdress(addressField.getText());
         passenger.setEmail(emailField.getText());
         passenger = manager.update(passenger);
-    }
-
-    public void updateField(ActionEvent actionEvent) throws FlightBookingException {
-        Passengers passenger = manager.getById(Integer.parseInt(IdField.getText()));
-        manager.delete(passenger.getId());
     }
 }

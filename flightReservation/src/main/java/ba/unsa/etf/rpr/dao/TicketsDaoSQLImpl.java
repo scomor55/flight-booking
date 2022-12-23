@@ -1,7 +1,5 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.Flights;
-import ba.unsa.etf.rpr.domain.Passengers;
 import ba.unsa.etf.rpr.domain.Tickets;
 import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 

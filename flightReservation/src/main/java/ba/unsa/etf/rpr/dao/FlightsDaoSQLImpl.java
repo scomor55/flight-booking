@@ -34,7 +34,7 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
             flight.setDestination(rs.getString("destination"));
             flight.setDeparture(rs.getDate("departure").toLocalDate());
             flight.setArrival(rs.getDate("arrival").toLocalDate());
-            flight.setSeats(rs.getInt("seatSeats"));
+            flight.setSeats(rs.getInt("seats"));
             return flight;
         } catch (SQLException e) {
             throw new FlightBookingException(e.getMessage(), e);

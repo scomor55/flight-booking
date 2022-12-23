@@ -23,15 +23,15 @@
       <Label text="Passenger ID :" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Label text="Class :" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
       <Label text="Price :" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-      <TextField GridPane.columnIndex="1" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Add" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      <TextField fx:id="flightIdLabel" GridPane.columnIndex="1" />
+      <TextField fx:id="passengerIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="classLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="priceLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" onAction="#addTicket" prefHeight="30.0" prefWidth="206.0" text="Add" GridPane.columnSpan="2" GridPane.rowIndex="4" />
       <Label text="ID :" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Update" GridPane.rowIndex="6" />
-      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <TextField fx:id="ticketIDLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" onAction="#updateTicket" prefHeight="30.0" prefWidth="100.0" text="Update" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" onAction="#deleteTicket" prefHeight="30.0" prefWidth="100.0" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="6" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

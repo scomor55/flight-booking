@@ -57,7 +57,7 @@ public class Tickets implements Idable{
                 "ticketID=" + ticketID +
                 ", flightID=" + flightID +
                 ", passengerID=" + passengerID +
-                ", travelClass:'" + travelClass + '\'' +
+                ", class:'" + travelClass + '\'' +
                 ", price=" + price +
                 '}';
     }

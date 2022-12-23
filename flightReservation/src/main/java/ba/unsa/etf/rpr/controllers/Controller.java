@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -104,7 +105,7 @@ public class Controller {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPanel.fxml"));
                     loader.load();
                     adminStage.setTitle("Admin panel");
-                    adminStage.setScene(new Scene(loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+                    adminStage.setScene(new Scene((Parent) loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
                     adminStage.setResizable(false);
                     adminStage.show();
                 } catch (IOException e) {
@@ -120,7 +121,7 @@ public class Controller {
             loader.load();
             Register register = loader.getController();
             myStage.setTitle("Main Screen");
-            myStage.setScene(new Scene(loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+            myStage.setScene(new Scene((Parent) loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
             myStage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -42,7 +42,7 @@ public class AdminPassengersController {
                 if(n != null){
                     nameField.setText(n.getName());
                     surnameField.setText(n.getSurname());
-                  //  dateOfBirthField.setConverter(n.getDateOfBirth());
+                  //  dateOfBirthField. setConverter(n.getDateOfBirth());
                     addressField.setText(n.getAdress());
                     emailField.setText(n.getEmail());
                     IdField.setText(String.valueOf(n.getId()));

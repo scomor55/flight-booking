@@ -99,12 +99,23 @@ public class Controller {
             alert.close();
 
             if(tempUsername.equals("safa")){
-
                 try {
                     final Stage adminStage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPanel.fxml"));
                     loader.load();
                     adminStage.setTitle("Admin panel");
+                    adminStage.setScene(new Scene((Parent) loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+                    adminStage.setResizable(false);
+                    adminStage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else{
+                try {
+                    final Stage adminStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userPanel.fxml"));
+                    loader.load();
+                    adminStage.setTitle("User panel");
                     adminStage.setScene(new Scene((Parent) loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
                     adminStage.setResizable(false);
                     adminStage.show();

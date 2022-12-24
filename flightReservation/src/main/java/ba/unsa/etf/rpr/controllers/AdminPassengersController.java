@@ -6,7 +6,9 @@ import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.domain.Passengers;
 import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,9 +30,30 @@ public class AdminPassengersController {
     public TextField addressField;
     public TextField emailField;
     public TextField IdField;
-    public ListView listField;
+    public ListView<Passengers> listField;
 
     private PassengersManager manager = new PassengersManager();
+
+    @FXML
+    public void initialize(){
+        try {
+            refreshPassengers();
+            listField.getSelectionModel().selectedItemProperty().addListener((obs, o , n) ->{
+                if(n != null){
+                    nameField.setText(n.getName());
+                    surnameField.setText(n.getSurname());
+                  //  dateOfBirthField.setConverter(n.getDateOfBirth());
+                    addressField.setText(n.getAdress());
+                    emailField.setText(n.getEmail());
+                    IdField.setText(String.valueOf(n.getId()));
+                }
+            });
+        }catch(FlightBookingException f){
+            throw new RuntimeException(f);
+        }
+    }
+
+
 
     public void addButton(ActionEvent actionEvent) {
 
@@ -60,5 +83,13 @@ public class AdminPassengersController {
         passenger.setAdress(addressField.getText());
         passenger.setEmail(emailField.getText());
         passenger = manager.update(passenger);
+    }
+
+    private void refreshPassengers()throws FlightBookingException{
+        try{
+            listField.setItems(FXCollections.observableList(manager.getAll()));
+        }catch(FlightBookingException f){
+            new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
+        }
     }
 }

@@ -66,7 +66,7 @@ public class Flights implements Idable{
     @Override
     public String toString() {
         return "Flight{" +
-                "source:" + flightID +
+                "id:" + flightID +
                 ", source:'" + source + '\'' +
                 ", destination:'" + destination + '\'' +
                 ", arrival:" + arrival +

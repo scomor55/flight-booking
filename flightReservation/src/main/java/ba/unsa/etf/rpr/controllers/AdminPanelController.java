@@ -12,20 +12,8 @@ import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class AdminPanelController extends Application {
+public class AdminPanelController  {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/adminPanel.fxml"));
-        stage.setTitle("Admin panel");
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        stage.show();
-    }
 
     public void userClick(ActionEvent actionEvent) throws IOException {
         Stage userStage = new Stage();
@@ -57,8 +45,8 @@ public class AdminPanelController extends Application {
         Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminFlights.fxml"));
         Parent root = loader.load();
-       /* AdminUsersController adminUsersController = new AdminUsersController();
-        loader.setController(adminUsersController);*/
+        AdminUsersController adminUsersController = new AdminUsersController();
+        loader.setController(adminUsersController);
         passengerStage.setTitle("Flights management");
         passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         passengerStage.setResizable(false);

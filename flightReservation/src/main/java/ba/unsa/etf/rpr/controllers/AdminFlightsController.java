@@ -3,9 +3,12 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.FlightsManager;
 import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.exceptions.FlightBookingException;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import java.time.LocalDate;
+
 import ba.unsa.etf.rpr.dao.AbstractDao;
 
 public class AdminFlightsController /*extends Application*/ {
@@ -16,7 +19,7 @@ public class AdminFlightsController /*extends Application*/ {
     public DatePicker arrivalField;
     public TextField seatsField;
     public TextField idField;
-    public ListView flightsList;
+    public ListView<Flights> flightsList;
     private FlightsManager manager = new FlightsManager();
 
 
@@ -29,7 +32,22 @@ public class AdminFlightsController /*extends Application*/ {
         stage.show();
     }*/
     
-
+    @FXML
+    public void initialize(){
+        try {
+            refreshFlights();
+           flightsList.getSelectionModel().selectedItemProperty().addListener((obs, o , n) ->{
+                if(n != null){
+                    sourceField.setText(n.getSource());
+                    destinationField.setText(n.getDestination());
+                    //arrivalField.setConverter(n.getDeparture().toString());
+                    seatsField.setText(String.valueOf(n.getSeats()));
+                }
+            });
+        }catch(FlightBookingException f){
+            throw new RuntimeException(f);
+        }
+    }
 
     public void addFlight(ActionEvent actionEvent) {
         try {
@@ -58,5 +76,13 @@ public class AdminFlightsController /*extends Application*/ {
     public void deleteFlight(ActionEvent actionEvent)throws FlightBookingException{
         Flights flight = manager.getById(Integer.parseInt(idField.getText()));
         manager.delete(flight.getId());
+    }
+
+    private void refreshFlights()throws FlightBookingException{
+        try{
+        flightsList.setItems(FXCollections.observableList(manager.getAll()));
+        }catch(FlightBookingException f){
+            new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
+        }
     }
 }

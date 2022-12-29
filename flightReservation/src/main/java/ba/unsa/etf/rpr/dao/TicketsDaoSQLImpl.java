@@ -44,18 +44,6 @@ public class TicketsDaoSQLImpl extends AbstractDao<Tickets> implements TicketsDa
 
     @Override
     public List<Tickets> searchByClass(String ticketClass) throws FlightBookingException{
-        String query = "SELECT * FROM Tickets WHERE class LIKE concat('%', ?, '%')";
-        try {
-            PreparedStatement stmt = getConnection().prepareStatement(query);
-            stmt.setString(1, ticketClass);
-            ResultSet rs = stmt.executeQuery();
-            ArrayList<Tickets> ticketsList = new ArrayList<>();
-            while (rs.next()) {
-                ticketsList.add(row2object(rs));
-            }
-            return ticketsList;
-        } catch (SQLException e) {
-            throw new FlightBookingException(e.getMessage(), e);
-        }
+        return executeQuery("SELECT * FROM Tickets WHERE class LIKE concat('%', ?, '%')",new Object[]{ticketClass});
     }
 }

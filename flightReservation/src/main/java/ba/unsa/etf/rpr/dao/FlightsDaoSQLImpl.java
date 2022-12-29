@@ -54,7 +54,17 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
     }
 
     @Override
+    public List<Flights> searchBySource(String flightSource) throws FlightBookingException{
+        return executeQuery("SELECT * FROM Flights WHERE source LIKE concat('%',?,'%')",new Object[]{flightSource});
+    }
+
+    @Override
     public List<Flights> searchByDestination(String flightDestination) throws FlightBookingException{
         return executeQuery("SELECT * FROM Flights WHERE destination LIKE concat('%',?,'%')",new Object[]{flightDestination});
     }
+    @Override
+    public List<Flights> searchBySourceAndDestination(String flightSource,String flightDestination) throws FlightBookingException{
+        return executeQuery("SELECT * FROM Flights WHERE source LIKE concat('%',?,'%') AND destination LIKE concat('%',?,'%')",new Object[]{flightSource,flightDestination});
+    }
+
 }

@@ -7,6 +7,7 @@ import ba.unsa.etf.rpr.dao.PassengersDaoSQLImpl;
 import ba.unsa.etf.rpr.dao.Dao;
 import ba.unsa.etf.rpr.dao.FlightsDaoSQLImpl;
 import ba.unsa.etf.rpr.dao.TicketsDaoSQLImpl;
+import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.domain.Passengers;
 import ba.unsa.etf.rpr.domain.Tickets;
 import ba.unsa.etf.rpr.exceptions.FlightBookingException;
@@ -63,6 +64,18 @@ public class App
             throw new RuntimeException(e);
         }
         for(Passengers temp: passengers1){
+            System.out.println(temp);
+        }
+
+
+        FlightsDao dao2 = new FlightsDaoSQLImpl();
+        ArrayList<Flights> flights = null;
+        try {
+            flights = new ArrayList<Flights>(dao2.searchBySourceAndDestination("Sarajevo","Zagreb"));
+        } catch (FlightBookingException e) {
+            throw new RuntimeException(e);
+        }
+        for(Flights temp: flights){
             System.out.println(temp);
         }
 

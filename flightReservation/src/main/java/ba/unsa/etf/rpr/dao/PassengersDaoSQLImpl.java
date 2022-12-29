@@ -47,36 +47,13 @@ public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements Pas
 
     @Override
     public List<Passengers> searchByName(String name)throws FlightBookingException{
-        String query = "SELECT * FROM Passengers WHERE name LIKE concat('%', ?, '%')";
-        try {
-            PreparedStatement stmt = getConnection().prepareStatement(query);
-            stmt.setString(1, name);
-            ResultSet rs = stmt.executeQuery();
-            ArrayList<Passengers> passengersList = new ArrayList<>();
-            while (rs.next()) {
-                passengersList.add(row2object(rs));
-            }
-            return passengersList;
-        } catch (SQLException e) {
-            throw new FlightBookingException(e.getMessage(), e);
-        }
+        return executeQuery("SELECT * FROM Passengers WHERE name LIKE concat('%', ?, '%')",new Object[]{name});
     }
 
     @Override
     public List<Passengers> searchBySurname(String surname) throws FlightBookingException{
-        String query = "SELECT * FROM Passengers WHERE surname LIKE concat('%', ?, '%')";
-        try {
-            PreparedStatement stmt = getConnection().prepareStatement(query);
-            stmt.setString(1, surname);
-            ResultSet rs = stmt.executeQuery();
-            ArrayList<Passengers> passengersList = new ArrayList<>();
-            while (rs.next()) {
-                passengersList.add(row2object(rs));
-            }
-            return passengersList;
-        } catch (SQLException e) {
-            throw new FlightBookingException(e.getMessage(), e);
-        }
+
+        return executeQuery("SELECT * FROM Passengers WHERE surname LIKE concat('%', ?, '%')",new Object[]{surname});
     }
 
 

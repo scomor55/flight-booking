@@ -37,7 +37,7 @@ public class App
 
         ArrayList<Tickets> t = null;
         try {
-            t = new ArrayList<Tickets>(dao.searchByClass("Economy"));
+            t = new ArrayList<Tickets>(dao.searchByClass("Business"));
         } catch (FlightBookingException e) {
             throw new RuntimeException(e);
         }
@@ -53,6 +53,16 @@ public class App
             throw new RuntimeException(e);
         }
         for(Passengers temp: passengers){
+            System.out.println(temp);
+        }
+
+        ArrayList<Passengers> passengers1 = null;
+        try {
+            passengers1 = new ArrayList<Passengers>(dao1.searchBySurname("Krupalija"));
+        } catch (FlightBookingException e) {
+            throw new RuntimeException(e);
+        }
+        for(Passengers temp: passengers1){
             System.out.println(temp);
         }
 

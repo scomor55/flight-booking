@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
-
+import java.sql.Connection;
 /**
  * Factory method for singleton implementation of DAOs
  *

@@ -40,7 +40,8 @@ public class AdminFlightsController /*extends Application*/ {
                 if(n != null){
                     sourceField.setText(n.getSource());
                     destinationField.setText(n.getDestination());
-                    //arrivalField.setConverter(n.getDeparture().toString());
+                    arrivalField.setValue(n.getArrival());
+                    departureField.setValue(n.getDeparture());
                     seatsField.setText(String.valueOf(n.getSeats()));
                 }
             });
@@ -64,13 +65,16 @@ public class AdminFlightsController /*extends Application*/ {
     }
 
     public void updateFlight(ActionEvent actionEvent) throws FlightBookingException {
-           Flights flight = manager.getById(Integer.parseInt(idField.getText()));
+        //   Flights flight = manager.getById(Integer.parseInt(idField.getText()));
+
+        Flights flight = flightsList.getSelectionModel().getSelectedItem();
         flight.setSource(sourceField.getText());
         flight.setDestination(destinationField.getText());
         flight.setDeparture(departureField.getValue());
         flight.setArrival(arrivalField.getValue());
         flight.setSeats(Integer.parseInt(seatsField.getText()));
         flight = manager.update(flight);
+        refreshFlights();
     }
 
     public void deleteFlight(ActionEvent actionEvent)throws FlightBookingException{

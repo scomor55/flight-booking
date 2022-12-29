@@ -6,6 +6,13 @@ import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 import java.sql.*;
 import java.util.*;
 
+
+/**
+ * Abstract class that implements core DAO CRUD methods for every entity
+ *
+ * @author Safet Čomor
+ */
+
 public abstract class AbstractDao <T extends Idable> implements Dao<T> {
 
     private static Connection connection = null;

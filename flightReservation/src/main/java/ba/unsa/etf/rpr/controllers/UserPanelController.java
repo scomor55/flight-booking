@@ -116,6 +116,13 @@ public class UserPanelController  {
                 }catch(FlightBookingException f){
                     new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
                 }
+            }else{
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Greška");
+                alert.setHeaderText("Korisnik već postoji");
+                alert.setContentText("Registriran korisnik sa ovim podacima");
+                alert.showAndWait();
             }
 
     }

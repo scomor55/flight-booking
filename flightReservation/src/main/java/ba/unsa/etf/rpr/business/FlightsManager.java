@@ -42,4 +42,8 @@ public class FlightsManager {
         return DaoFactory.flightsDao().getById(id);
     }
 
+    public List<Flights>searchBySourceAndDestination(String source,String destination) throws FlightBookingException {
+        return DaoFactory.flightsDao().searchBySourceAndDestination(source,destination);
+    }
+
 }

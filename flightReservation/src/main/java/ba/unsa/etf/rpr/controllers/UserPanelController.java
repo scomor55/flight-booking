@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 
 import javax.swing.table.DefaultTableColumnModel;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -90,18 +91,32 @@ public class UserPanelController  {
     public TextField emailField;
     public DatePicker datePicker;
 
-    public boolean Check(String firstName, String lastName, String address , String email, String dateOfBirth) throws FlightBookingException {
-
+    public boolean Check(String firstName, String lastName, String address , String email, LocalDate dateOfBirth) throws FlightBookingException {
         List<Passengers> passengers = passengersManager.getAll();
         for(Passengers temp : passengers){
-
+            if(temp.getName().equals(firstName) && temp.getSurname().equals(lastName) && temp.getAdress().equals(address) && temp.getEmail().equals(email) && temp.getDateOfBirth().equals(dateOfBirth)){
+                return true;
+            }
         }
         return false;
     }
 
-    public void save(ActionEvent actionEvent) {
+    public void save(ActionEvent actionEvent) throws FlightBookingException {
 
-
+            boolean check = Check(firstNameField.getText(),lastNameField.getText(),addressField.getText(),emailField.getText(),datePicker.getValue());
+            if(!check){
+                try {
+                    Passengers passenger = new Passengers();
+                    passenger.setName(firstNameField.getText());
+                    passenger.setSurname(lastNameField.getText());
+                    passenger.setDateOfBirth(datePicker.getValue());
+                    passenger.setAdress(addressField.getText());
+                    passenger.setEmail(emailField.getText());
+                    passenger = passengersManager.add(passenger);
+                }catch(FlightBookingException f){
+                    new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
+                }
+            }
 
     }
 }

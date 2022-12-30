@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 import ba.unsa.etf.rpr.dao.AbstractDao;
 
-public class AdminFlightsController /*extends Application*/ {
+public class AdminFlightsController {
 
     public TextField sourceField;
     public TextField destinationField;
@@ -76,6 +76,7 @@ public class AdminFlightsController /*extends Application*/ {
         flight = manager.update(flight);
         refreshFlights();
     }
+
 
     public void deleteFlight(ActionEvent actionEvent)throws FlightBookingException{
         Flights flight = manager.getById(Integer.parseInt(idField.getText()));

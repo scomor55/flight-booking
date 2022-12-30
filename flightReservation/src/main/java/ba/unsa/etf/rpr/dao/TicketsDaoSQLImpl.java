@@ -22,7 +22,7 @@ public class TicketsDaoSQLImpl extends AbstractDao<Tickets> implements TicketsDa
             p.setId(rs.getInt("id"));
             p.setFlightID(rs.getInt("flightID"));
             p.setPassengerID(rs.getInt("passengerID"));  /* <----- Ovo popraviti */
-            p.setTravelClass(rs.getString("class"));    /* I OVO */
+            p.setTravelClass(rs.getString("class"));
             p.setPrice(rs.getInt("price"));
             return p;
         } catch (Exception e) {

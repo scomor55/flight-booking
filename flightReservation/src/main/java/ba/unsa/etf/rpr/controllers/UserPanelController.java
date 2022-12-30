@@ -2,14 +2,20 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.FlightsManager;
 import ba.unsa.etf.rpr.business.PassengersManager;
+import ba.unsa.etf.rpr.business.TicketsManager;
 import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.domain.Passengers;
+import ba.unsa.etf.rpr.domain.Tickets;
 import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 
 import javax.swing.table.DefaultTableColumnModel;
 import java.sql.*;
@@ -22,6 +28,8 @@ public class UserPanelController  {
 
     private final FlightsManager flightsManager = new FlightsManager();
     private final PassengersManager passengersManager = new PassengersManager();
+
+    private final TicketsManager ticketsManager = new TicketsManager();
     public TextField sourceFindField;
     public TextField destinationFindField;
     public TableColumn<Flights,String> idColumn;
@@ -37,6 +45,8 @@ public class UserPanelController  {
     public TextField arrivalShowField;
     public TextField classShowField;
     public TextField seatsShowField;
+    public TextField departureShowField;
+    public TextField priceShowField;
 
 
 
@@ -73,6 +83,69 @@ public class UserPanelController  {
         }
      }
 
+    public int Price(int flightID) {
+
+        try {
+            Properties p = new Properties();
+            p.load(ClassLoader.getSystemResource("application.properties.template").openStream());
+            String url = p.getProperty("db.connection_string");
+            String usr = p.getProperty("db.username");
+            String pswd = p.getProperty("db.password");
+
+            Connection conn = DriverManager.getConnection(url, usr, pswd);
+
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT t.price FROM Tickets t , Flights f WHERE t.flightID = f.id AND f.id = ? ";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, flightID);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                int price = rs.getInt("price");
+                return price;
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getID(String firstName, String lastName , LocalDate dateOfBirth , String address, String email) {
+
+        try {
+            Properties p = new Properties();
+            p.load(ClassLoader.getSystemResource("application.properties.template").openStream());
+            String url = p.getProperty("db.connection_string");
+            String usr = p.getProperty("db.username");
+            String pswd = p.getProperty("db.password");
+
+            Connection conn = DriverManager.getConnection(url, usr, pswd);
+
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT id FROM Passengers WHERE name = ? AND surname = ? AND dateOfBirth = ? AND address = ? AND email = ? ";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setDate(3, java.sql.Date.valueOf(dateOfBirth));
+            preparedStatement.setString(4, address);
+            preparedStatement.setString(5, email);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                return id;
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
+
 
     public void selectedFlight(MouseEvent mouseEvent) {
       Flights selectedFlight = (Flights) flightsTable.getSelectionModel().getSelectedItem();
@@ -80,9 +153,11 @@ public class UserPanelController  {
         sourceShowField.setText(String.valueOf(selectedFlight.getSource()));
         destinationShowField.setText(String.valueOf(selectedFlight.getDestination()));
         arrivalShowField.setText(String.valueOf(selectedFlight.getArrival()));
-        classShowField.setText(String.valueOf(selectedFlight.getClass()));
-        seatsShowField.setText(String.valueOf(selectedFlight.getSeats()));
-
+      //  classShowField.setText(String.valueOf(selectedFlight.getClass()));
+      //  seatsShowField.setText(String.valueOf(selectedFlight.getSeats()));
+        departureShowField.setText(String.valueOf(selectedFlight.getDeparture()));
+        int price = Price(selectedFlight.getId());
+        priceShowField.setText(String.valueOf(price));
     }
 
     public TextField firstNameField;
@@ -124,6 +199,24 @@ public class UserPanelController  {
                 alert.setContentText("Registriran korisnik sa ovim podacima");
                 alert.showAndWait();
             }
+
+    }
+
+    /* Sve upite prebaci u dao */
+
+    public void bookFlight(ActionEvent actionEvent) {
+
+        int passengerID= getID(firstNameField.getText(),lastNameField.getText(),datePicker.getValue(),addressField.getText(),emailField.getText());
+        try {
+        Tickets ticket = new Tickets();
+        ticket.setFlightID(Integer.parseInt(idShowField.getText()));
+        ticket.setPassengerID(passengerID);
+        ticket.setTravelClass(classShowField.getText());
+        ticket.setPrice(Integer.parseInt(priceShowField.getText()));
+        ticket = ticketsManager.add(ticket);
+        } catch (FlightBookingException e) {
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+        }
 
     }
 }

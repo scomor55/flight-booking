@@ -14,6 +14,24 @@ public class Flights implements Idable{
    // private Date arrival;//
    private LocalDate arrival;
     private int seats;
+    private int priceEconomy;
+    private int priceBusiness;
+
+    public int getPriceEconomy() {
+        return priceEconomy;
+    }
+
+    public void setPriceEconomy(int priceEconomy) {
+        this.priceEconomy = priceEconomy;
+    }
+
+    public int getPriceBusiness() {
+        return priceBusiness;
+    }
+
+    public void setPriceBusiness(int priceBusiness) {
+        this.priceBusiness = priceBusiness;
+    }
 
     public int getId() {
         return flightID;
@@ -71,6 +89,8 @@ public class Flights implements Idable{
                 ", destination:'" + destination + '\'' +
                 ", arrival:" + arrival +
                 ", seats=" + seats +
+                ", priceEconomy=" + priceEconomy +
+                ", priceBusiness=" + priceBusiness +
                 '}';
     }
 
@@ -84,9 +104,6 @@ public class Flights implements Idable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(flightID, source, destination, departure,arrival, seats);
+        return Objects.hash(flightID, source, destination, departure,arrival, seats, priceEconomy, priceBusiness);
     }
-
-
-
 }

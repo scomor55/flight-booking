@@ -20,6 +20,9 @@ public class AdminFlightsController {
     public TextField seatsField;
     public TextField idField;
     public ListView<Flights> flightsList;
+    public TextField economyTicketField;
+    public TextField businessTicketField;
+
     private FlightsManager manager = new FlightsManager();
 
 
@@ -43,6 +46,9 @@ public class AdminFlightsController {
                     arrivalField.setValue(n.getArrival());
                     departureField.setValue(n.getDeparture());
                     seatsField.setText(String.valueOf(n.getSeats()));
+                    economyTicketField.setText(String.valueOf(n.getPriceEconomy()));
+                    businessTicketField.setText(String.valueOf(n.getPriceBusiness()));
+                    idField.setText(String.valueOf(n.getId()));
                 }
             });
         }catch(FlightBookingException f){
@@ -55,9 +61,11 @@ public class AdminFlightsController {
             Flights flight = new Flights();
             flight.setSource(sourceField.getText());
             flight.setDestination(destinationField.getText());
-            flight.setDeparture(departureField.getValue()); /* TRY TO USE DATE ONLY */
-            flight.setArrival(arrivalField.getValue()); /* TRY TO USE DATE ONLY */
-            flight.setSeats(Integer.parseInt(seatsField.getText())); /*RENAME THIS IF YOU DONT HAVE TIME */
+            flight.setDeparture(departureField.getValue());
+            flight.setArrival(arrivalField.getValue());
+            flight.setSeats(Integer.parseInt(seatsField.getText()));
+            flight.setPriceEconomy(Integer.parseInt(economyTicketField.getText()));
+            flight.setPriceBusiness(Integer.parseInt(businessTicketField.getText()));
             flight = manager.add(flight);
         }catch(FlightBookingException f){
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
@@ -73,6 +81,8 @@ public class AdminFlightsController {
         flight.setDeparture(departureField.getValue());
         flight.setArrival(arrivalField.getValue());
         flight.setSeats(Integer.parseInt(seatsField.getText()));
+        flight.setPriceEconomy(Integer.parseInt(economyTicketField.getText()));
+        flight.setPriceBusiness(Integer.parseInt(businessTicketField.getText()));
         flight = manager.update(flight);
         refreshFlights();
     }

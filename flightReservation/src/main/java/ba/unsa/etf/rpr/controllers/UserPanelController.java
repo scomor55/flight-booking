@@ -12,12 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
 
-import javax.swing.table.DefaultTableColumnModel;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Date;
@@ -87,7 +82,7 @@ public class UserPanelController  {
 
         try {
             Properties p = new Properties();
-            p.load(ClassLoader.getSystemResource("application.properties.template").openStream());
+            p.load(ClassLoader.getSystemResource("application.properties.sample").openStream());
             String url = p.getProperty("db.connection_string");
             String usr = p.getProperty("db.username");
             String pswd = p.getProperty("db.password");
@@ -115,7 +110,7 @@ public class UserPanelController  {
 
         try {
             Properties p = new Properties();
-            p.load(ClassLoader.getSystemResource("application.properties.template").openStream());
+            p.load(ClassLoader.getSystemResource("application.properties.sample").openStream());
             String url = p.getProperty("db.connection_string");
             String usr = p.getProperty("db.username");
             String pswd = p.getProperty("db.password");

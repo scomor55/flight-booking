@@ -1,23 +1,15 @@
 package ba.unsa.etf.rpr.controllers;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Properties;
-
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class Register  {
 
@@ -35,7 +27,7 @@ public class Register  {
         try{
 
             Properties p = new Properties();
-            p.load(ClassLoader.getSystemResource("application.properties.template").openStream());
+            p.load(ClassLoader.getSystemResource("application.properties.sample").openStream());
             String url = p.getProperty("db.connection_string");
             String usr = p.getProperty("db.username");
             String pswd = p.getProperty("db.password");

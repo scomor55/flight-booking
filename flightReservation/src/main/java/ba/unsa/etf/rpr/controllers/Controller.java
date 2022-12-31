@@ -4,7 +4,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -46,7 +45,7 @@ public class Controller {
 
         try {
             Properties p = new Properties();
-            p.load(ClassLoader.getSystemResource("application.properties.template").openStream());
+            p.load(ClassLoader.getSystemResource("application.properties.sample").openStream());
             String url = p.getProperty("db.connection_string");
             String usr = p.getProperty("db.username");
             String pswd = p.getProperty("db.password");

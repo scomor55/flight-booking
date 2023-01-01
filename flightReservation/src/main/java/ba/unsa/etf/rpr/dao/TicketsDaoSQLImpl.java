@@ -21,7 +21,7 @@ public class TicketsDaoSQLImpl extends AbstractDao<Tickets> implements TicketsDa
             Tickets p = new Tickets();
             p.setId(rs.getInt("id"));
             p.setFlightID(rs.getInt("flightID"));
-            p.setPassengerID(rs.getInt("passengerID"));  /* <----- Ovo popraviti */
+            p.setPassengerID(rs.getInt("passengerID"));
             p.setTravelClass(rs.getString("class"));
             p.setPrice(rs.getInt("price"));
             return p;
@@ -34,9 +34,9 @@ public class TicketsDaoSQLImpl extends AbstractDao<Tickets> implements TicketsDa
     public Map<String, Object> object2row(Tickets object) {
         Map<String, Object> item = new TreeMap<>();
         item.put("id", object.getId());
-        item.put("flightID", object.getFlightID());   /* <----- Ovo popraviti */
-        item.put("passengerID", object.getPassengerID());  /* I OVO */
-        item.put("class", object.getClass());
+        item.put("flightID", object.getFlightID());
+        item.put("passengerID", object.getPassengerID());
+        item.put("class", object.getTravelClass());
         item.put("price", object.getPrice());
         return item;
     }

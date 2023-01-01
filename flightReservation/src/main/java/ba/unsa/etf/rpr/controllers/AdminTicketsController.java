@@ -58,6 +58,7 @@ public class AdminTicketsController  {
             ticket.setTravelClass(classField.getText());
             ticket.setPrice(Integer.parseInt(priceField.getText()));
             ticket = manager.add(ticket);
+            ticketsList.getItems().add(ticket);
         }catch(FlightBookingException f){
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
         }

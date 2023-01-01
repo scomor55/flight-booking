@@ -11,6 +11,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.sql.*;
@@ -33,7 +36,7 @@ public class UserPanelController  {
     public TableColumn<Flights,Date> departureColumn;
     public TableColumn<Flights,Date> arrivalColumn;
     public TableColumn<Flights,Integer> seatsColumn;
-    public TableView flightsTable;
+    public TableView<Flights> flightsTable;
     public TextField idShowField;
     public TextField sourceShowField;
     public TextField destinationShowField;
@@ -42,7 +45,9 @@ public class UserPanelController  {
     public TextField seatsShowField;
     public TextField departureShowField;
     public TextField priceShowField;
-
+    public ChoiceBox<String> choiceBox;
+    public TableColumn<Flights, String> economyPriceColumn;
+    public TableColumn<Flights, String> businessPriceColumn;
 
 
     /*****/
@@ -55,6 +60,8 @@ public class UserPanelController  {
         departureColumn.setCellValueFactory(new PropertyValueFactory<Flights,Date>("departure"));
         arrivalColumn.setCellValueFactory(new PropertyValueFactory<Flights,Date>("arrival"));
         seatsColumn.setCellValueFactory(new PropertyValueFactory<Flights,Integer>("seats"));
+        economyPriceColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("priceEconomy"));
+        businessPriceColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("priceBusiness"));
 
         refreshFlights();
     }
@@ -78,7 +85,7 @@ public class UserPanelController  {
         }
      }
 
-    public int Price(int flightID) {
+    public int EconomyPrice(int flightID) {
 
         try {
             Properties p = new Properties();
@@ -90,12 +97,12 @@ public class UserPanelController  {
             Connection conn = DriverManager.getConnection(url, usr, pswd);
 
             Statement stmt = conn.createStatement();
-            String sql = "SELECT t.price FROM Tickets t , Flights f WHERE t.flightID = f.id AND f.id = ? ";
+            String sql = "SELECT priceEconomy FROM Flights WHERE id = ? ";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, flightID);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                int price = rs.getInt("price");
+                int price = rs.getInt("priceEconomy");
                 return price;
             }
             stmt.close();
@@ -105,6 +112,35 @@ public class UserPanelController  {
         }
         return 0;
     }
+
+    public int BusinessPrice(int flightID) {
+
+        try {
+            Properties p = new Properties();
+            p.load(ClassLoader.getSystemResource("application.properties.sample").openStream());
+            String url = p.getProperty("db.connection_string");
+            String usr = p.getProperty("db.username");
+            String pswd = p.getProperty("db.password");
+
+            Connection conn = DriverManager.getConnection(url, usr, pswd);
+
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT priceBusiness FROM Flights WHERE id = ? ";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, flightID);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                int price = rs.getInt("priceBusiness");
+                return price;
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 
     public int getID(String firstName, String lastName , LocalDate dateOfBirth , String address, String email) {
 
@@ -139,20 +175,20 @@ public class UserPanelController  {
     }
 
 
-
+    private int idFlight;
 
 
     public void selectedFlight(MouseEvent mouseEvent) {
-      Flights selectedFlight = (Flights) flightsTable.getSelectionModel().getSelectedItem();
+      Flights selectedFlight = flightsTable.getSelectionModel().getSelectedItem();
+      int idFlight = selectedFlight.getId();
       idShowField.setText(String.valueOf(selectedFlight.getId()));
         sourceShowField.setText(String.valueOf(selectedFlight.getSource()));
         destinationShowField.setText(String.valueOf(selectedFlight.getDestination()));
         arrivalShowField.setText(String.valueOf(selectedFlight.getArrival()));
-      //  classShowField.setText(String.valueOf(selectedFlight.getClass()));
-      //  seatsShowField.setText(String.valueOf(selectedFlight.getSeats()));
         departureShowField.setText(String.valueOf(selectedFlight.getDeparture()));
-        int price = Price(selectedFlight.getId());
-        priceShowField.setText(String.valueOf(price));
+        choiceBox.setValue("Economy");
+        int price = EconomyPrice(selectedFlight.getId());
+        priceShowField.setText(String.valueOf(selectedFlight.getPriceEconomy()));
     }
 
     public TextField firstNameField;
@@ -214,4 +250,5 @@ public class UserPanelController  {
         }
 
     }
+
 }

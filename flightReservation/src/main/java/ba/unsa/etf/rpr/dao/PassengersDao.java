@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.domain.Passengers;
 import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**

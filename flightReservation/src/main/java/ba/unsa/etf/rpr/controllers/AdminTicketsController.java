@@ -70,6 +70,7 @@ public class AdminTicketsController  {
         ticket.setTravelClass(classField.getText());
         ticket.setPrice(Integer.parseInt(priceField.getText()));
         ticket = manager.update(ticket);
+        refreshTickets();
     }
 
     public void deleteTicket(ActionEvent actionEvent) throws FlightBookingException {

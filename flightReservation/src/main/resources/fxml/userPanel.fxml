@@ -14,6 +14,8 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
   </columnConstraints>
   <rowConstraints>
@@ -38,45 +40,47 @@
       <Label text="Source : " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Button mnemonicParsing="false" onAction="#findFlight" text="Search" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <Label text="Destination :" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label text="First name : " GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label text="Last name :" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Label text="Date of birth :" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-      <Label text="Addres :" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-      <Label text="E-mail : " GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-      <TextField fx:id="firstNameField" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-      <TextField fx:id="lastNameField" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-      <TextField fx:id="addressField" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-      <TextField fx:id="emailField" GridPane.columnIndex="8" GridPane.rowIndex="5" />
-      <Label text="Flight ID :" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-      <Label text="Source :" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-      <Label text="Destination : " GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-      <Label text="Arrival : " GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-      <Label text="Class :" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
-      <Label text="Price :" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
-      <TextField fx:id="idShowField" GridPane.columnIndex="8" GridPane.rowIndex="7" />
-      <TextField fx:id="sourceShowField" GridPane.columnIndex="8" GridPane.rowIndex="8" />
-      <TextField fx:id="destinationShowField" GridPane.columnIndex="8" GridPane.rowIndex="9" />
-      <TextField fx:id="arrivalShowField" GridPane.columnIndex="8" GridPane.rowIndex="11" />
-      <TextField fx:id="priceShowField" GridPane.columnIndex="8" GridPane.rowIndex="13" />
-      <Button mnemonicParsing="false" onAction="#bookFlight" prefHeight="25.0" prefWidth="102.0" text="Book" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
-      <TableView fx:id="flightsTable" onMouseClicked="#selectedFlight" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="5" GridPane.rowSpan="10">
+      <Label text="First name : " GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label text="Last name :" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Label text="Date of birth :" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Label text="Addres :" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Label text="E-mail : " GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <TextField fx:id="firstNameField" GridPane.columnIndex="10" GridPane.rowIndex="1" />
+      <TextField fx:id="lastNameField" GridPane.columnIndex="10" GridPane.rowIndex="2" />
+      <TextField fx:id="addressField" GridPane.columnIndex="10" GridPane.rowIndex="4" />
+      <TextField fx:id="emailField" GridPane.columnIndex="10" GridPane.rowIndex="5" />
+      <Label text="Flight ID :" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Label text="Source :" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+      <Label text="Destination : " GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+      <Label text="Arrival : " GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+      <Label text="Class :" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
+      <Label text="Price :" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+      <TextField fx:id="idShowField" GridPane.columnIndex="10" GridPane.rowIndex="7" />
+      <TextField fx:id="sourceShowField" GridPane.columnIndex="10" GridPane.rowIndex="8" />
+      <TextField fx:id="destinationShowField" GridPane.columnIndex="10" GridPane.rowIndex="9" />
+      <TextField fx:id="arrivalShowField" GridPane.columnIndex="10" GridPane.rowIndex="11" />
+      <TextField fx:id="priceShowField" GridPane.columnIndex="10" GridPane.rowIndex="13" />
+      <Button mnemonicParsing="false" onAction="#bookFlight" prefHeight="25.0" prefWidth="102.0" text="Book" GridPane.columnIndex="10" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
+      <TableView fx:id="flightsTable" onMouseClicked="#selectedFlight" prefHeight="200.0" prefWidth="712.0" GridPane.columnIndex="1" GridPane.columnSpan="8" GridPane.rowIndex="5" GridPane.rowSpan="10">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="36.0" text="id" />
           <TableColumn fx:id="sourceColumn" prefWidth="64.0" text="source" />
             <TableColumn fx:id="destinationColumn" prefWidth="88.0" text="destination" />
             <TableColumn fx:id="departureColumn" prefWidth="83.0" text="departure" />
+            <TableColumn fx:id="departureTimeColumn" prefWidth="100.0" text="departureTime" />
             <TableColumn fx:id="arrivalColumn" prefWidth="61.0" text="arrival" />
-            <TableColumn fx:id="seatsColumn" prefWidth="62.0" text="seats" />
-            <TableColumn fx:id="economyPriceColumn" prefWidth="96.0" text="priceBusiness" />
-            <TableColumn fx:id="businessPriceColumn" prefWidth="109.0" text="priceEconomy" />
+            <TableColumn fx:id="arrivalTimeColumn" prefWidth="88.0" text="arrivalTime" />
+            <TableColumn fx:id="seatsColumn" prefWidth="63.0" text="seats" />
+            <TableColumn fx:id="economyPriceColumn" prefWidth="109.0" text="priceBusiness" />
+            <TableColumn fx:id="businessPriceColumn" prefWidth="107.0" text="priceEconomy" />
         </columns>
       </TableView>
       <TextField fx:id="sourceFindField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <TextField fx:id="destinationFindField" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-      <Button mnemonicParsing="false" onAction="#save" text="Save Passenger" GridPane.columnIndex="8" GridPane.rowIndex="6" />
-      <DatePicker fx:id="datePicker" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-      <Label text="Departure :" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-      <TextField fx:id="departureShowField" GridPane.columnIndex="8" GridPane.rowIndex="10" />
-      <TextField fx:id="classChooseField" onAction="#inputClass" GridPane.columnIndex="8" GridPane.rowIndex="12" />
+      <Button mnemonicParsing="false" onAction="#save" text="Save Passenger" GridPane.columnIndex="10" GridPane.rowIndex="6" />
+      <DatePicker fx:id="datePicker" GridPane.columnIndex="10" GridPane.rowIndex="3" />
+      <Label text="Departure :" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+      <TextField fx:id="departureShowField" GridPane.columnIndex="10" GridPane.rowIndex="10" />
+      <TextField fx:id="classChooseField" onAction="#inputClass" GridPane.columnIndex="10" GridPane.rowIndex="12" />
    </children>
 </GridPane>

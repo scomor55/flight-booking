@@ -49,6 +49,9 @@ public class UserPanelController  {
     public TableColumn<Flights, String> economyPriceColumn;
     public TableColumn<Flights, String> businessPriceColumn;
     public TextField classChooseField;
+    public TableColumn<Flights, String> departureTimeColumn;
+    public TableColumn<Flights, String> arrivalTimeColumn;
+
 
 
     /*****/
@@ -59,7 +62,9 @@ public class UserPanelController  {
         sourceColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("source"));
         destinationColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("destination"));
         departureColumn.setCellValueFactory(new PropertyValueFactory<Flights,Date>("departure"));
+        departureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("departureTime"));
         arrivalColumn.setCellValueFactory(new PropertyValueFactory<Flights,Date>("arrival"));
+        arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("arrivalTime"));
         seatsColumn.setCellValueFactory(new PropertyValueFactory<Flights,Integer>("seats"));
         economyPriceColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("priceEconomy"));
         businessPriceColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("priceBusiness"));

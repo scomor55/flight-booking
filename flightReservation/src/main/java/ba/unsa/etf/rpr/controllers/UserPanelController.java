@@ -48,6 +48,7 @@ public class UserPanelController  {
     public ChoiceBox<String> choiceBox;
     public TableColumn<Flights, String> economyPriceColumn;
     public TableColumn<Flights, String> businessPriceColumn;
+    public TextField classChooseField;
 
 
     /*****/
@@ -186,8 +187,9 @@ public class UserPanelController  {
         destinationShowField.setText(String.valueOf(selectedFlight.getDestination()));
         arrivalShowField.setText(String.valueOf(selectedFlight.getArrival()));
         departureShowField.setText(String.valueOf(selectedFlight.getDeparture()));
-        choiceBox.setValue("Economy");
-        int price = EconomyPrice(selectedFlight.getId());
+        if(classChooseField.equals("")){
+            priceShowField.setText(String.valueOf(selectedFlight.getPriceEconomy()));
+        }
         priceShowField.setText(String.valueOf(selectedFlight.getPriceEconomy()));
     }
 
@@ -237,12 +239,12 @@ public class UserPanelController  {
 
     public void bookFlight(ActionEvent actionEvent) {
 
-        int passengerID= getID(firstNameField.getText(),lastNameField.getText(),datePicker.getValue(),addressField.getText(),emailField.getText());
+        int passengerID = getID(firstNameField.getText(),lastNameField.getText(),datePicker.getValue(),addressField.getText(),emailField.getText());
         try {
         Tickets ticket = new Tickets();
         ticket.setFlightID(Integer.parseInt(idShowField.getText()));
         ticket.setPassengerID(passengerID);
-        ticket.setTravelClass(classShowField.getText());
+        ticket.setTravelClass(classChooseField.getText());
         ticket.setPrice(Integer.parseInt(priceShowField.getText()));
         ticket = ticketsManager.add(ticket);
         } catch (FlightBookingException e) {
@@ -251,4 +253,14 @@ public class UserPanelController  {
 
     }
 
+    public void inputClass(ActionEvent actionEvent) {
+        String text = classChooseField.getText();
+        if(text.equals("Economy") || text.isEmpty()){
+            int price = EconomyPrice(Integer.parseInt(idShowField.getText()));
+            priceShowField.setText(String.valueOf(price));
+        }else{
+            int price = BusinessPrice(Integer.parseInt(idShowField.getText()));
+            priceShowField.setText(String.valueOf(price));
+        }
+    }
 }

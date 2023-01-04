@@ -42,7 +42,7 @@ public class AdminPassengersController {
                 if(n != null){
                     nameField.setText(n.getName());
                     surnameField.setText(n.getSurname());
-                  //  dateOfBirthField. setConverter(n.getDateOfBirth());
+                    dateOfBirthField.setValue(n.getDateOfBirth());
                     addressField.setText(n.getAdress());
                     emailField.setText(n.getEmail());
                     IdField.setText(String.valueOf(n.getId()));
@@ -65,6 +65,7 @@ public class AdminPassengersController {
         passenger.setAdress(addressField.getText());
         passenger.setEmail(emailField.getText());
         passenger = manager.add(passenger);
+        listField.getItems().add(passenger);
     }catch(FlightBookingException f){
         new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
     }

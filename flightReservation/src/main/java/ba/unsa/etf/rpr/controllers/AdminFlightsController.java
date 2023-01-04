@@ -67,6 +67,7 @@ public class AdminFlightsController {
             flight.setPriceEconomy(Integer.parseInt(economyTicketField.getText()));
             flight.setPriceBusiness(Integer.parseInt(businessTicketField.getText()));
             flight = manager.add(flight);
+            flightsList.getItems().add(flight);
         }catch(FlightBookingException f){
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
         }

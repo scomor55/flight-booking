@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class AdminTicketsController  {
 
-
     public TextField flightIdField;
     public TextField passengerIdField;
     public TextField classField;

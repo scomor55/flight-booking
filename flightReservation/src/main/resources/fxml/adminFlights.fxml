@@ -21,28 +21,34 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label text="Source :" GridPane.halignment="CENTER" />
       <Label text="Destination :" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Label text="Departure :" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Label text="Arrival :" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-      <Label text="Seats :" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Label text="Arrival :" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Label text="Seats :" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
       <TextField fx:id="sourceField" GridPane.columnIndex="1" />
       <TextField fx:id="destinationField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <DatePicker fx:id="departureField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <DatePicker fx:id="arrivalField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <TextField fx:id="seatsField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Button mnemonicParsing="false" onAction="#addFlight" prefHeight="30.0" prefWidth="205.0" text="Add" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-      <Label text="ID :" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-      <TextField fx:id="idField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <Button mnemonicParsing="false" onAction="#updateFlight" prefHeight="30.0" prefWidth="100.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-      <Button mnemonicParsing="false" onAction="#deleteFlight" prefHeight="30.0" prefWidth="100.0" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+      <DatePicker fx:id="arrivalField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField fx:id="seatsField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" onAction="#addFlight" prefHeight="30.0" prefWidth="205.0" text="Add" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+      <Label text="ID :" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+      <TextField fx:id="idField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <Button mnemonicParsing="false" onAction="#updateFlight" prefHeight="30.0" prefWidth="100.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+      <Button mnemonicParsing="false" onAction="#deleteFlight" prefHeight="30.0" prefWidth="100.0" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
       <ListView fx:id="flightsList" prefHeight="200.0" prefWidth="300.0" GridPane.columnIndex="2" GridPane.rowSpan="10" />
-      <Label text="Economy ticket :" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-      <Label text="Business ticket :" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-      <TextField fx:id="economyTicketField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <TextField fx:id="businessTicketField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Label text="Economy ticket :" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Label text="Business ticket :" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+      <TextField fx:id="economyTicketField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <TextField fx:id="businessTicketField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <Label text="Departure time :" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Label text="Arrival time :" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <TextField fx:id="departureTimeField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="arrivalTimeField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

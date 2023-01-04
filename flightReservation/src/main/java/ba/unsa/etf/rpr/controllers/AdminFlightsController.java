@@ -22,6 +22,8 @@ public class AdminFlightsController {
     public ListView<Flights> flightsList;
     public TextField economyTicketField;
     public TextField businessTicketField;
+    public TextField departureTimeField;
+    public TextField arrivalTimeField;
 
     private FlightsManager manager = new FlightsManager();
 
@@ -44,7 +46,9 @@ public class AdminFlightsController {
                     sourceField.setText(n.getSource());
                     destinationField.setText(n.getDestination());
                     arrivalField.setValue(n.getArrival());
+                    arrivalTimeField.setText(n.getArrivalTime());
                     departureField.setValue(n.getDeparture());
+                    departureTimeField.setText(n.getDepartureTime());
                     seatsField.setText(String.valueOf(n.getSeats()));
                     economyTicketField.setText(String.valueOf(n.getPriceEconomy()));
                     businessTicketField.setText(String.valueOf(n.getPriceBusiness()));
@@ -62,7 +66,9 @@ public class AdminFlightsController {
             flight.setSource(sourceField.getText());
             flight.setDestination(destinationField.getText());
             flight.setDeparture(departureField.getValue());
+            flight.setDepartureTime(departureTimeField.getText());
             flight.setArrival(arrivalField.getValue());
+            flight.setArrivalTime(arrivalTimeField.getText());
             flight.setSeats(Integer.parseInt(seatsField.getText()));
             flight.setPriceEconomy(Integer.parseInt(economyTicketField.getText()));
             flight.setPriceBusiness(Integer.parseInt(businessTicketField.getText()));
@@ -80,7 +86,9 @@ public class AdminFlightsController {
         flight.setSource(sourceField.getText());
         flight.setDestination(destinationField.getText());
         flight.setDeparture(departureField.getValue());
+        flight.setDepartureTime(departureTimeField.getText());
         flight.setArrival(arrivalField.getValue());
+        flight.setArrivalTime(arrivalTimeField.getText());
         flight.setSeats(Integer.parseInt(seatsField.getText()));
         flight.setPriceEconomy(Integer.parseInt(economyTicketField.getText()));
         flight.setPriceBusiness(Integer.parseInt(businessTicketField.getText()));

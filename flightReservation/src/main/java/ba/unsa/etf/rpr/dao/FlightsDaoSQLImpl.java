@@ -33,7 +33,9 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
             flight.setSource(rs.getString("source"));
             flight.setDestination(rs.getString("destination"));
             flight.setDeparture(rs.getDate("departure").toLocalDate());
+            flight.setDepartureTime(rs.getString("departureTime"));
             flight.setArrival(rs.getDate("arrival").toLocalDate());
+            flight.setArrivalTime(rs.getString("arrivalTime"));
             flight.setSeats(rs.getInt("seats"));
             flight.setPriceEconomy(rs.getInt("priceEconomy"));
             flight.setPriceBusiness(rs.getInt("priceBusiness"));
@@ -50,7 +52,9 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
         row.put("source", object.getSource());
         row.put("destination", object.getDestination());
         row.put("departure", object.getDeparture());
+        row.put("departureTime",object.getDepartureTime());
         row.put("arrival", object.getArrival());
+        row.put("arrivalTime",object.getArrivalTime());
         row.put("seats", object.getSeats());
         row.put("priceEconomy", object.getPriceEconomy());
         row.put("priceBusiness", object.getPriceBusiness());

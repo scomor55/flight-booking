@@ -11,10 +11,20 @@ import java.util.TreeMap;
 
 public class TicketsDaoSQLImpl extends AbstractDao<Tickets> implements TicketsDao{
 
-    public TicketsDaoSQLImpl() {
+    private static TicketsDaoSQLImpl instance = null;
+    private TicketsDaoSQLImpl() {
         super("Tickets");
     }
+    public static TicketsDaoSQLImpl getInstance(){
+        if(instance==null)
+            instance = new TicketsDaoSQLImpl();
+        return instance;
+    }
 
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
     @Override
     public Tickets row2object(ResultSet rs) throws FlightBookingException{
         try {

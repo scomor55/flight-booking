@@ -26,7 +26,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        TicketsDao dao = new TicketsDaoSQLImpl();
+        TicketsDao dao =  TicketsDaoSQLImpl.getInstance();
         Tickets tickets = new Tickets();
 
         tickets.setId(3);
@@ -46,7 +46,7 @@ public class App
             System.out.println(temp);
         }
 
-        /*PassengersDao dao1 = new PassengersDaoSQLImpl();
+        PassengersDao dao1 = PassengersDaoSQLImpl.getInstance();
         ArrayList<Passengers> passengers = null;
         try {
             passengers = new ArrayList<Passengers>(dao1.searchByName("Denan"));
@@ -55,9 +55,9 @@ public class App
         }
         for(Passengers temp: passengers){
             System.out.println(temp);
-        }*/
+        }
 
-       /* ArrayList<Passengers> passengers1 = null;
+        ArrayList<Passengers> passengers1 = null;
         try {
             passengers1 = new ArrayList<Passengers>(dao1.searchBySurname("Krupalija"));
         } catch (FlightBookingException e) {
@@ -66,9 +66,9 @@ public class App
         for(Passengers temp: passengers1){
             System.out.println(temp);
         }
-*/
 
-      /*  FlightsDao dao2 = new FlightsDaoSQLImpl();
+
+        FlightsDao dao2 =  FlightsDaoSQLImpl.getInstance();
         ArrayList<Flights> flights = null;
         try {
             flights = new ArrayList<Flights>(dao2.searchBySourceAndDestination("Sarajevo","Zagreb"));
@@ -77,7 +77,7 @@ public class App
         }
         for(Flights temp: flights){
             System.out.println(temp);
-        }*/
+        }
 
     }
    /*public static void main( String[] args ){

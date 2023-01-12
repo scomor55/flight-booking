@@ -12,7 +12,7 @@ public class DaoFactory {
     private static final FlightsDao flightsDao = FlightsDaoSQLImpl.getInstance();
 
     private static final PassengersDao passengersDao = PassengersDaoSQLImpl.getInstance();
-    private static final TicketsDao ticketsDao = new TicketsDaoSQLImpl();
+    private static final TicketsDao ticketsDao = TicketsDaoSQLImpl.getInstance();
 
     private DaoFactory(){
     }

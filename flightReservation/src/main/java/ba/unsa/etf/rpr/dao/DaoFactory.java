@@ -9,9 +9,9 @@ import java.sql.Connection;
 
 public class DaoFactory {
 
-    private static final FlightsDao flightsDao = new FlightsDaoSQLImpl();
+    private static final FlightsDao flightsDao = FlightsDaoSQLImpl.getInstance();
 
-    private static final PassengersDao passengersDao = new PassengersDaoSQLImpl();
+    private static final PassengersDao passengersDao = PassengersDaoSQLImpl;
     private static final TicketsDao ticketsDao = new TicketsDaoSQLImpl();
 
     private DaoFactory(){

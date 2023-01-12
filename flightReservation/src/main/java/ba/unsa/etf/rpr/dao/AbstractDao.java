@@ -46,7 +46,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         return AbstractDao.connection;
     }
 
-    public void setConnection(){
+  /*  public void setConnection(){
         if(AbstractDao.connection!=null) {
             try {
                 AbstractDao.connection.close();
@@ -55,10 +55,12 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
             }
         }
         AbstractDao.connection = connection;
-    }
+    }*/
 
-    public void removeConnection(){
-        if(this.connection!=null) {
+
+    public static void closeConnection(){
+        System.out.println("Pozvana metoda za zatvaranje konekcije");
+        if(connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {

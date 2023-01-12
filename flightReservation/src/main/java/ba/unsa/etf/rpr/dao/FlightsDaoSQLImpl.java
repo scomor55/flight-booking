@@ -18,12 +18,22 @@ import java.util.List;
 
 public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDao {
 
-
-    public FlightsDaoSQLImpl() {
+    private static FlightsDaoSQLImpl instance = null;
+   private FlightsDaoSQLImpl() {
         super("Flights");
     }
 
 
+    public static FlightsDaoSQLImpl getInstance(){
+       if (instance == null){
+           instance = new FlightsDaoSQLImpl();
+       }
+       return instance;
+    }
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
     @Override
     public Flights row2object(ResultSet rs) throws FlightBookingException {
         try {

@@ -68,7 +68,7 @@ public class App
         }
 
 
-        FlightsDao dao2 = new FlightsDaoSQLImpl();
+      /*  FlightsDao dao2 = new FlightsDaoSQLImpl();
         ArrayList<Flights> flights = null;
         try {
             flights = new ArrayList<Flights>(dao2.searchBySourceAndDestination("Sarajevo","Zagreb"));
@@ -77,7 +77,7 @@ public class App
         }
         for(Flights temp: flights){
             System.out.println(temp);
-        }
+        }*/
 
     }
    /*public static void main( String[] args ){

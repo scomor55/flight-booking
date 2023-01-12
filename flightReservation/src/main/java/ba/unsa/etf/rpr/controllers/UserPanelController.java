@@ -259,7 +259,7 @@ public class UserPanelController  {
         Tickets ticket = new Tickets();
         ticket.setFlightID(Integer.parseInt(idShowField.getText()));
         ticket.setPassengerID(passengerID);
-        ticket.setTravelClass(classChooseField.getText());
+        ticket.setTravelClass(boxBox.getSelectionModel().getSelectedItem().toString());
         ticket.setPrice(Integer.parseInt(priceShowField.getText()));
         ticket = ticketsManager.add(ticket);
         } catch (FlightBookingException e) {

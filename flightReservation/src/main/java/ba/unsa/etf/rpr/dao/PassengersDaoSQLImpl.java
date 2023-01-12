@@ -12,9 +12,20 @@ import java.util.TreeMap;
 
 public class PassengersDaoSQLImpl extends AbstractDao<Passengers> implements PassengersDao {
 
-
-    public PassengersDaoSQLImpl() {
+    private static PassengersDaoSQLImpl instance = null;
+    private PassengersDaoSQLImpl() {
         super("Passengers");
+    }
+
+    public static PassengersDaoSQLImpl getInstance(){
+        if(instance==null)
+            instance = new PassengersDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
     }
 
     @Override

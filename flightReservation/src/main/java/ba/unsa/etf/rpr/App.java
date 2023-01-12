@@ -46,7 +46,7 @@ public class App
             System.out.println(temp);
         }
 
-        PassengersDao dao1 = new PassengersDaoSQLImpl();
+        /*PassengersDao dao1 = new PassengersDaoSQLImpl();
         ArrayList<Passengers> passengers = null;
         try {
             passengers = new ArrayList<Passengers>(dao1.searchByName("Denan"));
@@ -55,9 +55,9 @@ public class App
         }
         for(Passengers temp: passengers){
             System.out.println(temp);
-        }
+        }*/
 
-        ArrayList<Passengers> passengers1 = null;
+       /* ArrayList<Passengers> passengers1 = null;
         try {
             passengers1 = new ArrayList<Passengers>(dao1.searchBySurname("Krupalija"));
         } catch (FlightBookingException e) {
@@ -66,7 +66,7 @@ public class App
         for(Passengers temp: passengers1){
             System.out.println(temp);
         }
-
+*/
 
       /*  FlightsDao dao2 = new FlightsDaoSQLImpl();
         ArrayList<Flights> flights = null;

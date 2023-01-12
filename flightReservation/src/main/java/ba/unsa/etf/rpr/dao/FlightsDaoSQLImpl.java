@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import java.util.List;
 
 /**
- * MySQL implementation of the DAO
+ * MySQL's implementation of the DAO
  * @author Safet Čomor
  */
 

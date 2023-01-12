@@ -11,7 +11,7 @@ public class DaoFactory {
 
     private static final FlightsDao flightsDao = FlightsDaoSQLImpl.getInstance();
 
-    private static final PassengersDao passengersDao = PassengersDaoSQLImpl;
+    private static final PassengersDao passengersDao = PassengersDaoSQLImpl.getInstance();
     private static final TicketsDao ticketsDao = new TicketsDaoSQLImpl();
 
     private DaoFactory(){

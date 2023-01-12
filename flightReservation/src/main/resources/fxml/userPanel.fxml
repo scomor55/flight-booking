@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -81,6 +83,13 @@
       <DatePicker fx:id="datePicker" GridPane.columnIndex="10" GridPane.rowIndex="3" />
       <Label text="Departure :" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
       <TextField fx:id="departureShowField" GridPane.columnIndex="10" GridPane.rowIndex="10" />
-      <TextField fx:id="classChooseField" onAction="#inputClass" GridPane.columnIndex="10" GridPane.rowIndex="12" />
+       <ChoiceBox fx:id="boxBox" prefWidth="150.0" GridPane.columnIndex="10" GridPane.rowIndex="12">
+           <items>
+               <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="Economy" />
+                   <String fx:value="Business" />
+               </FXCollections>
+           </items>
+       </ChoiceBox>
    </children>
 </GridPane>

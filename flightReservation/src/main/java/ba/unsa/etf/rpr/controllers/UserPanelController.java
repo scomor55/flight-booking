@@ -51,13 +51,22 @@ public class UserPanelController  {
     public TextField classChooseField;
     public TableColumn<Flights, String> departureTimeColumn;
     public TableColumn<Flights, String> arrivalTimeColumn;
-
+    public ChoiceBox boxBox;
 
 
     /*****/
 
 
     public void initialize(){
+        boxBox.getSelectionModel().selectedItemProperty().addListener((obs,oldValue, newValue)->{
+            if(newValue.toString().equals("Economy") || newValue.toString().isEmpty()){
+                int price = EconomyPrice(Integer.parseInt(idShowField.getText()));
+                priceShowField.setText(String.valueOf(price));
+            }else{
+                int price = BusinessPrice(Integer.parseInt(idShowField.getText()));
+                priceShowField.setText(String.valueOf(price));
+            }
+        });
         idColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("id"));
         sourceColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("source"));
         destinationColumn.setCellValueFactory(new PropertyValueFactory<Flights,String>("destination"));
@@ -192,7 +201,8 @@ public class UserPanelController  {
         destinationShowField.setText(String.valueOf(selectedFlight.getDestination()));
         arrivalShowField.setText(String.valueOf(selectedFlight.getArrival()));
         departureShowField.setText(String.valueOf(selectedFlight.getDeparture()));
-        if(classChooseField.equals("")){
+        boxBox.setValue("Economy");
+        if(boxBox.getSelectionModel().isEmpty()){
             priceShowField.setText(String.valueOf(selectedFlight.getPriceEconomy()));
         }
         priceShowField.setText(String.valueOf(selectedFlight.getPriceEconomy()));

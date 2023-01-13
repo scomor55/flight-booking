@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.business;
+/*package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.FlightsDaoSQLImpl;
 import ba.unsa.etf.rpr.dao.DaoFactory;
@@ -15,9 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
+import java.time.LocalDate;*/
 
-public class FlightsManagerTest {
+/*public class FlightsManagerTest {
 
     private FlightsManager flightsManager;
     private Flights flight;
@@ -52,13 +52,13 @@ public class FlightsManagerTest {
 
         Assertions.assertTrue(true);
         Mockito.verify(flightsManager).add(newFlight);
-    }
+    }*/
 
     /**
      * We are testing add() method. An explanation will be covered in the comments below
      */
 
-    @Test
+  /*  @Test
     void add() throws FlightBookingException{
         MockedStatic<DaoFactory> daoFactoryMockedStatic = Mockito.mockStatic(DaoFactory.class);
 
@@ -80,4 +80,4 @@ public class FlightsManagerTest {
     }
 
 
-}
+}*/

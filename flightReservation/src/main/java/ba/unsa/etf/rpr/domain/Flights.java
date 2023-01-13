@@ -101,6 +101,13 @@ public class Flights implements Idable{
         this.arrivalTime = arrivalTime;
     }
 
+
+    public Flights(String destination){
+        this.destination = destination;
+    }
+    public Flights(){
+    }
+
     @Override
     public String toString() {
         return "Flight{" +

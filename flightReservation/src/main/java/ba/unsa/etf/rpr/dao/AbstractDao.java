@@ -3,6 +3,8 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
@@ -20,7 +22,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
 
     public AbstractDao(String tableName) {
         this.tableName = tableName;
-        if(connection == null) createConnection();
+        createConnection();
     }
 
     private static void createConnection(){
@@ -35,40 +37,24 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
             } catch (Exception e) {
                 e.printStackTrace();
                 System.exit(0);
+            }finally {
+                Runtime.getRuntime().addShutdownHook(new Thread(){
+                    @Override
+                    public void run(){
+                        try{
+                            connection.close();
+                        }catch (SQLException e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         }
     }
-
-
-
+    
 
     public static Connection getConnection() {
         return AbstractDao.connection;
-    }
-
-  /*  public void setConnection(){
-        if(AbstractDao.connection!=null) {
-            try {
-                AbstractDao.connection.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        AbstractDao.connection = connection;
-    }*/
-
-
-    public static void closeConnection(){
-        System.out.println("Pozvana metoda za zatvaranje konekcije");
-        if(connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                //throw new RuntimeException(e);
-                e.printStackTrace();
-                System.out.println("REMOVE CONNECTION METHOD ERROR: Unable to close connection on database");
-            }
-        }
     }
 
 

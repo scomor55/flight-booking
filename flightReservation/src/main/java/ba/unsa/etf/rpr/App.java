@@ -32,98 +32,92 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * Hello world!
+ *@author Safet Čomor
+ *  * CLI (Command Line Interface) implementation in following class
+ *  * Even though this type of presentation layer (called CLI) is becoming past tense for GUI apps
+ *  * it's good to see how you can manipulate data through command line and database also
  *
  */
 
 public class App
 {
-    public static void main( String[] args )
-    {
-        TicketsDao dao =  TicketsDaoSQLImpl.getInstance();
-        Tickets tickets = new Tickets();
 
-        tickets.setId(3);
-        tickets.setFlightID(3);
-        tickets.setPassengerID(1);
-        tickets.setTravelClass("Business");
-        tickets.setPrice(1000);
+    private static final Option addFlight = new Option("newFlight","add-flight",false,"\"Adding new flight to Flights database\"");
+    private static final Option addPassenger = new Option("newPassenger","add-passenger",false,"\"Adding new passenger to Passenger database\"");
+    private static final Option getFlight = new Option("getFlight","get-flight",false,"\"Printing all flights from Flights database\"");
+    private static final Option getPassenger = new Option("getPassenger","get-passenger",false,"\"Printing all passengers from Passengers database\"");
+    private static final Option flightDefinition = new Option(null,"flight",false,"Defining flight for next added flight");
 
-
-        ArrayList<Tickets> t = null;
-        try {
-            t = new ArrayList<Tickets>(dao.searchByClass("Business"));
-        } catch (FlightBookingException e) {
-            throw new RuntimeException(e);
-        }
-        for(Tickets temp : t){
-            System.out.println(temp);
-        }
-
-        PassengersDao dao1 = PassengersDaoSQLImpl.getInstance();
-        ArrayList<Passengers> passengers = null;
-        try {
-            passengers = new ArrayList<Passengers>(dao1.searchByName("Denan"));
-        } catch (FlightBookingException e) {
-            throw new RuntimeException(e);
-        }
-        for(Passengers temp: passengers){
-            System.out.println(temp);
-        }
-
-        ArrayList<Passengers> passengers1 = null;
-        try {
-            passengers1 = new ArrayList<Passengers>(dao1.searchBySurname("Krupalija"));
-        } catch (FlightBookingException e) {
-            throw new RuntimeException(e);
-        }
-        for(Passengers temp: passengers1){
-            System.out.println(temp);
-        }
-
-
-        FlightsDao dao2 =  FlightsDaoSQLImpl.getInstance();
-        ArrayList<Flights> flights = null;
-        try {
-            flights = new ArrayList<Flights>(dao2.searchBySourceAndDestination("Sarajevo","Zagreb"));
-        } catch (FlightBookingException e) {
-            throw new RuntimeException(e);
-        }
-        for(Flights temp: flights){
-            System.out.println(temp);
-        }
-
+    public static void printFormattedOptions(Options options) {
+        HelpFormatter helpFormatter = new HelpFormatter();
+        PrintWriter printWriter = new PrintWriter(System.out);
+        helpFormatter.printUsage(printWriter, 150, "java -jar flightBooking.jar [option] 'something else if needed' ");
+        helpFormatter.printOptions(printWriter, 150, options, 2, 7);
+        printWriter.close();
     }
-   /*public static void main( String[] args ){
-       Runtime.Version version = Runtime.version();
-       System.out.println("Java version: " + version);
-   }*/
+
+    public static Options addOptions() {
+        Options options = new Options();
+        options.addOption(addFlight);
+        options.addOption(addPassenger);
+        options.addOption(getFlight);
+        options.addOption(getPassenger);
+        options.addOption(flightDefinition);
+        return options;
+    }
+
+    public static Flights searchThroughFlights(List<Flights> listOfFlights, String flightDestination) {
+        Flights flight = null;
+        flight = listOfFlights.stream().filter(cat -> cat.getDestination().toLowerCase().equals(flightDestination.toLowerCase())).findAny().get();
+        return flight;
+    }
+
+    public static void main( String[] args )throws Exception
+    {
+    Options options = addOptions();
+    CommandLineParser commandLineParser = new DefaultParser();
+    CommandLine cl = commandLineParser.parse(options,args);
+
+    if((cl.hasOption(addFlight.getOpt()))||(cl.hasOption(addFlight.getLongOpt())) && cl.hasOption((flightDefinition.getLongOpt()))){
+        PassengersManager passengersManager = new PassengersManager();
+        FlightsManager flightsManager = new FlightsManager();
+        Flights flights = null;
+    try{
+        flights = searchThroughFlights(flightsManager.getAll(),cl.getArgList().get(1));
+
+    }catch(Exception e){
+        System.out.println("There is no passenger in the list! Try again.");
+        System.exit(1);
+    }
+        Flights flight = new Flights();
+        flight.setDestination(cl.getArgList().get(0));
+        flightsManager.add(flight);
+        System.out.println("You successfully added flight to database!");
+    }else if(cl.hasOption(getFlight.getOpt())|| cl.hasOption(getFlight.getLongOpt())){
+        FlightsManager flightsManager = new FlightsManager();
+        flightsManager.getAll().forEach( q -> System.out.println(q.getDestination()));
+
+    }else if(cl.hasOption(getPassenger.getOpt())|| cl.hasOption(getPassenger.getLongOpt())){
+        try {
+        PassengersManager passengersManager = new PassengersManager();
+        Passengers passenger = new Passengers();
+        passenger.setName(cl.getArgList().get(0));
+        passengersManager.add(passenger);
+        System.out.println("Passenger been added successfully");
+        }catch(Exception e){
+            System.out.println("There is already category with same name in database! Try again");
+            System.exit(1);
+        }
+    }else if(cl.hasOption(getPassenger.getOpt())|| cl.hasOption(getPassenger.getLongOpt())){
+        PassengersManager passengersManager = new PassengersManager();
+        passengersManager.getAll().forEach(q-> System.out.println(q.getName()));
+    }else{
+        printFormattedOptions(options);
+        System.exit(-1);
+    }
+    }
+
 
 }
 
 
-/*package ba.unsa.etf.rpr;*/
-
-/*import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-public class App extends Application {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        // FXML style
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
-        primaryStage.setTitle("Login App");
-        primaryStage.setScene(new Scene(root, 300, 110));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-
-    }
-}*/

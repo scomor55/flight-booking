@@ -42,7 +42,7 @@ public class FlightsManagerTest {
 
         flightsDaoSQLMock = Mockito.mock(FlightsDaoSQLImpl.class);
         flights = new ArrayList<>();
-        flights.addAll(Arrays.asList(new Flights("Dortmund"),new Flights("Dortmund"),new Flights("Plzen"),new Flights("Olomuc"),new Flights("Pribram")));
+        flights.addAll(Arrays.asList(new Flights("Dortmund"),new Flights("Rostock"),new Flights("Plzen"),new Flights("Olomuc"),new Flights("Pribram")));
     }
 
     @Test

@@ -1,6 +1,4 @@
-ba\unsa\etf\rpr\controllers\LoginMain.class
 ba\unsa\etf\rpr\controllers\AdminPassengersController.class
-ba\unsa\etf\rpr\controllers\AdminUsersController.class
 ba\unsa\etf\rpr\dao\PassengersDao.class
 ba\unsa\etf\rpr\business\TicketsManager.class
 ba\unsa\etf\rpr\controllers\AdminTicketsController.class
@@ -21,8 +19,10 @@ ba\unsa\etf\rpr\dao\DaoFactory.class
 ba\unsa\etf\rpr\domain\Tickets.class
 ba\unsa\etf\rpr\controllers\Register.class
 ba\unsa\etf\rpr\controllers\Controller.class
+ba\unsa\etf\rpr\dao\AbstractDao$1.class
 ba\unsa\etf\rpr\controllers\UserPanelController.class
 ba\unsa\etf\rpr\domain\Passengers.class
 ba\unsa\etf\rpr\dao\FlightsDaoSQLImpl.class
 ba\unsa\etf\rpr\dao\TicketsDaoSQLImpl.class
 ba\unsa\etf\rpr\dao\AbstractDao.class
+ba\unsa\etf\rpr\LoginMain.class

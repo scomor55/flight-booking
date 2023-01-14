@@ -53,6 +53,7 @@ public class FlightsManagerTest {
         Assertions.assertTrue(true);
         Mockito.verify(flightsManager).add(newFlight);
     }
+
     /**
      * We are testing add() method. An explanation will be covered in the comments below
      */

@@ -4,8 +4,6 @@ C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\co
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\App.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\controllers\Register.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\business\TicketsManager.java
-C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\controllers\AdminUsersController.java
-C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\controllers\LoginMain.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\controllers\Controller.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\controllers\AdminFlightsController.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\dao\TicketsDao.java
@@ -21,6 +19,7 @@ C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\da
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\dao\PassengersDaoSQLImpl.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\domain\Passengers.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\business\PassengersManager.java
+C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\LoginMain.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\controllers\AdminPanelController.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\domain\Flights.java
 C:\Users\PC\flightReservation\flightReservation\src\main\java\ba\unsa\etf\rpr\dao\AbstractDao.java

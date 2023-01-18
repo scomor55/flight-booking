@@ -94,6 +94,39 @@ public class PassengersManagerTests {
 
     }
 
+    @Test
+    void validatePassengerSurname() throws FlightBookingException{
+        String correctSurname ="Sudžuka";
+        try {
+            Mockito.doCallRealMethod().when(passengersManager).validatePassengerSurname(correctSurname);
+        }catch(FlightBookingException f){
+            f.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+
+        String incorrectSurname = "A";
+        Mockito.doCallRealMethod().when(passengersManager).validatePassengerSurname(incorrectSurname);
+        FlightBookingException flightBookingException = Assertions.assertThrows(FlightBookingException.class, () -> {passengersManager.validatePassengerSurname(incorrectSurname);},"Passenger surname must be between 3 and 20 characters long");
+        Assertions.assertEquals("Passenger surname must be between 3 and 20 characters long",flightBookingException.getMessage());
 
 
+    }
+
+    @Test
+    void validatePassengerAddress() throws FlightBookingException{
+        String correctAddress ="mustafa.sudzuka@gmail.com";
+        try {
+            Mockito.doCallRealMethod().when(passengersManager).validatePassengerAddress(correctAddress);
+        }catch(FlightBookingException f){
+            f.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+
+        String incorrectAddress = "A";
+        Mockito.doCallRealMethod().when(passengersManager).validatePassengerAddress(incorrectAddress);
+        FlightBookingException flightBookingException = Assertions.assertThrows(FlightBookingException.class, () -> {passengersManager.validatePassengerAddress(incorrectAddress);},"Passenger address must be between 3 and 20 characters long");
+        Assertions.assertEquals("Passenger address must be between 3 and 20 characters long",flightBookingException.getMessage());
+
+
+    }
 }

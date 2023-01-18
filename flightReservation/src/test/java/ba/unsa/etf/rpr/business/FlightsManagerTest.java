@@ -46,6 +46,30 @@ public class FlightsManagerTest {
     }
 
     @Test
+    void validateSourceName() throws FlightBookingException{
+        String correctSource ="Sarajevo";
+        try {
+            Mockito.doCallRealMethod().when(flightsManager).validateSourceName(correctSource);
+        }catch(FlightBookingException f){
+            f.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+
+        String incorrectSource = "Ub";
+        Mockito.doCallRealMethod().when(flightsManager).validateSourceName(incorrectSource);
+        FlightBookingException flightBookingException = Assertions.assertThrows(FlightBookingException.class, () -> {flightsManager.validateSourceName(incorrectSource);},"Source name must be between 3 and 30 characters");
+        Assertions.assertEquals("Source name must be between 3 and 30 characters",flightBookingException.getMessage());
+
+
+        String incorrectSourceL  = RandomStringUtils.randomAlphabetic(31);
+        Mockito.doCallRealMethod().when(flightsManager).validateSourceName(incorrectSourceL);
+        FlightBookingException flightBookingExceptionL = Assertions.assertThrows(FlightBookingException.class, () -> {flightsManager.validateSourceName(incorrectSourceL);},"Source name must be between 3 and 30 characters");
+        Assertions.assertEquals("Source name must be between 3 and 30 characters",flightBookingExceptionL.getMessage());
+
+
+    }
+
+    @Test
     void validateDestinationName()throws FlightBookingException{
        String correctDestination ="Riga";
        try {
@@ -67,6 +91,22 @@ public class FlightsManagerTest {
         Assertions.assertEquals("Destination name must be between 3 and 30 characters",flightBookingExceptionL.getMessage());
 
 
+    }
+
+    @Test
+    void validateNumberOfSeats()throws FlightBookingException{
+        int correctNumOfSeats = 156;
+        try{
+            Mockito.doCallRealMethod().when(flightsManager).validateSeats(correctNumOfSeats);
+        }catch(FlightBookingException f){
+            f.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+
+        int incorrectNumOfSeats = 1000;
+        Mockito.doCallRealMethod().when(flightsManager).validateSeats(incorrectNumOfSeats);
+        FlightBookingException flightBookingException = Assertions.assertThrows(FlightBookingException.class, () -> {flightsManager.validateSeats(incorrectNumOfSeats);},"Number of seats must be between 20 and 853");
+        Assertions.assertEquals("Number of seats must be between 20 and 853",flightBookingException.getMessage());
     }
 
     @Test

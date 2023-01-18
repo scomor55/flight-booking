@@ -61,6 +61,12 @@ public class Passengers implements Idable{
         this.email = email;
     }
 
+    public Passengers(String name){
+        this.name = name;
+    }
+    public Passengers(){
+    }
+
     @Override
     public String toString() {
         return "Passengr{" +

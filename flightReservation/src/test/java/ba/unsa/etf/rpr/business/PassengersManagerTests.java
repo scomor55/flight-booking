@@ -74,4 +74,7 @@ public class PassengersManagerTests {
         Assertions.assertTrue(true);
         Mockito.verify(passengersManager).add(newPassenger);
     }
+
+
+
 }

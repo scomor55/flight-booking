@@ -46,6 +46,30 @@ public class FlightsManagerTest {
     }
 
     @Test
+    void validateDestinationName()throws FlightBookingException{
+       String correctDestination ="Riga";
+       try {
+           Mockito.doCallRealMethod().when(flightsManager).validateDestinationName(correctDestination);
+       }catch(FlightBookingException f){
+           f.printStackTrace();
+           Assertions.assertTrue(false);
+       }
+
+       String incorrectDestination = "Ub";
+       Mockito.doCallRealMethod().when(flightsManager).validateDestinationName(incorrectDestination);
+       FlightBookingException flightBookingException = Assertions.assertThrows(FlightBookingException.class, () -> {flightsManager.validateDestinationName(incorrectDestination);},"Destination name must be between 3 and 30 characters");
+       Assertions.assertEquals("Destination name must be between 3 and 30 characters",flightBookingException.getMessage());
+
+
+        String incorrectDestinationL = RandomStringUtils.randomAlphabetic(31);
+        Mockito.doCallRealMethod().when(flightsManager).validateDestinationName(incorrectDestinationL);
+        FlightBookingException flightBookingExceptionL = Assertions.assertThrows(FlightBookingException.class, () -> {flightsManager.validateDestinationName(incorrectDestination);},"Destination name must be between 3 and 30 characters");
+        Assertions.assertEquals("Destination name must be between 3 and 30 characters",flightBookingExceptionL.getMessage());
+
+
+    }
+
+    @Test
     public void add2()throws FlightBookingException{
         Flights newFlight = new Flights("Teplice");
         flightsManager.add(newFlight);

@@ -84,7 +84,11 @@ public class UserPanelController  {
 
     public void findFlight(ActionEvent actionEvent) {
         try {
-            flightsTable.setItems(FXCollections.observableList(flightsManager.searchBySourceAndDestination(sourceFindField.getText(),destinationFindField.getText())));
+            if(sourceShowField==null && destinationShowField != null){
+                flightsTable.setItems(FXCollections.observableList(flightsManager.searchByDestination(destinationFindField.getText())));
+            }else {
+                flightsTable.setItems(FXCollections.observableList(flightsManager.searchBySourceAndDestination(sourceFindField.getText(), destinationFindField.getText())));
+            }
             flightsTable.refresh();
         }catch(FlightBookingException f){
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();

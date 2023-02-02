@@ -52,6 +52,8 @@ public class UserPanelController  {
     public TableColumn<Flights, String> departureTimeColumn;
     public TableColumn<Flights, String> arrivalTimeColumn;
     public ChoiceBox boxBox;
+    public TextField departureTimeShowField;
+    public TextField arrivalTimeShowField;
 
 
     /*****/
@@ -204,7 +206,9 @@ public class UserPanelController  {
         sourceShowField.setText(String.valueOf(selectedFlight.getSource()));
         destinationShowField.setText(String.valueOf(selectedFlight.getDestination()));
         arrivalShowField.setText(String.valueOf(selectedFlight.getArrival()));
+        arrivalTimeShowField.setText(selectedFlight.getArrivalTime());
         departureShowField.setText(String.valueOf(selectedFlight.getDeparture()));
+        departureTimeShowField.setText(selectedFlight.getDepartureTime());
         boxBox.setValue("Economy");
         if(boxBox.getSelectionModel().isEmpty()){
             priceShowField.setText(String.valueOf(selectedFlight.getPriceEconomy()));

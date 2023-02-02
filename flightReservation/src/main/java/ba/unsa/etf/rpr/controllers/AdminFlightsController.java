@@ -100,6 +100,7 @@ public class AdminFlightsController {
     public void deleteFlight(ActionEvent actionEvent)throws FlightBookingException{
         Flights flight = manager.getById(Integer.parseInt(idField.getText()));
         manager.delete(flight.getId());
+        refreshFlights();
     }
 
     private void refreshFlights()throws FlightBookingException{

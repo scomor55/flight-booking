@@ -76,6 +76,7 @@ public class AdminTicketsController  {
     public void deleteTicket(ActionEvent actionEvent) throws FlightBookingException {
         Tickets ticket = manager.getById(Integer.parseInt(ticketIDField.getText()));
         manager.delete(ticket.getId());
+        refreshTickets();
     }
 
     private void refreshTickets()throws FlightBookingException{

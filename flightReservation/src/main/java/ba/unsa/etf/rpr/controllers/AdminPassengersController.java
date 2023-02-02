@@ -103,8 +103,6 @@ public class AdminPassengersController {
         Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminFlights.fxml"));
         Parent root = loader.load();
-       /* AdminUsersController adminUsersController = new AdminUsersController();
-        loader.setController(adminUsersController);*/
         passengerStage.setTitle("Flights management");
         passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         passengerStage.setResizable(false);
@@ -120,8 +118,6 @@ public class AdminPassengersController {
         Stage ticketsStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminTickets.fxml"));
         Parent root = loader.load();
-       /* AdminUsersController adminUsersController = new AdminUsersController();
-        loader.setController(adminUsersController);*/
         ticketsStage.setTitle("Tickets management");
         ticketsStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         ticketsStage.setResizable(false);

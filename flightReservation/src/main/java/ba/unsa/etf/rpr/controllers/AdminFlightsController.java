@@ -37,16 +37,6 @@ public class AdminFlightsController {
     public Button goToTickets;
 
     private FlightsManager manager = new FlightsManager();
-
-
-  /*  @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/adminFlights.fxml"));
-        stage.setTitle("Flights management");
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        stage.show();
-    }*/
     
     @FXML
     public void initialize(){
@@ -91,7 +81,6 @@ public class AdminFlightsController {
     }
 
     public void updateFlight(ActionEvent actionEvent) throws FlightBookingException {
-        //   Flights flight = manager.getById(Integer.parseInt(idField.getText()));
 
         Flights flight = flightsList.getSelectionModel().getSelectedItem();
         flight.setSource(sourceField.getText());
@@ -126,8 +115,6 @@ public class AdminFlightsController {
         Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPassengers.fxml"));
         Parent root = loader.load();
-       /* AdminUsersController adminUsersController = new AdminUsersController();
-        loader.setController(adminUsersController);*/
         passengerStage.setTitle("Passengers management");
         passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         passengerStage.setResizable(false);
@@ -143,8 +130,6 @@ public class AdminFlightsController {
         Stage ticketsStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminTickets.fxml"));
         Parent root = loader.load();
-       /* AdminUsersController adminUsersController = new AdminUsersController();
-        loader.setController(adminUsersController);*/
         ticketsStage.setTitle("Tickets management");
         ticketsStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         ticketsStage.setResizable(false);

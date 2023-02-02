@@ -13,11 +13,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.sql.*;
+import java.util.Properties;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class AdminTicketsController  {
@@ -28,6 +28,7 @@ public class AdminTicketsController  {
     public TextField priceField;
     public TextField ticketIDField;
     public ListView<Tickets> ticketsList;
+    public ChoiceBox boxBox;
 
     private TicketsManager manager = new TicketsManager();
 
@@ -37,13 +38,22 @@ public class AdminTicketsController  {
             refreshTickets();
             ticketsList.getSelectionModel().selectedItemProperty().addListener((obs, o , n) ->{
                 if(n != null){
-                   flightIdField.setText(String.valueOf(n.getFlightID()));
-                   passengerIdField.setText(String.valueOf(n.getPassengerID()));
-                   classField.setText(n.getTravelClass());
-                   priceField.setText(String.valueOf(n.getPrice()));
-                   ticketIDField.setText(String.valueOf(n.getId()));
+                    flightIdField.setText(String.valueOf(n.getFlightID()));
+                    passengerIdField.setText(String.valueOf(n.getPassengerID()));
+                    ticketIDField.setText(String.valueOf(n.getId()));
+                }
+            }
+            );
+            boxBox.getSelectionModel().selectedItemProperty().addListener((obs,oldValue, newValue)->{
+                if(newValue.toString().equals("Economy") || newValue.toString().isEmpty()){
+                    int price = EconomyPrice(Integer.parseInt(flightIdField.getText()));
+                    priceField.setText(String.valueOf(price));
+                }else{
+                    int price = BusinessPrice(Integer.parseInt(flightIdField.getText()));
+                    priceField.setText(String.valueOf(price));
                 }
             });
+
         }catch(FlightBookingException f){
             throw new RuntimeException(f);
         }
@@ -54,7 +64,7 @@ public class AdminTicketsController  {
             Tickets ticket = new Tickets();
             ticket.setFlightID(Integer.parseInt(flightIdField.getText()));
             ticket.setPassengerID(Integer.parseInt(passengerIdField.getText()));
-            ticket.setTravelClass(classField.getText());
+            ticket.setTravelClass(String.valueOf(boxBox.getSelectionModel().getSelectedItem()));
             ticket.setPrice(Integer.parseInt(priceField.getText()));
             ticket = manager.add(ticket);
             ticketsList.getItems().add(ticket);
@@ -67,7 +77,7 @@ public class AdminTicketsController  {
         Tickets ticket = manager.getById(Integer.parseInt(ticketIDField.getText()));
         ticket.setFlightID(Integer.parseInt(flightIdField.getText()));
         ticket.setPassengerID(Integer.parseInt(passengerIdField.getText()));
-        ticket.setTravelClass(classField.getText());
+        ticket.setTravelClass(String.valueOf(boxBox.getSelectionModel().getSelectedItem()));
         ticket.setPrice(Integer.parseInt(priceField.getText()));
         ticket = manager.update(ticket);
         refreshTickets();
@@ -85,6 +95,63 @@ public class AdminTicketsController  {
         }catch(FlightBookingException f){
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
         }
+    }
+
+
+    public int EconomyPrice(int flightID) {
+
+        try {
+            Properties p = new Properties();
+            p.load(ClassLoader.getSystemResource("application.properties.sample").openStream());
+            String url = p.getProperty("db.connection_string");
+            String usr = p.getProperty("db.username");
+            String pswd = p.getProperty("db.password");
+
+            Connection conn = DriverManager.getConnection(url, usr, pswd);
+
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT priceEconomy FROM Flights WHERE id = ? ";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, flightID);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                int price = rs.getInt("priceEconomy");
+                return price;
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int BusinessPrice(int flightID) {
+
+        try {
+            Properties p = new Properties();
+            p.load(ClassLoader.getSystemResource("application.properties.sample").openStream());
+            String url = p.getProperty("db.connection_string");
+            String usr = p.getProperty("db.username");
+            String pswd = p.getProperty("db.password");
+
+            Connection conn = DriverManager.getConnection(url, usr, pswd);
+
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT priceBusiness FROM Flights WHERE id = ? ";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, flightID);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                int price = rs.getInt("priceBusiness");
+                return price;
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
 

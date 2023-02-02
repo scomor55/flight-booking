@@ -11,11 +11,13 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
@@ -152,6 +154,38 @@ public class AdminTicketsController  {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public void goToFlights(ActionEvent actionEvent) throws IOException {
+        Stage passengerStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminFlights.fxml"));
+        Parent root = loader.load();
+       /* AdminUsersController adminUsersController = new AdminUsersController();
+        loader.setController(adminUsersController);*/
+        passengerStage.setTitle("Flights management");
+        passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        passengerStage.setResizable(false);
+        passengerStage.show();
+
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+
+    public void goToPassengers(ActionEvent actionEvent) throws IOException {
+        Stage passengerStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPassengers.fxml"));
+        Parent root = loader.load();
+       /* AdminUsersController adminUsersController = new AdminUsersController();
+        loader.setController(adminUsersController);*/
+        passengerStage.setTitle("Passengers management");
+        passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        passengerStage.setResizable(false);
+        passengerStage.show();
+
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 }
 

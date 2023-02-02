@@ -1,9 +1,11 @@
 package ba.unsa.etf.rpr.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -76,6 +78,10 @@ public class Register  {
             alert.setHeaderText("Uspjesno ste kreirali racun ");
             alert.setContentText("Svaka cast");
             alert.showAndWait();
+
+            Node n = (Node) actionEvent.getSource();
+            Stage stage = (Stage) n.getScene().getWindow();
+            stage.close();
         }
 
 

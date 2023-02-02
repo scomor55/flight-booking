@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -18,6 +19,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -94,5 +97,38 @@ public class AdminPassengersController {
         }catch(FlightBookingException f){
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
         }
+    }
+
+    public void goToFlights(ActionEvent actionEvent) throws IOException {
+        Stage passengerStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminFlights.fxml"));
+        Parent root = loader.load();
+       /* AdminUsersController adminUsersController = new AdminUsersController();
+        loader.setController(adminUsersController);*/
+        passengerStage.setTitle("Flights management");
+        passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        passengerStage.setResizable(false);
+        passengerStage.show();
+
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+
+    }
+
+    public void goToTickets(ActionEvent actionEvent) throws IOException {
+        Stage ticketsStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminTickets.fxml"));
+        Parent root = loader.load();
+       /* AdminUsersController adminUsersController = new AdminUsersController();
+        loader.setController(adminUsersController);*/
+        ticketsStage.setTitle("Tickets management");
+        ticketsStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        ticketsStage.setResizable(false);
+        ticketsStage.show();
+
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 }

@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -99,25 +100,34 @@ public class Controller {
 
             if(tempUsername.equals("safa")){
                 try {
-                    final Stage adminStage = new Stage();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPanel.fxml"));
-                    loader.load();
-                    adminStage.setTitle("Admin panel");
-                    adminStage.setScene(new Scene((Parent) loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-                    adminStage.setResizable(false);
-                    adminStage.show();
+                    Stage passengerStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminFlights.fxml"));
+                    Parent root = loader.load();
+                    passengerStage.setTitle("Flights management");
+                    passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+                    passengerStage.setResizable(false);
+                    passengerStage.show();
+
+                    Node n = (Node) actionEvent.getSource();
+                    Stage stage = (Stage) n.getScene().getWindow();
+                    stage.close();
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }else{
                 try {
-                    final Stage adminStage = new Stage();
+                    final Stage userStage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userPanel.fxml"));
                     loader.load();
-                    adminStage.setTitle("User panel");
-                    adminStage.setScene(new Scene((Parent) loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-                    adminStage.setResizable(false);
-                    adminStage.show();
+                    userStage.setTitle("User panel");
+                    userStage.setScene(new Scene((Parent) loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+                    userStage.setResizable(false);
+                    userStage.show();
+
+                    Node n = (Node) actionEvent.getSource();
+                    Stage stage = (Stage) n.getScene().getWindow();
+                    stage.close();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

@@ -57,23 +57,24 @@ public class AdminPassengersController {
 
     public void addButton(ActionEvent actionEvent) {
 
-    try {
-        Passengers passenger = new Passengers();
-        passenger.setName(nameField.getText());
-        passenger.setSurname(surnameField.getText());
-        passenger.setDateOfBirth(dateOfBirthField.getValue());
-        passenger.setAdress(addressField.getText());
-        passenger.setEmail(emailField.getText());
-        passenger = manager.add(passenger);
-        listField.getItems().add(passenger);
-    }catch(FlightBookingException f){
-        new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
-    }
+        try {
+            Passengers passenger = new Passengers();
+            passenger.setName(nameField.getText());
+            passenger.setSurname(surnameField.getText());
+            passenger.setDateOfBirth(dateOfBirthField.getValue());
+            passenger.setAdress(addressField.getText());
+            passenger.setEmail(emailField.getText());
+            passenger = manager.add(passenger);
+            listField.getItems().add(passenger);
+        }catch(FlightBookingException f){
+            new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
+        }
     }
 
     public void deleteButton(ActionEvent actionEvent) throws FlightBookingException {
         Passengers passenger = manager.getById(Integer.parseInt(IdField.getText()));
         manager.delete(passenger.getId());
+        refreshPassengers();
     }
 
     public void updateField(ActionEvent actionEvent) throws FlightBookingException {
@@ -84,6 +85,7 @@ public class AdminPassengersController {
         passenger.setAdress(addressField.getText());
         passenger.setEmail(emailField.getText());
         passenger = manager.update(passenger);
+        refreshPassengers();
     }
 
     private void refreshPassengers()throws FlightBookingException{

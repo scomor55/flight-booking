@@ -44,9 +44,9 @@ public class App
 
     private static final Option addFlight = new Option("newFlight","add-flight",false,"\"Adding new flight to Flights database\"");
     private static final Option addPassenger = new Option("newPassenger","add-passenger",false,"\"Adding new passenger to Passenger database\"");
-    private static final Option getFlight = new Option("getFlight","get-flight",false,"\"Printing all flights from Flights database\"");
-    private static final Option getPassenger = new Option("getPassenger","get-passenger",false,"\"Printing all passengers from Passengers database\"");
-    private static final Option flightDefinition = new Option(null,"flight",false,"Defining flight for next added flight");
+    private static final Option getFlights = new Option("getFlight","get-flight",false,"\"Printing all flights from Flights database\"");
+    private static final Option getPassengers = new Option("getPassenger","get-passenger",false,"\"Printing all passengers from Passengers database\"");
+    private static final Option passengerDefinition = new Option(null,"flight",false,"Defining flight for next added flight");
 
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
@@ -60,16 +60,16 @@ public class App
         Options options = new Options();
         options.addOption(addFlight);
         options.addOption(addPassenger);
-        options.addOption(getFlight);
-        options.addOption(getPassenger);
-        options.addOption(flightDefinition);
+        options.addOption(getFlights);
+        options.addOption(getPassengers);
+        options.addOption(passengerDefinition);
         return options;
     }
 
-    public static Flights searchThroughFlights(List<Flights> listOfFlights, String flightDestination) {
-        Flights flight = null;
-        flight = listOfFlights.stream().filter(cat -> cat.getDestination().toLowerCase().equals(flightDestination.toLowerCase())).findAny().get();
-        return flight;
+    public static Passengers searchThroughPassengers(List<Passengers> listOfPassengers, String name) {
+        Passengers passenger = null;
+        passenger = listOfPassengers.stream().filter(cat -> cat.getName().toLowerCase().equals(name.toLowerCase())).findAny().get();
+        return passenger;
     }
 
     public static void main( String[] args )throws Exception
@@ -78,39 +78,50 @@ public class App
     CommandLineParser commandLineParser = new DefaultParser();
     CommandLine cl = commandLineParser.parse(options,args);
 
-    if((cl.hasOption(addFlight.getOpt()))||(cl.hasOption(addFlight.getLongOpt())) && cl.hasOption((flightDefinition.getLongOpt()))){
-        PassengersManager passengersManager = new PassengersManager();
+    if((cl.hasOption(addFlight.getOpt())||cl.hasOption(addFlight.getLongOpt())) && cl.hasOption((passengerDefinition.getLongOpt()))){
         FlightsManager flightsManager = new FlightsManager();
-        Flights flights = null;
+        PassengersManager passengersManager = new PassengersManager();
+        Passengers passenger = null;
     try{
-        flights = searchThroughFlights(flightsManager.getAll(),cl.getArgList().get(1));
+        passenger = searchThroughPassengers(passengersManager.getAll(),cl.getArgList().get(1));
 
     }catch(Exception e){
         System.out.println("There is no passenger in the list! Try again.");
         System.exit(1);
     }
         Flights flight = new Flights();
+        flight.setSource("Sarajevo");
         flight.setDestination(cl.getArgList().get(0));
+        flight.setDeparture(LocalDate.parse("2023-01-01"));
+        flight.setDepartureTime("12:00 AM");
+        flight.setArrival(LocalDate.parse("2023-01-01"));
+        flight.setArrivalTime("12:00 PM");
+        flight.setSeats(156);
+        flight.setPriceEconomy(100);
+        flight.setPriceBusiness(200);
         flightsManager.add(flight);
         System.out.println("You successfully added flight to database!");
-    }else if(cl.hasOption(getFlight.getOpt())|| cl.hasOption(getFlight.getLongOpt())){
+    }else if(cl.hasOption(getFlights.getOpt())|| cl.hasOption(getFlights.getLongOpt())){
         FlightsManager flightsManager = new FlightsManager();
-        flightsManager.getAll().forEach( q -> System.out.println(q.getDestination()));
-
-    }else if(cl.hasOption(getPassenger.getOpt())|| cl.hasOption(getPassenger.getLongOpt())){
+        flightsManager.getAll().forEach(q -> System.out.println(q.getDestination()));
+    }else if(cl.hasOption(getPassengers.getOpt())|| cl.hasOption(getPassengers.getLongOpt())){
         try {
         PassengersManager passengersManager = new PassengersManager();
         Passengers passenger = new Passengers();
         passenger.setName(cl.getArgList().get(0));
+        passenger.setSurname("Doe");
+        passenger.setDateOfBirth(LocalDate.parse("2023-01-01");
+        passenger.setAdress("Nowhere");
+        passenger.setEmail("a@doe.gmail.com");
         passengersManager.add(passenger);
         System.out.println("Passenger been added successfully");
         }catch(Exception e){
-            System.out.println("There is already category with same name in database! Try again");
+            System.out.println("There is already passenger with same name in database! Try again");
             System.exit(1);
         }
-    }else if(cl.hasOption(getPassenger.getOpt())|| cl.hasOption(getPassenger.getLongOpt())){
+    }else if(cl.hasOption(getPassengers.getOpt())|| cl.hasOption(getPassengers.getLongOpt())){
         PassengersManager passengersManager = new PassengersManager();
-        passengersManager.getAll().forEach(q-> System.out.println(q.getName()));
+        passengersManager.getAll().forEach(newPassenger -> System.out.println(newPassenger.getName()));
     }else{
         printFormattedOptions(options);
         System.exit(-1);

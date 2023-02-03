@@ -19,12 +19,32 @@ import java.util.Properties;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class Controller {
-    public TextField fieldUsername;
-    public String tempUsername;
-    public String tempPassword;
-    public PasswordField fieldPassword;
+/**
+ * Controller class for the main user interface. Handles user input and database interactions.
+ * @author Safet Čomor
+ */
 
+public class Controller {
+    /**
+     * Text field for entering username.
+     */
+    public TextField fieldUsername;
+    /**
+     * String to temporarily store entered username.
+     */
+    public String tempUsername;
+    /**
+     * String to temporarily store entered password.
+     */
+    public String tempPassword;
+    /**
+     * Password field for entering password.
+     */
+    public PasswordField fieldPassword;
+    /**
+     * Initializes the main interface by adding a change listener to the username text field.
+     * Adds the "invalidField" style class if the text field is empty.
+     */
     @FXML
     public void initialize() {
         fieldUsername.getStyleClass().add("invalidField");
@@ -41,7 +61,13 @@ public class Controller {
             }
         });
     }
-
+    /**
+     * Check method that takes a username and password as parameters and returns a boolean indicating if the
+     * combination is found in the database.
+     * @param username entered username
+     * @param password entered password
+     * @return true if the combination is found in the database, false otherwise
+     */
     public boolean Check(String username, String password) {
 
         try {
@@ -70,13 +96,20 @@ public class Controller {
         return false;
     }
 
+    /**
+     * This method is triggered when the "Button" is clicked. It checks the validity of the entered username and password.
+     * If the entered username is empty, it displays an error message and adds the "invalidField" style class to the "fieldUsername".
+     * If the check method returns false, it displays an error message.
+     * If the check method returns true, it displays a success message and opens the relevant window based on the username.
+     * @param actionEvent the event triggered by the button click
+     */
     public void buttonClick(ActionEvent actionEvent) {
         if (fieldUsername.getText().isEmpty()) {
             fieldUsername.getStyleClass().add("invalidField");
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Greška");
-            alert.setHeaderText("Niste unijeli korisničko ime");
-            alert.setContentText("Korisničko ime ne smije biti prazno");
+            alert.setTitle("Error");
+            alert.setHeaderText("You have not entered a username");
+            alert.setContentText("Username must not be empty");
             alert.showAndWait();
             return;
         }
@@ -86,15 +119,15 @@ public class Controller {
         boolean check = Check(tempUsername, tempPassword);
         if (!check) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Greška");
-            alert.setHeaderText("Pogrijesio si");
-            alert.setContentText("Greska Safete");
+            alert.setTitle("Error");
+            alert.setHeaderText("You made an error");
+            alert.setContentText("Wrong input!");
             alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Ispravan unos");
-            alert.setHeaderText("Uspjesno ste logovani");
-            alert.setContentText("Svaka cast");
+            alert.setTitle("Correct input");
+            alert.setHeaderText("Logged in");
+            alert.setContentText("You are successfully logged in");
             alert.showAndWait();
             alert.close();
 
@@ -134,6 +167,10 @@ public class Controller {
             }
         }
     }
+    /**
+     * This method is triggered when the "Register" button is clicked. It opens the registration window.
+     * @param actionEvent the event triggered by the button click
+     */
     public void registerClick(ActionEvent actionEvent) {
         try {
             final Stage myStage = new Stage();

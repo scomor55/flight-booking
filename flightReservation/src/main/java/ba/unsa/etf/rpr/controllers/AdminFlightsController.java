@@ -20,24 +20,73 @@ import javafx.stage.Stage;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * This class is used for Admin functionality for managing Flights.
+ * It allows the Admin to add, edit, delete, and view flights.
+ * @author Safet Čomor
+ */
+
 public class AdminFlightsController {
-
+    /**
+     * sourceField - text field for source location of flight
+     */
     public TextField sourceField;
+    /**
+     * destinationField - text field for destination location of flight
+     */
     public TextField destinationField;
+    /**
+     * departureField - date picker for departure date of flight
+     */
     public DatePicker departureField;
+    /**
+     * arrivalField - date picker for arrival date of flight
+     */
     public DatePicker arrivalField;
+    /**
+     * seatsField - text field for number of seats in flight
+     */
     public TextField seatsField;
+    /**
+     * idField - text field for id of flight
+     */
     public TextField idField;
+    /**
+     * flightsList - list view to display flights
+     */
     public ListView<Flights> flightsList;
+    /**
+     * economyTicketField - text field for price of economy class ticket
+     */
     public TextField economyTicketField;
+    /**
+     * businessTicketField - text field for price of business class ticket
+     */
     public TextField businessTicketField;
+    /**
+     * departureTimeField - text field for departure time of flight
+     */
     public TextField departureTimeField;
+    /**
+     * arrivalTimeField - text field for arrival time of flight
+     */
     public TextField arrivalTimeField;
+    /**
+     * goToPassengers - button to go to passengers management
+     */
     public Button goToPassengers;
+    /**
+     * goToTickets - button to go to tickets management
+     */
     public Button goToTickets;
-
+    /**
+     * manager - instance of FlightsManager
+     */
     private FlightsManager manager = new FlightsManager();
-    
+    /**
+     * This method is called during the initialization of the class.
+     * It is used to initialize the flight list and bind the selected item to input fields.
+     */
     @FXML
     public void initialize(){
         try {
@@ -60,7 +109,10 @@ public class AdminFlightsController {
             throw new RuntimeException(f);
         }
     }
-
+    /**
+     * Adds a new flight to the database.
+     * @param actionEvent The event that triggers the method call.
+     */
     public void addFlight(ActionEvent actionEvent) {
         try {
             Flights flight = new Flights();
@@ -79,7 +131,11 @@ public class AdminFlightsController {
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
         }
     }
-
+    /**
+     * Updates an existing flight in the database.
+     * @param actionEvent The event that triggers the method call.
+     * @throws FlightBookingException if an error occurs while updating the flight.
+     */
     public void updateFlight(ActionEvent actionEvent) throws FlightBookingException {
 
         Flights flight = flightsList.getSelectionModel().getSelectedItem();
@@ -95,14 +151,21 @@ public class AdminFlightsController {
         flight = manager.update(flight);
         refreshFlights();
     }
-
-
+    /**
+     * Deletes a flight from the database.
+     *
+     * @param actionEvent The event that triggers the method call.
+     * @throws FlightBookingException if an error occurs while deleting the flight.
+     */
     public void deleteFlight(ActionEvent actionEvent)throws FlightBookingException{
         Flights flight = manager.getById(Integer.parseInt(idField.getText()));
         manager.delete(flight.getId());
         refreshFlights();
     }
-
+    /**
+     * Refreshes the flight information displayed in the UI.
+     * @throws FlightBookingException if there is an issue retrieving the flight information
+     */
     private void refreshFlights()throws FlightBookingException{
         try{
         flightsList.setItems(FXCollections.observableList(manager.getAll()));
@@ -110,7 +173,11 @@ public class AdminFlightsController {
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
         }
     }
-
+    /**
+     * Navigates the user to the Passengers Management page.
+     * @param actionEvent the event that triggered this action
+     * @throws IOException if there is an issue loading the FXML file for the Passengers Management page
+     */
     public void goToPassengers(ActionEvent actionEvent) throws IOException {
         Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPassengers.fxml"));
@@ -125,7 +192,11 @@ public class AdminFlightsController {
         stage.close();
     }
 
-
+    /**
+     * Navigates the user to the Tickets Management page.
+     * @param actionEvent the event that triggered this action
+     * @throws IOException if there is an issue loading the FXML file for the Tickets Management page
+     */
     public void goToTickets(ActionEvent actionEvent) throws IOException {
         Stage ticketsStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminTickets.fxml"));

@@ -16,15 +16,25 @@ import java.util.*;
  */
 
 public abstract class AbstractDao <T extends Idable> implements Dao<T> {
-
+    /**
+     *Connection instance variable to represent the database connection.
+     */
     private static Connection connection = null;
+    /**
+    *String instance variable to represent the name of the table associated with the entity.
+    */
     private String tableName;
-
+    /**
+     * Constructor that sets the tableName and creates the database connection.
+     * @param tableName The name of the table associated with the entity.
+     */
     public AbstractDao(String tableName) {
         this.tableName = tableName;
         createConnection();
     }
-
+    /**
+     * Method that creates a database connection if it does not already exist.
+     */
     private static void createConnection(){
         if(AbstractDao.connection==null) {
             try {
@@ -51,24 +61,50 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
             }
         }
     }
-    
 
+    /**
+     * Method that returns the database connection.
+     * @return The database connection.
+     */
     public static Connection getConnection() {
         return AbstractDao.connection;
     }
 
-
+    /**
+     * Abstract method that converts a row from a result set to an object.
+     * @param rs The result set from the database.
+     * @return The object representation of the result set.
+     * @throws FlightBookingException
+     */
     public abstract T row2object(ResultSet rs) throws FlightBookingException;
+    /**
+     * Abstract method that converts an object to a row for the database.
+     * @param object The object that is being converted.
+     * @return The database row representation of the object.
+     */
     public abstract Map<String, Object> object2row(T object) ;
-
+    /**
+     * Method that retrieves an object from the database by its id.
+     * @param id The id of the object.
+     * @return The object with the specified id.
+     * @throws FlightBookingException
+     */
     public T getById(int id) throws FlightBookingException {
         return executeQueryUnique("SELECT * FROM "+ this.tableName +" WHERE id = ?",new Object[]{id});
     }
-
+    /**
+     * Returns a list of all items from the table.
+     * @return The list of all items from the table.
+     * @throws FlightBookingException if an error occurs during the operation.
+     */
     public List<T> getAll() throws FlightBookingException {
         return executeQuery("SELECT * FROM " + tableName, null);
     }
-
+    /**
+     * Deletes an item from the table with a specified ID.
+     * @param id The ID of the item to be deleted.
+     * @throws FlightBookingException if an error occurs during the operation.
+     */
     public void delete(int id) throws FlightBookingException {
         String sql = "DELETE FROM "+tableName+" WHERE id = ?";
         try{
@@ -79,7 +115,12 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
             throw new FlightBookingException(e.getMessage(), e);
         }
     }
-
+    /**
+     * Adds a new item to the table.
+     * @param item The item to be added to the table.
+     * @return The item with the assigned ID from the table.
+     * @throws FlightBookingException if an error occurs during the operation.
+     */
     public T add(T item) throws FlightBookingException{
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row);
@@ -109,7 +150,13 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
             throw new FlightBookingException(e.getMessage(), e);
         }
     }
-
+    /**
+     * Updates an item in the database.
+     *
+     * @param item the item to be updated
+     * @return the updated item
+     * @throws FlightBookingException if there is an error in the database operation
+     */
     public T update(T item) throws FlightBookingException{
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row);

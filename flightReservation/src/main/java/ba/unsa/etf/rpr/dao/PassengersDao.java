@@ -13,7 +13,19 @@ import java.util.List;
  * @author Safet Čomor
  */
 public interface PassengersDao extends Dao<Passengers> {
+    /**
+     * Searches for Passengers objects with a name matching the specified name.
+     * @param name The name to search for.
+     * @return A list of Passengers objects with matching names.
+     * @throws FlightBookingException if an error occurs during the search.
+     */
     List<Passengers> searchByName(String name) throws FlightBookingException;
+    /**
+     * Searches for Passengers objects with a surname matching the specified surname.
+     * @param surname The surname to search for.
+     * @return A list of Passengers objects with matching surnames.
+     * @throws FlightBookingException if an error occurs during the search.
+     */
     List<Passengers> searchBySurname(String surname)throws FlightBookingException;
 
 }

@@ -110,7 +110,7 @@ public class App
         Passengers passenger = new Passengers();
         passenger.setName(cl.getArgList().get(0));
         passenger.setSurname("Doe");
-        passenger.setDateOfBirth(LocalDate.parse("2023-01-01");
+        passenger.setDateOfBirth(LocalDate.parse("2023-01-01"));
         passenger.setAdress("Nowhere");
         passenger.setEmail("a@doe.gmail.com");
         passengersManager.add(passenger);

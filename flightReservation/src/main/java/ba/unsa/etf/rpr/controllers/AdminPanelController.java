@@ -10,11 +10,20 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+/**
+ * The class AdminPanelController handles the actions of buttons in the administrative panel.
+ * @author Safet Čomor
+ */
+
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class AdminPanelController  {
 
-
+    /**
+     * This method opens a new stage to manage the users in the system when the "User" button is clicked.
+     * @param actionEvent the event that triggers the method.
+     * @throws IOException if there is an error in loading the FXML file.
+*/
     public void userClick(ActionEvent actionEvent) throws IOException {
         Stage userStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminUser.fxml"));
@@ -26,7 +35,11 @@ public class AdminPanelController  {
         userStage.setResizable(false);
         userStage.show();
     }
-
+    /**
+     * This method opens a new stage to manage the passengers in the system when the "Passenger" button is clicked.
+     * @param actionEvent the event that triggers the method.
+     * @throws IOException if there is an error in loading the FXML file.
+     */
     public void passengerClick(ActionEvent actionEvent)throws IOException {
         Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPassengers.fxml"));
@@ -39,7 +52,11 @@ public class AdminPanelController  {
         passengerStage.show();
     }
 
-
+    /**
+     * This method opens a new stage to manage the flights in the system when the "Flights" button is clicked.
+     * @param actionEvent the event that triggers the method.
+     * @throws IOException if there is an error in loading the FXML file.
+     */
     public void flightsClick(ActionEvent actionEvent) throws IOException {
 
         Stage passengerStage = new Stage();
@@ -55,7 +72,11 @@ public class AdminPanelController  {
 
     }
 
-
+    /**
+     * This method opens a new stage to manage the tickets in the system when the "Tickets" button is clicked.
+     * @param actionEvent the event that triggers the method.
+     * @throws IOException if there is an error in loading the FXML file.
+     */
     public void ticketsClick(ActionEvent actionEvent)throws IOException{
         Stage ticketsStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminTickets.fxml"));

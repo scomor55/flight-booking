@@ -22,11 +22,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * The UserPanelController class is responsible for managing the interactions between the user interface and the backend.
+ * It is responsible for searching for flights, selecting a flight, and displaying flight details, as well as buying tickets.
+ * @author Safet Čomor
+ */
 public class UserPanelController  {
-
+    /**
+     * The FlightsManager instance for managing flights.
+     */
     private final FlightsManager flightsManager = new FlightsManager();
+    /**
+     * The PassengersManager instance for managing passengers.
+     */
     private final PassengersManager passengersManager = new PassengersManager();
-
+    /**
+     * The TicketsManager instance for managing tickets.
+     */
     private final TicketsManager ticketsManager = new TicketsManager();
     public TextField sourceFindField;
     public TextField destinationFindField;
@@ -57,9 +69,10 @@ public class UserPanelController  {
     public TableView ticketsTable;
 
 
-    /*****/
 
-
+    /**
+     * The method that initializes the user interface, including adding listeners to certain elements, setting the value factory for table columns and refreshing the flights table.
+     */
     public void initialize(){
         boxBox.getSelectionModel().selectedItemProperty().addListener((obs,oldValue, newValue)->{
             if(newValue.toString().equals("Economy") || newValue.toString().isEmpty()){
@@ -84,7 +97,10 @@ public class UserPanelController  {
         refreshFlights();
     }
 
-
+    /**
+     * The method that handles the action of finding a flight, either by source or source and destination.
+     * @param actionEvent The event triggered by the user's action.
+     */
     public void findFlight(ActionEvent actionEvent) {
         try {
             if(sourceShowField==null && destinationShowField != null){
@@ -98,6 +114,10 @@ public class UserPanelController  {
         }
      }
 
+    /**
+     * refreshFlights is a method used to refresh the flights table by retrieving the list of all flights from the flights manager and updating the flights table with it.
+     * If there is an exception during the retrieval process, it will be caught and displayed in an Alert dialog box with the exception's message.
+     */
      private void refreshFlights(){
         try {
             flightsTable.setItems(FXCollections.observableList(flightsManager.getAll()));
@@ -106,7 +126,13 @@ public class UserPanelController  {
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
         }
      }
-
+    /**
+     * EconomyPrice is a method used to retrieve the economy class price of a specific flight given its ID.
+     * This method connects to the database, retrieves the price from the 'Flights' table and returns it.
+     * In case of any exceptions, it will print the stack trace.
+     * @param flightID the ID of the flight for which the economy class price is to be retrieved.
+     * @return the economy class price of the specified flight. If no flight with the given ID is found, returns 0.
+     */
     public int EconomyPrice(int flightID) {
 
         try {
@@ -134,7 +160,13 @@ public class UserPanelController  {
         }
         return 0;
     }
-
+    /**
+     * BusinessPrice is a method used to retrieve the business class price of a specific flight given its ID.
+     * This method connects to the database, retrieves the price from the 'Flights' table and returns it.
+     * In case of any exceptions, it will print the stack trace.
+     * @param flightID the ID of the flight for which the business class price is to be retrieved.
+     * @return the business class price of the specified flight. If no flight with the given ID is found, returns 0.
+     */
     public int BusinessPrice(int flightID) {
 
         try {
@@ -163,7 +195,19 @@ public class UserPanelController  {
         return 0;
     }
 
-
+    /**
+     * getID() method is used to retrieve the passenger ID from the database.
+     * The method reads the database connection properties from the "application.properties.sample" file.
+     * It then creates a connection with the database using the JDBC DriverManager class.
+     * The method then prepares and executes a SQL query to retrieve the ID of the passenger.
+     * If a matching record is found, the method returns the ID of the passenger.
+     * @param firstName The first name of the passenger
+     * @param lastName The last name of the passenger
+     * @param dateOfBirth The date of birth of the passenger
+     * @param address The address of the passenger
+     * @param email The email of the passenger
+     * @return int The ID of the passenger if a match is found, else 0
+     */
     public int getID(String firstName, String lastName , LocalDate dateOfBirth , String address, String email) {
 
         try {
@@ -196,7 +240,14 @@ public class UserPanelController  {
         return 0;
     }
 
-
+    /**
+     * selectedFlight() method is used to set the selected flight information to UI fields.
+     * The method retrieves the selected flight information from the flightsTable,
+     * sets the values of the various text fields such as source, destination, arrival, departure, etc.
+     * The method also sets the default value for the boxBox to "Economy".
+     * If the boxBox is empty, it sets the price to the price of the Economy class.
+     * @param mouseEvent The mouse event that triggers the method
+     */
 
     public void selectedFlight(MouseEvent mouseEvent) {
       Flights selectedFlight = flightsTable.getSelectionModel().getSelectedItem();
@@ -221,6 +272,18 @@ public class UserPanelController  {
     public TextField emailField;
     public DatePicker datePicker;
 
+    /**
+     * Check() method is used to check if the passenger information already exists in the database.
+     * The method retrieves a list of all passengers and iterates through it to find a match with the input information.
+     * If a match is found, the method returns true, otherwise false.
+     * @param firstName The first name of the passenger
+     * @param lastName The last name of the passenger
+     * @param address The address of the passenger
+     * @param email The email of the passenger
+     * @param dateOfBirth The date of birth of the passenger
+     * @return boolean True if the passenger information is found, else False.
+     * @throws FlightBookingException If any exception occurs during the execution of the method
+     */
     public boolean Check(String firstName, String lastName, String address , String email, LocalDate dateOfBirth) throws FlightBookingException {
         List<Passengers> passengers = passengersManager.getAll();
         for(Passengers temp : passengers){
@@ -230,6 +293,16 @@ public class UserPanelController  {
         }
         return false;
     }
+
+    /**
+     * save() method is used to save the passenger information to the database.
+     * The method calls the Check() method to check if the passenger information already exists in the database.
+     * If the passenger information doesn't exist, the method creates a new passenger object, sets its values from the UI fields,
+     * and saves it to the database using the passengersManager.add() method.
+     * If the passenger information already exists, an alert is shown to the user.
+     * @param actionEvent The action event that triggers the method
+     * @throws FlightBookingException If any exception occurs during the execution of the method
+     */
 
     public void save(ActionEvent actionEvent) throws FlightBookingException {
 
@@ -262,7 +335,14 @@ public class UserPanelController  {
 
     }
 
-
+    /**
+     * bookFlight() method is used to book a flight for the passenger.
+     * The method calls the getID() method to retrieve the passenger ID from the database.
+     * If the passenger ID is found, the method creates a new booking object, sets its values, and saves it to the database using the bookingsManager.add() method.
+     * An alert is shown to the user to indicate the success or failure of the booking.
+     * @param actionEvent The action event that triggers the method
+     * @throws FlightBookingException If any exception occurs during the execution of the method
+     */
 
     public void bookFlight(ActionEvent actionEvent) throws FlightBookingException {
 
@@ -286,7 +366,14 @@ public class UserPanelController  {
        /* ticketsTable.setItems(FXCollections.observableList(flightsManager.searchFlightsForPassenger(passengerID)));
         ticketsTable.refresh();*/
     }
-/* Ovo JE SUMNJIVO */
+ /*-------------------------------------------*/
+
+    /**
+     * Refreshes the contents of the ticketsTable.
+     * This method retrieves a list of all flights using the `getAll` method of the `flightsManager` object.
+     * The list is set as the items of the `ticketsTable`, and the `ticketsTable` is then refreshed.
+     * If a `FlightBookingException` occurs, an alert is displayed with the exception's error message.
+     */
     private void refreshTickets(){
         try {
             ticketsTable.setItems(FXCollections.observableList(flightsManager.getAll()));
@@ -296,6 +383,13 @@ public class UserPanelController  {
         }
     }
 
+    /**
+     * Calculates the price of a flight based on the chosen class.
+     * This method retrieves the class choice from the `classChooseField` and calculates the price based on the selected class.
+     * If the chosen class is "Economy" or the field is empty, the `EconomyPrice` method is called with the flight ID from the `idShowField`.
+     * Otherwise, the `BusinessPrice` method is called.
+     * The calculated price is then set in the `priceShowField`.
+     */
     public void inputClass(ActionEvent actionEvent) {
         String text = classChooseField.getText();
         if(text.equals("Economy") || text.isEmpty()){

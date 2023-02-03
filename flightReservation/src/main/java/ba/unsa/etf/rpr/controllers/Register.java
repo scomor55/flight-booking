@@ -13,17 +13,37 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Properties;
 
+/**
+ * Register class is responsible for registering a user into the database by creating a new account.
+ * @author Safet Čomor
+ */
+
 public class Register  {
 
-
+    /**
+     * The signinBtn button object used to initiate the sign in process
+     */
     public Button signinBtn;
+    /**
+     * The fieldUsername text field object used to store the username of the user
+     */
     public TextField fieldUsername;
-
+    /**
+     * The tempUsername string variable used to temporarily store the username
+     */
     public String tempUsername;
+    /**
+     * The tempPassword string variable used to temporarily store the password
+     */
     public String tempPassword;
+    /**
+     * The fieldPassword text field object used to store the password of the user
+     */
     public TextField fieldPassword;
-
-
+    /**
+     * The signin method is used to add the new user to the database.
+     * @return true if the insertion into the database was successful, false otherwise.
+     */
     public boolean signin(){
 
         try{
@@ -53,13 +73,22 @@ public class Register  {
 
         return true;
     }
+
+    /**
+     * The signinClick method is used to initiate the sign in process.
+     * It checks if the username field is empty, and shows an error message if it is.
+     * If the username is not empty, the signin method is called to add the user to the database.
+     * If the signin method returns true, the user is informed that the account has been created successfully.
+     * If the signin method returns false, the user is informed that the entry is incorrect.
+     * @param actionEvent the event that triggered the sign in process
+     */
     public void signinClick(ActionEvent actionEvent) {
         if (fieldUsername.getText().isEmpty()) {
             fieldUsername.getStyleClass().add("invalidField");
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Greška");
-            alert.setHeaderText("Niste unijeli korisničko ime");
-            alert.setContentText("Korisničko ime ne smije biti prazno");
+            alert.setTitle("Error");
+            alert.setHeaderText("You have not entered a username");
+            alert.setContentText("Username must not be empty");
 
             alert.showAndWait();
             return;
@@ -69,25 +98,19 @@ public class Register  {
         if (!check) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška");
-            alert.setHeaderText("Pogrijesio si");
-            alert.setContentText("Greska Safete");
+            alert.setHeaderText("Incorrect entry");
+            alert.setContentText("You have entered incorrect information");
             alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Ispravan unos");
-            alert.setHeaderText("Uspjesno ste kreirali racun ");
-            alert.setContentText("Svaka cast");
+            alert.setTitle("Correct entry");
+            alert.setHeaderText("Account created!");
+            alert.setContentText("You have successfully created an account");
             alert.showAndWait();
 
             Node n = (Node) actionEvent.getSource();
             Stage stage = (Stage) n.getScene().getWindow();
             stage.close();
         }
-
-
-
-
-
-
     }
 }

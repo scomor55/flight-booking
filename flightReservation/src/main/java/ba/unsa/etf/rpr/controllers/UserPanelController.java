@@ -277,6 +277,12 @@ public class UserPanelController  {
         } catch (FlightBookingException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText("Success");
+        alert.setContentText("Flight for this passenger is successfully booked");
+        alert.showAndWait();
+
        /* ticketsTable.setItems(FXCollections.observableList(flightsManager.searchFlightsForPassenger(passengerID)));
         ticketsTable.refresh();*/
     }

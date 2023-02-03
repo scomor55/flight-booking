@@ -22,18 +22,52 @@ import java.sql.*;
 import java.util.Properties;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+
+/**
+ * AdminTicketsController is a JavaFX Controller class that implements the functionalities of adding, updating, and deleting
+ * {@link Tickets} objects in the database. It contains several GUI components such as TextFields, ListView, and ChoiceBox
+ * to allow the user to input, view, and modify the ticket information. The class also has a method for calculating the ticket
+ * price based on the chosen travel class and flight.
+ @author Safet Čomor
+ */
 public class AdminTicketsController  {
-
+    /**
+     * TextField for entering the flight id of a ticket
+     */
     public TextField flightIdField;
+    /**
+     * TextField for entering the passenger id of a ticket
+     */
     public TextField passengerIdField;
+    /**
+     * TextField for entering the passenger id of a ticket
+     */
     public TextField classField;
+    /**
+     * TextField for entering the price of a ticket
+     */
     public TextField priceField;
+    /**
+     * TextField for entering the ticket id of a ticket
+     */
     public TextField ticketIDField;
+    /**
+     * ListView for displaying a list of all tickets
+     */
     public ListView<Tickets> ticketsList;
+    /**
+     * ChoiceBox for selecting the travel class of a ticket
+     */
     public ChoiceBox boxBox;
-
+    /**
+     * A manager object for performing CRUD operations on the Tickets objects
+     */
     private TicketsManager manager = new TicketsManager();
-
+    /**
+     * The initialize method is called when the GUI is set up. It initializes the ListView of tickets and sets up listeners
+     * for the ChoiceBox and the ListView. The method also sets the default values for the ticket information fields.
+     * @throws FlightBookingException if there is an error while accessing the database
+     */
     @FXML
     public void initialize(){
         try {
@@ -69,6 +103,10 @@ public class AdminTicketsController  {
         }
     }
 
+    /**
+     * Adds a new ticket to the list of tickets.
+     * @param actionEvent triggered event to add a new ticket
+    */
     public void addTicket(ActionEvent actionEvent) {
         try {
             Tickets ticket = new Tickets();
@@ -82,7 +120,11 @@ public class AdminTicketsController  {
             new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
         }
     }
-
+    /**
+     * Updates an existing ticket in the list of tickets.
+     * @param actionEvent triggered event to update a ticket
+     * @throws FlightBookingException if the operation fails
+     */
     public void updateTicket(ActionEvent actionEvent) throws FlightBookingException {
         Tickets ticket = manager.getById(Integer.parseInt(ticketIDField.getText()));
         ticket.setFlightID(Integer.parseInt(flightIdField.getText()));
@@ -92,13 +134,20 @@ public class AdminTicketsController  {
         ticket = manager.update(ticket);
         refreshTickets();
     }
-
+    /**
+     * Deletes an existing ticket from the list of tickets.
+     * @param actionEvent triggered event to delete a ticket
+     * @throws FlightBookingException if the operation fails
+     */
     public void deleteTicket(ActionEvent actionEvent) throws FlightBookingException {
         Tickets ticket = manager.getById(Integer.parseInt(ticketIDField.getText()));
         manager.delete(ticket.getId());
         refreshTickets();
     }
-
+    /**
+     * Refreshes the list of tickets.
+     * @throws FlightBookingException if the operation fails
+     */
     private void refreshTickets()throws FlightBookingException{
         try{
             ticketsList.setItems(FXCollections.observableList(manager.getAll()));
@@ -107,7 +156,11 @@ public class AdminTicketsController  {
         }
     }
 
-
+    /**
+     * Gets the price of Economy class for a flight.
+     * @param flightID ID of the flight
+     * @return price of Economy class
+     */
     public int EconomyPrice(int flightID) {
 
         try {
@@ -136,6 +189,12 @@ public class AdminTicketsController  {
         return 0;
     }
 
+    /**
+     * Returns the price of business class for a specific flight.
+     * @param flightID the ID of the flight to get the business class price for.
+     * @return the price of the business class for the specified flight.
+     */
+
     public int BusinessPrice(int flightID) {
         try {
             Properties p = new Properties();
@@ -162,7 +221,12 @@ public class AdminTicketsController  {
         }
         return 0;
     }
-
+    /**
+     * Loads the flight management screen.
+     * It also closes the current stage.
+     * @param actionEvent the event that triggers this action.
+     * @throws IOException if the FXML file cannot be loaded.
+     */
     public void goToFlights(ActionEvent actionEvent) throws IOException {
         Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminFlights.fxml"));
@@ -176,7 +240,12 @@ public class AdminTicketsController  {
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
     }
-
+    /**
+     * Loads the passenger management screen.
+     * It also closes the current stage.
+     * @param actionEvent the event that triggers this action.
+     * @throws IOException if the FXML file cannot be loaded.
+     */
     public void goToPassengers(ActionEvent actionEvent) throws IOException {
         Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPassengers.fxml"));

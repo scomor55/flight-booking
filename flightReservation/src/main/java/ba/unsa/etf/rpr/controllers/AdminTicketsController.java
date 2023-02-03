@@ -42,6 +42,14 @@ public class AdminTicketsController  {
                 if(n != null){
                     flightIdField.setText(String.valueOf(n.getFlightID()));
                     passengerIdField.setText(String.valueOf(n.getPassengerID()));
+                    boxBox.setValue(n.getTravelClass());
+                    if(n.getTravelClass().equals("Economy")){
+                        int price = EconomyPrice(Integer.parseInt(flightIdField.getText()));
+                        priceField.setText(String.valueOf(price));
+                    }else {
+                        int price = BusinessPrice(Integer.parseInt(flightIdField.getText()));
+                        priceField.setText(String.valueOf(price));
+                    }
                     ticketIDField.setText(String.valueOf(n.getId()));
                 }
             }
@@ -129,7 +137,6 @@ public class AdminTicketsController  {
     }
 
     public int BusinessPrice(int flightID) {
-
         try {
             Properties p = new Properties();
             p.load(ClassLoader.getSystemResource("application.properties.sample").openStream());

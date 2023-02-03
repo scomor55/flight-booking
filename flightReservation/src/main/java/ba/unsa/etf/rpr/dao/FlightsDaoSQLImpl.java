@@ -19,21 +19,37 @@ import java.util.List;
 public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDao {
 
     private static FlightsDaoSQLImpl instance = null;
+    /**
+     * Private constructor that calls the super class constructor with the table name "Flights".
+     */
    private FlightsDaoSQLImpl() {
         super("Flights");
     }
-
-
+    /**
+     * Returns the singleton instance of the class. If the instance is null, a new instance is created.
+     * @return singleton instance of the FlightsDaoSQLImpl class
+     */
     public static FlightsDaoSQLImpl getInstance(){
        if (instance == null){
            instance = new FlightsDaoSQLImpl();
        }
        return instance;
     }
+    /**
+     * Removes the singleton instance if it exists.
+     */
     public static void removeInstance(){
         if(instance!=null)
             instance=null;
     }
+    /**
+     * This method maps the data from a {@link ResultSet} to a {@link Flights} object.
+     * It retrieves the data for each column of the Flights table and sets it to the corresponding
+     * field of the Flights object.
+     * @param rs a ResultSet object representing a row in the Flights table
+     * @return a Flights object with data from the ResultSet
+     * @throws FlightBookingException if a database access error occurs
+     */
     @Override
     public Flights row2object(ResultSet rs) throws FlightBookingException {
         try {
@@ -54,7 +70,11 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
             throw new FlightBookingException(e.getMessage(), e);
         }
     }
-
+    /**
+     * Converts a Flights object to a Map representation.
+     * @param object the Flights object to be converted
+     * @return a Map representation of the Flights object
+     */
     @Override
     public Map<String, Object> object2row(Flights object) {
         Map<String, Object> row = new TreeMap<>();
@@ -70,21 +90,43 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
         row.put("priceBusiness", object.getPriceBusiness());
         return row;
     }
-
+    /**
+     * Searches for flights based on the source.
+     * @param flightSource the source of the flight
+     * @return a List of Flights that match the source
+     * @throws FlightBookingException if there is an error in the query execution
+     */
     @Override
     public List<Flights> searchBySource(String flightSource) throws FlightBookingException{
         return executeQuery("SELECT * FROM Flights WHERE source LIKE concat('%',?,'%')",new Object[]{flightSource});
     }
-
+    /**
+     * Searches for flights based on the destination.
+     * @param flightDestination the destination of the flight
+     * @return a List of Flights that match the destination
+     * @throws FlightBookingException if there is an error in the query execution
+     */
     @Override
     public List<Flights> searchByDestination(String flightDestination) throws FlightBookingException{
         return executeQuery("SELECT * FROM Flights WHERE destination LIKE concat('%',?,'%')",new Object[]{flightDestination});
     }
+    /**
+     * Searches for flights based on the source and destination.
+     * @param flightSource the source of the flight
+     * @param flightDestination the destination of the flight
+     * @return a List of Flights that match the source and destination
+     * @throws FlightBookingException if there is an error in the query execution
+     */
     @Override
     public List<Flights> searchBySourceAndDestination(String flightSource,String flightDestination) throws FlightBookingException{
         return executeQuery("SELECT * FROM Flights WHERE source LIKE concat('%',?,'%') AND destination LIKE concat('%',?,'%')",new Object[]{flightSource,flightDestination});
     }
-
+    /**
+     * Searches for flights based on a passenger ID.
+     * @param passengerID the ID of the passenger
+     * @return a List of Flights that the passenger is booked on
+     * @throws FlightBookingException if there is an error in the query execution
+     */
     @Override
     public List<Flights> searchFlightsForPassenger(int passengerID ) throws FlightBookingException{
         return executeQuery("SELECT Flights.id,Flights.source, Flights.destination,Flights.departure FROM Flights,Tickets,Passengers WHERE Flights.id = Tickets.flightID AND Passengers.id = Tickets.passengerID AND Passengers.id = ?",new Object[]{passengerID});

@@ -13,6 +13,12 @@ import java.util.List;
  */
 
 public interface TicketsDao extends Dao<Tickets>{
+    /**
+     * This method retrieves a list of {@link Tickets} objects based on the ticket class provided.
+     * @param ticketClass The class of the tickets to be retrieved.
+     * @return A list of {@link Tickets} objects that match the specified ticket class.
+     * @throws FlightBookingException if there was an error while searching for tickets by class.
+     */
     List<Tickets> searchByClass(String ticketClass) throws FlightBookingException ;
 
 }

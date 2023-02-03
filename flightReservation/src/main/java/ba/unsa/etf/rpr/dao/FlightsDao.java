@@ -15,4 +15,6 @@ public interface FlightsDao extends Dao<Flights> {
     List<Flights> searchByDestination(String flightDestination) throws FlightBookingException ;
     List<Flights> searchBySourceAndDestination(String flightSource,String flightDestination) throws FlightBookingException ;
 
+    public List<Flights> searchFlightsForPassenger(int passengerID ) throws FlightBookingException;
+
 }

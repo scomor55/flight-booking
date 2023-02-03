@@ -68,4 +68,8 @@ public class FlightsManager {
         return DaoFactory.flightsDao().searchByDestination(destination);
     }
 
+    public List<Flights> searchFlightsForPassenger(int passengerID ) throws FlightBookingException{
+        return DaoFactory.flightsDao().searchFlightsForPassenger(passengerID);
+    }
+
 }

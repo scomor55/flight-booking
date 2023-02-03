@@ -54,6 +54,7 @@ public class UserPanelController  {
     public ChoiceBox boxBox;
     public TextField departureTimeShowField;
     public TextField arrivalTimeShowField;
+    public TableView ticketsTable;
 
 
     /*****/
@@ -196,8 +197,6 @@ public class UserPanelController  {
     }
 
 
-    private int idFlight;
-
 
     public void selectedFlight(MouseEvent mouseEvent) {
       Flights selectedFlight = flightsTable.getSelectionModel().getSelectedItem();
@@ -244,23 +243,28 @@ public class UserPanelController  {
                     passenger.setAdress(addressField.getText());
                     passenger.setEmail(emailField.getText());
                     passenger = passengersManager.add(passenger);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("Passenger added successfully");
+                    alert.setContentText("Passenger with this data is successfully added");
+                    alert.showAndWait();
                 }catch(FlightBookingException f){
                     new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
                 }
             }else{
 
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Greška");
-                alert.setHeaderText("Korisnik već postoji");
-                alert.setContentText("Registriran korisnik sa ovim podacima");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Passenger already exists");
+                alert.setContentText("Passenger with this data is already registered");
                 alert.showAndWait();
             }
 
     }
 
-    /* Sve upite prebaci u dao */
 
-    public void bookFlight(ActionEvent actionEvent) {
+
+    public void bookFlight(ActionEvent actionEvent) throws FlightBookingException {
 
         int passengerID = getID(firstNameField.getText(),lastNameField.getText(),datePicker.getValue(),addressField.getText(),emailField.getText());
         try {
@@ -273,7 +277,17 @@ public class UserPanelController  {
         } catch (FlightBookingException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
-
+       /* ticketsTable.setItems(FXCollections.observableList(flightsManager.searchFlightsForPassenger(passengerID)));
+        ticketsTable.refresh();*/
+    }
+/* Ovo JE SUMNJIVO */
+    private void refreshTickets(){
+        try {
+            ticketsTable.setItems(FXCollections.observableList(flightsManager.getAll()));
+            ticketsTable.refresh();
+        }catch(FlightBookingException f){
+            new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
+        }
     }
 
     public void inputClass(ActionEvent actionEvent) {

@@ -44,8 +44,8 @@ public class App
 
     private static final Option addFlight = new Option("newFlight","add-flight",false,"\"Adding new flight to Flights database\"");
     private static final Option addPassenger = new Option("newPassenger","add-passenger",false,"\"Adding new passenger to Passenger database\"");
-    private static final Option getFlights = new Option("getFlights","get-flight",false,"\"Printing all flights from Flights database\"");
-    private static final Option getPassengers = new Option("getPassengers","get-passenger",false,"\"Printing all passengers from Passengers database\"");
+    private static final Option getFlights = new Option("getFlights","get-flights",false,"\"Printing all flights from Flights database\"");
+    private static final Option getPassengers = new Option("getPassengers","get-passengers",false,"\"Printing all passengers from Passengers database\"");
     private static final Option passengerDefinition = new Option(null,"flight",false,"Defining flight for next added flight");
 
     public static void printFormattedOptions(Options options) {
@@ -78,17 +78,8 @@ public class App
     CommandLineParser commandLineParser = new DefaultParser();
     CommandLine cl = commandLineParser.parse(options,args);
 
-    if((cl.hasOption(addFlight.getOpt())||cl.hasOption(addFlight.getLongOpt())) && cl.hasOption((passengerDefinition.getLongOpt()))){
+    if((cl.hasOption(addFlight.getOpt())||cl.hasOption(addFlight.getLongOpt())) /*&& cl.hasOption((passengerDefinition.getLongOpt()))*/){
         FlightsManager flightsManager = new FlightsManager();
-        PassengersManager passengersManager = new PassengersManager();
-        Passengers passenger = null;
-    try{
-        passenger = searchThroughPassengers(passengersManager.getAll(),cl.getArgList().get(1));
-
-    }catch(Exception e){
-        System.out.println("There is no passenger in the list! Try again.");
-        System.exit(1);
-    }
         Flights flight = new Flights();
         flight.setSource("Sarajevo");
         flight.setDestination(cl.getArgList().get(0));
@@ -104,7 +95,7 @@ public class App
     }else if(cl.hasOption(getFlights.getOpt())|| cl.hasOption(getFlights.getLongOpt())){
         FlightsManager flightsManager = new FlightsManager();
         flightsManager.getAll().forEach(q -> System.out.println(q.getDestination()));
-    }else if(cl.hasOption(getPassengers.getOpt())|| cl.hasOption(getPassengers.getLongOpt())){
+    }else if(cl.hasOption(addPassenger.getOpt())|| cl.hasOption(addPassenger.getLongOpt())){
         try {
         PassengersManager passengersManager = new PassengersManager();
         Passengers passenger = new Passengers();

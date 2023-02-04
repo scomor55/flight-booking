@@ -33,9 +33,9 @@ import java.util.Stack;
 
 /**
  *@author Safet Čomor
- *  * CLI (Command Line Interface) implementation in following class
- *  * Even though this type of presentation layer (called CLI) is becoming past tense for GUI apps
- *  * it's good to see how you can manipulate data through command line and database also
+ * CLI (Command Line Interface) implementation in following class
+ * Even though this type of presentation layer (called CLI) is becoming past tense for GUI apps
+ * it's good to see how you can manipulate data through command line and database also
  *
  */
 
@@ -44,8 +44,8 @@ public class App
 
     private static final Option addFlight = new Option("newFlight","add-flight",false,"\"Adding new flight to Flights database\"");
     private static final Option addPassenger = new Option("newPassenger","add-passenger",false,"\"Adding new passenger to Passenger database\"");
-    private static final Option getFlights = new Option("getFlight","get-flight",false,"\"Printing all flights from Flights database\"");
-    private static final Option getPassengers = new Option("getPassenger","get-passenger",false,"\"Printing all passengers from Passengers database\"");
+    private static final Option getFlights = new Option("getFlights","get-flight",false,"\"Printing all flights from Flights database\"");
+    private static final Option getPassengers = new Option("getPassengers","get-passenger",false,"\"Printing all passengers from Passengers database\"");
     private static final Option passengerDefinition = new Option(null,"flight",false,"Defining flight for next added flight");
 
     public static void printFormattedOptions(Options options) {

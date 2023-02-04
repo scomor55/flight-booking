@@ -171,6 +171,11 @@
   </profile>
     <profile>
       <id>cli-app</id>
+      <activation>
+        <property>
+          <name>cli</name>
+        </property>
+      </activation>
       <build>
         <finalName>${project.name}-cli</finalName>
         <plugins>

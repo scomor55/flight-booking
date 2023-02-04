@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.business;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.exceptions.FlightBookingException;
+import javafx.scene.control.Alert;
 
 import java.util.List;
 /**
@@ -67,9 +68,14 @@ public class FlightsManager {
         DaoFactory.flightsDao().delete(flightId);
     }catch(FlightBookingException f){
         if(f.getMessage().contains("FOREIGN KEY")){
-            throw new FlightBookingException("Cannot delete category which is related to quotes. First delete related quotes before deleting category.");
+            // throw new FlightBookingException("Cannot delete category which is related to quotes. First delete related quotes before deleting category.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Flight undeleted");
+            alert.setContentText("You have to delete all tickets on this flight!");
+            alert.showAndWait();
         }
-        throw f;
+        // throw f;
     }
     }
     /**

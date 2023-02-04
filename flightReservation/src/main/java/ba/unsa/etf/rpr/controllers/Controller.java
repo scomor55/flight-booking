@@ -131,7 +131,7 @@ public class Controller {
             alert.showAndWait();
             alert.close();
 
-            if(tempUsername.equals("safa")){
+            if(tempUsername.equals("admin")){
                 try {
                     Stage passengerStage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminFlights.fxml"));

@@ -32,11 +32,13 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- *@author Safet Čomor
- * CLI (Command Line Interface) implementation in following class
- * Even though this type of presentation layer (called CLI) is becoming past tense for GUI apps
- * it's good to see how you can manipulate data through command line and database also
+ * CLI (Command Line Interface) implementation in following class.
+ * Even though this type of presentation layer (called CLI) is becoming past tense for GUI apps,
+ * it's good to see how you can manipulate data through command line and database also.
  *
+ * @author Safet Čomor
+ *
+ * Main method that starts the application.
  */
 
 public class App

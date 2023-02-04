@@ -11,7 +11,7 @@ import java.util.*;
 
 /**
  * Abstract class that implements core DAO CRUD methods for every entity
- *
+ * @param <T> the type of objects this DAO can handle
  * @author Safet Čomor
  */
 
@@ -74,7 +74,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      * Abstract method that converts a row from a result set to an object.
      * @param rs The result set from the database.
      * @return The object representation of the result set.
-     * @throws FlightBookingException
+     * @throws FlightBookingException if there was a problem converting the row to an object
      */
     public abstract T row2object(ResultSet rs) throws FlightBookingException;
     /**
@@ -87,7 +87,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      * Method that retrieves an object from the database by its id.
      * @param id The id of the object.
      * @return The object with the specified id.
-     * @throws FlightBookingException
+     * @throws FlightBookingException if there was a problem retrieving the object from the database
      */
     public T getById(int id) throws FlightBookingException {
         return executeQueryUnique("SELECT * FROM "+ this.tableName +" WHERE id = ?",new Object[]{id});

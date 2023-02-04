@@ -10,15 +10,18 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 /**
  * The class AdminPanelController handles the actions of buttons in the administrative panel.
  * @author Safet Čomor
  */
-
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
-
 public class AdminPanelController  {
+    /**
+     * Default constructor for the AdminPanelController class.
+     */
+    public AdminPanelController() {
 
+    }
     /**
      * This method opens a new stage to manage the users in the system when the "User" button is clicked.
      * @param actionEvent the event that triggers the method.

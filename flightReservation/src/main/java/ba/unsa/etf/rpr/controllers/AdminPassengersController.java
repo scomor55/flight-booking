@@ -67,6 +67,12 @@ public class AdminPassengersController {
      */
     private PassengersManager manager = new PassengersManager();
     /**
+     * Default constructor for the AdminPassengersController class.
+     */
+    public AdminPassengersController() {
+
+    }
+    /**
      * This method initializes the list view with the data of all passengers and sets
      * a listener for the selected item property of the list view. If a passenger is selected,
      * the data for that passenger is displayed in the text fields.

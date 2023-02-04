@@ -21,11 +21,9 @@ import javafx.stage.Stage;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 /**
- * This class is used for Admin functionality for managing Flights.
- * It allows the Admin to add, edit, delete, and view flights.
- * @author Safet Čomor
+ * The class AdminFlightsController is responsible for handling the administration of flights.
+ * It provides methods for adding, editing and deleting flights, as well as displaying a list of all flights.
  */
-
 public class AdminFlightsController {
     /**
      * sourceField - text field for source location of flight
@@ -83,6 +81,12 @@ public class AdminFlightsController {
      * manager - instance of FlightsManager
      */
     private FlightsManager manager = new FlightsManager();
+    /**
+     * Default constructor for the AdminFlightsController class.
+     */
+    public AdminFlightsController() {
+
+    }
     /**
      * This method is called during the initialization of the class.
      * It is used to initialize the flight list and bind the selected item to input fields.

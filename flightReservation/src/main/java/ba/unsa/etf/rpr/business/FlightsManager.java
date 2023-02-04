@@ -6,7 +6,7 @@ import ba.unsa.etf.rpr.exceptions.FlightBookingException;
 
 import java.util.List;
 /**
- * The FlightsManager class provides functionality for managing flight objects.
+ * The FlightsManager class provides functionality for managing flights.
  * @author Safet Čomor
  */
 public class FlightsManager {

@@ -66,7 +66,6 @@ public class AdminTicketsController  {
     /**
      * The initialize method is called when the GUI is set up. It initializes the ListView of tickets and sets up listeners
      * for the ChoiceBox and the ListView. The method also sets the default values for the ticket information fields.
-     * @throws FlightBookingException if there is an error while accessing the database
      */
     @FXML
     public void initialize(){

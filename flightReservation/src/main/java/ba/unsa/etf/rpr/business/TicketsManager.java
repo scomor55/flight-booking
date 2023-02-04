@@ -8,7 +8,7 @@ import ba.unsa.etf.rpr.controllers.UserPanelController;
 import java.util.List;
 
 /**
- * The `TicketsManager` class manages the CRUD operations for `Tickets` objects.
+ * The TicketsManager class provides functionality for managing tickets.
  * This class uses the `DaoFactory` to perform CRUD operations on `Tickets` objects.
  * It provides methods to add, delete, update, get all, and get by ID `Tickets` objects.
  * If any errors occur during these operations, a `FlightBookingException` is thrown with an error message.

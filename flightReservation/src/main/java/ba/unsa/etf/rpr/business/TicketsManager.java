@@ -46,9 +46,6 @@ public class TicketsManager {
         try {
             DaoFactory.ticketsDao().delete(ticketId);
         }catch(FlightBookingException f){
-            if(f.getMessage().contains("FOREIGN KEY")){
-                throw new FlightBookingException("Cannot delete category which is related to quotes. First delete related quotes before deleting category.");
-            }
             throw f;
         }
     }

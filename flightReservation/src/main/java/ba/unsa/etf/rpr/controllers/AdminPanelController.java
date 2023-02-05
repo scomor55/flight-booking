@@ -31,8 +31,6 @@ public class AdminPanelController  {
         Stage userStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminUser.fxml"));
         Parent root = loader.load();
-       /* AdminUsersController adminUsersController = new AdminUsersController();
-        loader.setController(adminUsersController);*/
         userStage.setTitle("User management");
         userStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         userStage.setResizable(false);
@@ -47,8 +45,6 @@ public class AdminPanelController  {
         Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminPassengers.fxml"));
         Parent root = loader.load();
-       /* AdminUsersController adminUsersController = new AdminUsersController();
-        loader.setController(adminUsersController);*/
         passengerStage.setTitle("Passengers management");
         passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         passengerStage.setResizable(false);
@@ -65,8 +61,6 @@ public class AdminPanelController  {
         Stage passengerStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminFlights.fxml"));
         Parent root = loader.load();
-       /* AdminUsersController adminUsersController = new AdminUsersController();
-        loader.setController(adminUsersController);*/
         passengerStage.setTitle("Flights management");
         passengerStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         passengerStage.setResizable(false);
@@ -84,8 +78,6 @@ public class AdminPanelController  {
         Stage ticketsStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminTickets.fxml"));
         Parent root = loader.load();
-       /* AdminUsersController adminUsersController = new AdminUsersController();
-        loader.setController(adminUsersController);*/
         ticketsStage.setTitle("Tickets management");
         ticketsStage.setScene(new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         ticketsStage.setResizable(false);

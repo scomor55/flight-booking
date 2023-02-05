@@ -130,7 +130,6 @@ public class Controller {
             alert.setContentText("You are successfully logged in");
             alert.showAndWait();
             alert.close();
-
             if(tempUsername.equals("admin")){
                 try {
                     Stage passengerStage = new Stage();
@@ -176,7 +175,6 @@ public class Controller {
             final Stage myStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/register.fxml"));
             loader.load();
-            Register register = loader.getController();
             myStage.setTitle("Main Screen");
             myStage.setScene(new Scene((Parent) loader.getRoot(),USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
             myStage.show();

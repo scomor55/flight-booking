@@ -53,11 +53,8 @@ public class UserPanelController  {
     public TextField sourceShowField;
     public TextField destinationShowField;
     public TextField arrivalShowField;
-    public TextField classShowField;
-    public TextField seatsShowField;
     public TextField departureShowField;
     public TextField priceShowField;
-    public ChoiceBox<String> choiceBox;
     public TableColumn<Flights, String> economyPriceColumn;
     public TableColumn<Flights, String> businessPriceColumn;
     public TextField classChooseField;
@@ -363,41 +360,6 @@ public class UserPanelController  {
         alert.setContentText("Flight for this passenger is successfully booked");
         alert.showAndWait();
 
-       /* ticketsTable.setItems(FXCollections.observableList(flightsManager.searchFlightsForPassenger(passengerID)));
-        ticketsTable.refresh();*/
-    }
- /*-------------------------------------------*/
-
-    /**
-     * Refreshes the contents of the ticketsTable.
-     * This method retrieves a list of all flights using the `getAll` method of the `flightsManager` object.
-     * The list is set as the items of the `ticketsTable`, and the `ticketsTable` is then refreshed.
-     * If a `FlightBookingException` occurs, an alert is displayed with the exception's error message.
-     */
-    private void refreshTickets(){
-        try {
-            ticketsTable.setItems(FXCollections.observableList(flightsManager.getAll()));
-            ticketsTable.refresh();
-        }catch(FlightBookingException f){
-            new Alert(Alert.AlertType.NONE, f.getMessage(), ButtonType.OK).show();
-        }
     }
 
-    /**
-     * Calculates the price of a flight based on the chosen class.
-     * This method retrieves the class choice from the `classChooseField` and calculates the price based on the selected class.
-     * If the chosen class is "Economy" or the field is empty, the `EconomyPrice` method is called with the flight ID from the `idShowField`.
-     * Otherwise, the `BusinessPrice` method is called.
-     * The calculated price is then set in the `priceShowField`.
-     */
-    public void inputClass(ActionEvent actionEvent) {
-        String text = classChooseField.getText();
-        if(text.equals("Economy") || text.isEmpty()){
-            int price = EconomyPrice(Integer.parseInt(idShowField.getText()));
-            priceShowField.setText(String.valueOf(price));
-        }else{
-            int price = BusinessPrice(Integer.parseInt(idShowField.getText()));
-            priceShowField.setText(String.valueOf(price));
-        }
-    }
 }

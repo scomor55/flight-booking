@@ -35,21 +35,36 @@ import java.util.Stack;
  * CLI (Command Line Interface) implementation in following class.
  * Even though this type of presentation layer (called CLI) is becoming past tense for GUI apps,
  * it's good to see how you can manipulate data through command line and database also.
- *
  * @author Safet Čomor
- *
  * Main method that starts the application.
  */
 
 public class App
 {
-
+    /**
+     * Option for adding a new flight to the Flights database
+     */
     private static final Option addFlight = new Option("newFlight","add-flight",false,"\"Adding new flight to Flights database\"");
+    /**
+     * Option for adding a new passenger to the Passengers database
+     */
     private static final Option addPassenger = new Option("newPassenger","add-passenger",false,"\"Adding new passenger to Passenger database\"");
+    /**
+     * Option for printing all flights from the Flights database
+     */
     private static final Option getFlights = new Option("getFlights","get-flights",false,"\"Printing all flights from Flights database\"");
+    /**
+     * Option for defining flight for next added flight
+     */
     private static final Option getPassengers = new Option("getPassengers","get-passengers",false,"\"Printing all passengers from Passengers database\"");
+    /**
+     * Option for defining flight for next added flight
+     */
     private static final Option passengerDefinition = new Option(null,"flight",false,"Defining flight for next added flight");
-
+    /**
+     * Method for printing formatted options
+     * @param options list of options
+     */
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
@@ -57,7 +72,10 @@ public class App
         helpFormatter.printOptions(printWriter, 150, options, 2, 7);
         printWriter.close();
     }
-
+    /**
+     * Method for adding options
+     * @return list of options
+     */
     public static Options addOptions() {
         Options options = new Options();
         options.addOption(addFlight);
@@ -67,13 +85,22 @@ public class App
         options.addOption(passengerDefinition);
         return options;
     }
-
+    /**
+     * Method for searching through Passengers database
+     * @param listOfPassengers list of passengers in the database
+     * @param name name of the passenger to be searched for
+     * @return Passengers object if found, null otherwise
+     */
     public static Passengers searchThroughPassengers(List<Passengers> listOfPassengers, String name) {
         Passengers passenger = null;
         passenger = listOfPassengers.stream().filter(cat -> cat.getName().toLowerCase().equals(name.toLowerCase())).findAny().get();
         return passenger;
     }
-
+    /**
+     * Main method which takes command line arguments and performs different operations based on options provided.
+     * @param args command line arguments
+     * @throws Exception
+     */
     public static void main( String[] args )throws Exception
     {
     Options options = addOptions();

@@ -68,14 +68,12 @@ public class FlightsManager {
         DaoFactory.flightsDao().delete(flightId);
     }catch(FlightBookingException f){
         if(f.getMessage().contains("FOREIGN KEY")){
-            // throw new FlightBookingException("Cannot delete category which is related to quotes. First delete related quotes before deleting category.");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Flight undeleted");
             alert.setContentText("You have to delete all tickets on this flight!");
             alert.showAndWait();
         }
-        // throw f;
     }
     }
     /**
@@ -104,7 +102,6 @@ public class FlightsManager {
     public Flights getById(int id) throws FlightBookingException {
         return DaoFactory.flightsDao().getById(id);
     }
-
     /**
      * @param source the source of the flight
      * @param destination the destination of the flight
@@ -127,8 +124,5 @@ public class FlightsManager {
      @return a list of flights the passenger is booked for
      @throws FlightBookingException if an error occurs while searching
      */
-    public List<Flights> searchFlightsForPassenger(int passengerID ) throws FlightBookingException{
-        return DaoFactory.flightsDao().searchFlightsForPassenger(passengerID);
-    }
 
 }

@@ -45,9 +45,7 @@ public class Register  {
      * @return true if the insertion into the database was successful, false otherwise.
      */
     public boolean signin(){
-
         try{
-
             Properties p = new Properties();
             p.load(ClassLoader.getSystemResource("application.properties.sample").openStream());
             String url = p.getProperty("db.connection_string");
@@ -57,20 +55,16 @@ public class Register  {
             Connection conn = DriverManager.getConnection(url, usr, pswd);
 
             Statement stmt = conn.createStatement();
-            String sql = "INSERT INTO Users (username , password)"+
-                    "VALUES (?,?)";
+            String sql = "INSERT INTO Users (username , password)"+ "VALUES (?,?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, fieldUsername.getText());
             preparedStatement.setString(2, fieldPassword.getText());
 
             preparedStatement.executeUpdate();
-
-
         }catch (Exception e){
             e.printStackTrace();
             return false;
         }
-
         return true;
     }
 

@@ -39,6 +39,5 @@ public interface FlightsDao extends Dao<Flights> {
      * @return a list of flights for the specified passenger.
      * @throws FlightBookingException if an error occurs while searching for flights.
      */
-    public List<Flights> searchFlightsForPassenger(int passengerID ) throws FlightBookingException;
 
 }

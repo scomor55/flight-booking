@@ -1,35 +1,13 @@
 package ba.unsa.etf.rpr;
 
-import ba.unsa.etf.rpr.dao.TicketsDao;
-import ba.unsa.etf.rpr.dao.PassengersDao;
-import ba.unsa.etf.rpr.dao.FlightsDao;
-import ba.unsa.etf.rpr.dao.PassengersDaoSQLImpl;
-import ba.unsa.etf.rpr.dao.Dao;
-import ba.unsa.etf.rpr.dao.FlightsDaoSQLImpl;
-import ba.unsa.etf.rpr.dao.TicketsDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Flights;
 import ba.unsa.etf.rpr.domain.Passengers;
-import ba.unsa.etf.rpr.domain.Tickets;
-import ba.unsa.etf.rpr.exceptions.FlightBookingException;
-import ba.unsa.etf.rpr.business.TicketsManager;
 import ba.unsa.etf.rpr.business.FlightsManager;
 import ba.unsa.etf.rpr.business.PassengersManager;
-
-
-import net.bytebuddy.asm.Advice;
 import org.apache.commons.cli.*;
-import java.sql.Date;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Stream;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * CLI (Command Line Interface) implementation in following class.

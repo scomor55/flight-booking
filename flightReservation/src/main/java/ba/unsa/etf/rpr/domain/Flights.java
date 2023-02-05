@@ -13,13 +13,8 @@ public class Flights implements Idable{
 
     private int flightID;
     private String source;
-
-
     private String destination;
-    //private Date departure;//
-
     private LocalDate departure;
-   // private Date arrival;//
     private String departureTime;
    private LocalDate arrival;
     private String arrivalTime;

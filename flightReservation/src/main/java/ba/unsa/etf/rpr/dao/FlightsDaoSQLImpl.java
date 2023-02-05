@@ -121,16 +121,5 @@ public class FlightsDaoSQLImpl extends AbstractDao<Flights> implements FlightsDa
     public List<Flights> searchBySourceAndDestination(String flightSource,String flightDestination) throws FlightBookingException{
         return executeQuery("SELECT * FROM Flights WHERE source LIKE concat('%',?,'%') AND destination LIKE concat('%',?,'%')",new Object[]{flightSource,flightDestination});
     }
-    /**
-     * Searches for flights based on a passenger ID.
-     * @param passengerID the ID of the passenger
-     * @return a List of Flights that the passenger is booked on
-     * @throws FlightBookingException if there is an error in the query execution
-     */
-    @Override
-    public List<Flights> searchFlightsForPassenger(int passengerID ) throws FlightBookingException{
-        return executeQuery("SELECT Flights.id,Flights.source, Flights.destination,Flights.departure FROM Flights,Tickets,Passengers WHERE Flights.id = Tickets.flightID AND Passengers.id = Tickets.passengerID AND Passengers.id = ?",new Object[]{passengerID});
-    }
-
 
 }

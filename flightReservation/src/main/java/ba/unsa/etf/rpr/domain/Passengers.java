@@ -14,7 +14,7 @@ public class Passengers implements Idable{
     private int passengerID;
     private String name;
     private String surname;
-    private LocalDate dateOfBirth;   /* TRY TO USE DATE INSTEAD OF THIS */
+    private LocalDate dateOfBirth;
     private String adress;
     private String email;
 
@@ -121,7 +121,7 @@ public class Passengers implements Idable{
      */
     @Override
     public String toString() {
-        return "Passengr{" +
+        return "Passenger{" +
                 "passengerID=" + passengerID +
                 ", name:'" + name + '\'' +
                 ", surname:'" + surname + "'"+

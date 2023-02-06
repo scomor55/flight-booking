@@ -91,7 +91,7 @@ public class Register  {
         boolean check = signin();
         if (!check) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Greška");
+            alert.setTitle("Error");
             alert.setHeaderText("Incorrect entry");
             alert.setContentText("You have entered incorrect information");
             alert.showAndWait();

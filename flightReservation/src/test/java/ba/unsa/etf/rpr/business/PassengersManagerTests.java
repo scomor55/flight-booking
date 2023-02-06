@@ -22,10 +22,21 @@ import java.time.LocalDate;
 public class PassengersManagerTests {
 
     private PassengersManager passengersManager;
+    /**
+     * A Passengers object used in the tests.
+     */
     private Passengers passenger;
+    /**
+     A mocked instance of the PassengersDaoSQLImpl class.
+     */
     private PassengersDaoSQLImpl passengersDaoSQLMock;
+    /**
+     * A list of  Passengers objects used in the tests.
+     */
     private List<Passengers> passengers;
-
+    /**
+     * This method initializes the objects required for testing.
+     */
 
     @BeforeEach
     public void initializeObjectsWeNeed(){
@@ -43,7 +54,13 @@ public class PassengersManagerTests {
         passengers = new ArrayList<>();
         passengers.addAll(Arrays.asList( new Passengers("A") ,new Passengers("B"), new Passengers("C"), new Passengers("D"), new Passengers("E") ));
     }
-
+    /**
+     * Test for the add() method of PassengersManager class.
+     * This test mocks the DaoFactory class to return a mocked PassengersDao object.
+     * The add() method of PassengersManager is verified to be called and the expected
+     * FlightBookingException is thrown and its message is tested.
+     * @throws FlightBookingException if the add() method fails to add a passenger
+     */
     @Test
     void add() throws FlightBookingException{
         MockedStatic<DaoFactory> daoFactoryMockedStatic = Mockito.mockStatic(DaoFactory.class);
@@ -65,7 +82,14 @@ public class PassengersManagerTests {
         daoFactoryMockedStatic.close();
     }
 
-
+    /**
+     * This test method tests the add() method of the PassengersManager class.
+     * It creates a new instance of the Passengers class with the name "Ceiling",
+     * and then calls the add() method of the passengersManager object to add this passenger.
+     * The test then uses Assertions.assertTrue() to verify that the passenger was added successfully,
+     * and Mockito.verify() to check that the add() method was indeed called.
+     * @throws FlightBookingException if an exception occurs while adding the passenger
+     */
     @Test
     public void add2()throws FlightBookingException{
         Passengers newPassenger = new Passengers("Ceiling");
@@ -75,7 +99,11 @@ public class PassengersManagerTests {
         Mockito.verify(passengersManager).add(newPassenger);
     }
 
-
+    /**
+     This method tests the validatePassengerName() method in PassengersManager.
+     It checks if the correct  name is accepted and if the incorrect name throw an exception with the correct message.
+     @throws FlightBookingException when the name is incorrect.
+     */
     @Test
     void validatePassengerName() throws FlightBookingException{
         String correctName ="Mustafa";
@@ -93,7 +121,11 @@ public class PassengersManagerTests {
 
 
     }
-
+    /**
+     This method tests the validatePassengerSurname() method in PassengersManager.
+     It checks if the correct surname is accepted and if the incorrect surname throw an exception with the correct message.
+     @throws FlightBookingException when the surname is incorrect.
+     */
     @Test
     void validatePassengerSurname() throws FlightBookingException{
         String correctSurname ="Sudžuka";
@@ -111,7 +143,13 @@ public class PassengersManagerTests {
 
 
     }
-
+    /**
+     * The validatePassengerAddress() method is tested in this JUnit test.
+     * The correct email address, "mustafa.sudzuka@gmail.com", is passed to the method to ensure that it is accepted.
+     * An incorrect email address, "A", is also passed to the method and a FlightBookingException is expected with a message
+     * "Passenger address must be between 3 and 20 characters long".
+     * The test checks if the exception message matches the expected value.
+     */
     @Test
     void validatePassengerAddress() throws FlightBookingException{
         String correctAddress ="mustafa.sudzuka@gmail.com";

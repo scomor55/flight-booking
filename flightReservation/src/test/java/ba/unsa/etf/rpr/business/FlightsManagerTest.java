@@ -17,13 +17,30 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 
+/**
+ * This is the class for testing the {@link FlightsManager} class.
+ * It contains various test methods for validating the source name, destination name, and other functions of the {@link FlightsManager} class.
+ * The class uses JUnit 5 for testing and mockito for mocking.
+ */
+
 public class FlightsManagerTest {
 
     private FlightsManager flightsManager;
+    /**
+     * A Flights object used in the tests.
+     */
     private Flights flight;
+    /**
+     A mocked instance of the FlightsDaoSQLImpl class.
+     */
     private FlightsDaoSQLImpl flightsDaoSQLMock;
+    /**
+     * A list of  Flights objects used in the tests.
+     */
     private List<Flights> flights;
-
+    /**
+     * This method initializes the objects required for testing.
+     */
     @BeforeEach
     public void initializeObjectsWeNeed(){
         flightsManager = Mockito.mock(FlightsManager.class);
@@ -44,7 +61,11 @@ public class FlightsManagerTest {
         flights = new ArrayList<>();
         flights.addAll(Arrays.asList(new Flights("Dortmund"),new Flights("Rostock"),new Flights("Plzen"),new Flights("Olomuc"),new Flights("Pribram")));
     }
-
+    /**
+     This method tests the validateSourceName(String) method in FlightsManager.
+     It checks if the correct source name is accepted and if the incorrect source names throw an exception with the correct message.
+     @throws FlightBookingException when the source name is incorrect.
+     */
     @Test
     void validateSourceName() throws FlightBookingException{
         String correctSource ="Sarajevo";
@@ -68,7 +89,11 @@ public class FlightsManagerTest {
 
 
     }
-
+    /**
+     This method tests the validateDestinationName(String) method in FlightsManager.
+     It checks if the correct destination name is accepted and if the incorrect destination names throw an exception with the correct message.
+     @throws FlightBookingException when the destination name is incorrect.
+     */
     @Test
     void validateDestinationName()throws FlightBookingException{
        String correctDestination ="Riga";
@@ -92,7 +117,11 @@ public class FlightsManagerTest {
 
 
     }
-
+    /**
+     This method tests the validateNumberOfSeats() method in FlightsManager.
+     It checks if the correct number of seats is accepted and if number of seats is incorrect then throw an exception with the correct message.
+     @throws FlightBookingException when the number of seats is incorrect.
+     */
     @Test
     void validateNumberOfSeats()throws FlightBookingException{
         int correctNumOfSeats = 156;
@@ -108,7 +137,14 @@ public class FlightsManagerTest {
         FlightBookingException flightBookingException = Assertions.assertThrows(FlightBookingException.class, () -> {flightsManager.validateSeats(incorrectNumOfSeats);},"Number of seats must be between 20 and 853");
         Assertions.assertEquals("Number of seats must be between 20 and 853",flightBookingException.getMessage());
     }
-
+    /**
+     * This test method tests the add() method of the FlightsManager class.
+     * It creates a new instance of the Flights class with the destination "Teplice",
+     * and then calls the add() method of the flightsManager object to add this flight.
+     * The test then uses Assertions.assertTrue() to verify that the flight was added successfully,
+     * and Mockito.verify() to check that the add() method was indeed called.
+     * @throws FlightBookingException if an exception occurs while adding the flight
+     */
     @Test
     public void add2()throws FlightBookingException{
         Flights newFlight = new Flights("Teplice");
@@ -119,7 +155,11 @@ public class FlightsManagerTest {
     }
 
     /**
-     * We are testing add() method. An explanation will be covered in the comments below
+     * Test for the add() method of FlightsManager class.
+     * This test mocks the DaoFactory class to return a mocked FlightsDao object.
+     * The add() method of FlightsManager is verified to be called and the expected
+     * FlightBookingException is thrown and its message is tested.
+     * @throws FlightBookingException if the add() method fails to add a flight
      */
 
     @Test
